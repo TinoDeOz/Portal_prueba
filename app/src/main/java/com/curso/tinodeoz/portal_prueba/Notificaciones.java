@@ -1310,7 +1310,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
 
     public void nueva(){
-//bbbb
+//baaaaaa
         nueva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
