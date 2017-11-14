@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.curso.tinodeoz.portal_prueba.principal"
+    android:background="@drawable/fondo1">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/banner"
+        />
+
+    <TextView
+        android:id="@+id/banner2"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Publicaciónes De Tocas."
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:fontFamily="serif"
+        android:textStyle="italic"
+
+        />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/banner2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="15dp"
+            android:background="#77ffffff"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:id="@+id/txt_sala"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Sala De Procedencia:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_sala_toca"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                android:hint="Seleccione aqui:"
+                />
+
+            <TextView
+                android:id="@+id/txt_no_toca"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Número de toca:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/txt_numero_publi_toca"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/darker_gray"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLength="9"
+                android:gravity="center"
+                android:hint="Ingrese aqui:"
+                />
+
+
+            <Button
+                android:id="@+id/btn_publi_toca_consultar"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/fondo_btn"
+                android:text="Consultar"
+                android:textSize="10sp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TableLayout
+                    android:id="@+id/Tabla_btn_publicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    >
+                </TableLayout>
+            </HorizontalScrollView>
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+               >
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <Button
+                            android:id="@+id/nueva_consulta"
+                            android:layout_width="100dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@drawable/fondo_btn"
+                            android:text="Nueva Consulta"
+                            android:textSize="10sp"
+                            android:layout_gravity="center_horizontal"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <Button
+                            android:id="@+id/Salir"
+                            android:layout_width="100dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@drawable/fondo_btn"
+                            android:text="Salir."
+                            android:textSize="10sp"
+                            android:layout_gravity="center_horizontal"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

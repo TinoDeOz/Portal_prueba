@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.curso.tinodeoz.portal_prueba.principal"
+    android:background="@drawable/fondo1">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/banner"
+        />
+
+    <TextView
+        android:id="@+id/banner2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Consulta De Notificaciones Por Lista."
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:fontFamily="serif"
+        android:textStyle="italic"
+
+        />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/banner2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="15dp"
+            android:background="#77ffffff"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:id="@+id/lbl_noti_distrito"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Distrito:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_noti_distrito"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+
+                />
+
+            <TextView
+                android:id="@+id/lbl_noti_juzgado"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Juzgado:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_actopan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+            <Spinner
+                android:id="@+id/spinner_noti_apan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <!--<Spinner
+                android:id="@+id/spinner_atotonilco"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+            <Spinner
+                android:id="@+id/spinner_huejutla"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_huichapan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+
+            <Spinner
+                android:id="@+id/spinner_ixmiqulpan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <!-- <Spinner
+                android:id="@+id/spinner_jacala"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+            <!--<Spinner
+                android:id="@+id/spinner_meztitlan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+            <Spinner
+                android:id="@+id/spinner_mixquiahuala"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+           <!-- <Spinner
+                android:id="@+id/spinner_molango"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+            <Spinner
+                android:id="@+id/spinner_pachuca"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <!--<Spinner
+                android:id="@+id/spinner_tenango"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+            <Spinner
+                android:id="@+id/spinner_tizayuca"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_tula"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_tulancingo"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <!--<Spinner
+                android:id="@+id/spinner_zacualtipan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_zimapan"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+           <!-- <TextView
+                android:id="@+id/lbl_noti_materia"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione El Tipo De Materia:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_noti_materia"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />-->
+
+
+            <TextView
+                android:id="@+id/lbl_noti_opciones"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione La Opción De Busqueda:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_noti_opc_civil"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+
+            <TextView
+                android:id="@+id/lbl_noti_opciones2"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione La Opción De Busqueda:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_noti_opc_penal"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <TextView
+                android:id="@+id/lbl_noti_fecha"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Fecha De Notificación:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <EditText
+                android:id="@+id/txt_fecha"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/darker_gray"
+                android:ems="10"
+               android:focusable="false"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="Ingrese aqui:"
+                android:inputType="date"/>
+
+
+
+            <TextView
+                android:id="@+id/lbl_no_expediente"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Número de Expediete:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/txt_numero_expediente"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/darker_gray"
+                android:ems="10"
+                android:maxLength="11"
+                android:gravity="center"
+                android:hint="Ingrese aqui:"
+                android:inputType="text"/>
+
+
+
+            <TextView
+                android:id="@+id/lbl_no_causa"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Número de Causa:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/txt_numero_causa"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/darker_gray"
+                android:ems="10"
+                android:maxLength="9"
+                android:gravity="center"
+                android:hint="Ingrese aqui:"
+                android:inputType="text"/>
+
+
+            <Button
+                android:id="@+id/btn_noti_consultar"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/fondo_btn"
+                android:text="Consultar"
+                android:textSize="10sp"
+                android:layout_gravity="center_horizontal"
+                />
+
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TableLayout
+                    android:id="@+id/Tabla_btn_noti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    >
+                </TableLayout>
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp">
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        >
+                        <Button
+                            android:id="@+id/nueva_consulta"
+                            android:layout_width="100dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@drawable/fondo_btn"
+                            android:text="Nueva Consulta"
+                            android:textSize="10sp"
+                            android:layout_gravity="center_horizontal"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <Button
+                            android:id="@+id/Salir"
+                            android:layout_width="100dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:background="@drawable/fondo_btn"
+                            android:text="Salir."
+                            android:textSize="10sp"
+                            android:layout_gravity="center_horizontal"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <!--<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/pie"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/info"
+            />
+    </LinearLayout>-->
+</RelativeLayout>

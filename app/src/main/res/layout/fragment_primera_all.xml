@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.curso.tinodeoz.portal_prueba.principal"
+    android:background="@drawable/fondo1">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/banner"
+        />
+
+    <ImageView
+        android:id="@+id/banner2"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:background="@drawable/maso"
+        android:layout_below="@id/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner2"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/linearLayout">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/marco"
+            android:orientation="vertical">
+
+            <WebView
+                android:id="@+id/WebView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                />
+
+
+            <Button
+                android:id="@+id/txt_not"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/fondo_btn"
+                android:fontFamily="serif"
+                android:textStyle="italic"
+                android:text="@string/btn_des"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:lineSpacingExtra="5dp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/pie"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/info"
+            android:layout_above="@+id/txtpie"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
+</RelativeLayout>

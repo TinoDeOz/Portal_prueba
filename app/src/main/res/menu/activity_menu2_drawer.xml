@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--<item android:title="Primera Instancia Materia Civil y Familiar"/>-->
+    <item android:title="Primera Instancia Materia Civil y Familiar"  >
+    <menu>
+        <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/opcion1"
+            android:icon="@mipmap/icon_uno"
+            android:title="Distritos Pachuca Y Tulancingo." />
+
+    </group>
+        </menu>
+        </item>
+
+        <item android:title="Primera Instancia Todas Las Materias"  >
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/opcion2"
+                android:icon="@drawable/icon_derecho"
+                android:title="Todos Los Distritos"
+                />
+            </group>
+        </menu>
+    </item>
+
+
+
+    <item android:title="Segunda Instancia">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/opcion3"
+                android:icon="@drawable/icon_law"
+                android:title="Materias Civil Y Familiar." />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Mi Portafolio"  >
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/opcion4"
+                    android:icon="@drawable/folder"
+                    android:title="Mis Expedientes." />
+
+            </group>
+        </menu>
+    </item>
+
+
+</menu>
