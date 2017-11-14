@@ -1287,7 +1287,8 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-
+                        int p = android.os.Process.myPid();
+                        android.os.Process.killProcess(p);
 
                     }
                 });
@@ -1310,7 +1311,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
 
     public void nueva(){
-//baaaaaa
+
         nueva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
