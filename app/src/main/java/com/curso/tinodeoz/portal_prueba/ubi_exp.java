@@ -177,6 +177,7 @@ public class ubi_exp extends Fragment {
 
         dialogo1.setPositiveButton("Guardar y Salir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
+                base.borrar(nuevo_registro.getExpediente());
                 base.Agregar_portafolio(nuevo_registro);
                 base.closeDB();
                 aceptar2();

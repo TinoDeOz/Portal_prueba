@@ -77,41 +77,15 @@ public class DB extends SQLiteOpenHelper {
 
     }
 
-public String [] leer(){
-    String []contenido= new String[7];
-    String frase="";
-    String columnas []={"id","ancho","largo","total"};
 
-    try {    Cursor c= this.getReadableDatabase().query("registro",columnas,null,null,null,null,null);
-        int id,an,lar,to;
-
-        id=c.getColumnIndex("id");
-        an=c.getColumnIndex("ancho");
-        lar=c.getColumnIndex("largo");
-        to=c.getColumnIndex("total");
-
-        c.moveToLast();
-
-        contenido[1]=c.getString(an);
-        contenido[2]=c.getString(lar);
-        contenido[3]=c.getString(to);
-        contenido[4]=c.getString(id);
-
-       //frase ="El total de matas es"+c.getString(id)+c.getString(an)+c.getString(lar)+c.getString(to);
-        closeDB();
-
-        return contenido;
-
-
-    }catch (Exception e){
-        closeDB();
-        return contenido;
+    public void borrar(String exp){
+        try {
+            SQLiteDatabase db =this.getWritableDatabase();
+            db.delete(TABLE_SIS,"expediente='"+exp+"'",null);
+            closeDB();
+        }catch (Exception e) {
+            closeDB();
+        }
     }
-
-
-
-}
-
-
 
 }
