@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Portal_prueba</string>
-    <string name="title_activity_menu2">Portal Prueba</string>
+    <string name="app_name">APP-PJHIDALGO</string>
+    <string name="title_activity_menu2">APP-PJHIDALGO.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
