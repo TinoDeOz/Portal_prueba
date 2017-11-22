@@ -41,6 +41,7 @@ import java.sql.Statement;
  */
 public class ubi_exp extends Fragment {
 
+
     DB base;
 
     Data_Portafolio nuevo_registro;
@@ -58,7 +59,7 @@ public class ubi_exp extends Fragment {
     TableLayout tabla;
 
 
-    Datos datos_consulta;
+    Datos datos_consulta,Seleccion;
 
     Spinner distrito, juzgado1,juzgado2;
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
@@ -277,9 +278,6 @@ public class ubi_exp extends Fragment {
             }
         });
 
-
-
-
     }
 
 
@@ -357,6 +355,8 @@ public class ubi_exp extends Fragment {
                     juzgado2.setVisibility(View.GONE);
                     nuevo_registro= new Data_Portafolio();
                     nuevo_registro.setDistrito("Pachuca de Soto.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
 
 
                 } else if (position==2) {
@@ -365,6 +365,8 @@ public class ubi_exp extends Fragment {
                     juzgado1.setVisibility(View.GONE);
                     nuevo_registro= new Data_Portafolio();
                     nuevo_registro.setDistrito("Tulancingo de Bravo.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("2");
                 }
             }
 
@@ -488,9 +490,14 @@ public class ubi_exp extends Fragment {
                 String[] datos =new String[3];;
                 try {
 
-                    Con_sql conStr=new Con_sql();
-                    connect =conStr.connections();
-                    //Encabezado("Fecha","Area");
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                    }
 
 
                     if (connect == null)

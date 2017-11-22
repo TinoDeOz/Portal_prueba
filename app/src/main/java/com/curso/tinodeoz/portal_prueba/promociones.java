@@ -31,7 +31,7 @@ public class promociones extends Fragment {
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
 
-    Datos datos_consulta;
+    Datos datos_consulta,Seleccion;
 
 
     WebView web;
@@ -241,6 +241,8 @@ public void accion(final View v){
                 inicial.setVisibility(View.VISIBLE);
                 datos_consulta =new Datos();
                 datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90)");
+                Seleccion =new Datos();
+                Seleccion.setID("1");
 
 
 
@@ -250,6 +252,8 @@ public void accion(final View v){
                 inicial.setVisibility(View.VISIBLE);
                 datos_consulta =new Datos();
                 datos_consulta.setID("IN(28,29,30,34,48,71)");
+                Seleccion =new Datos();
+                Seleccion.setID("2");
 
             }
         }
@@ -297,18 +301,32 @@ public void accion(final View v){
 
                 if(datos_consulta.getQUE_ES()=="INICIAL") {
 
-                    Con_sql conStr = new Con_sql();
-                    connect = conStr.connections();
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                    }
+
+
                     query = "SELECT Vta_ResiAcuerdosInicial.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosInicial, Juzgados where id_expediente ="+no_expediente.getText().toString()+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosInicial.IdJuzgado=Juzgados.id_juzgado";
-                    //CAMPO1="Vta_ResiAcuerdosInicial.Expediente";
-                    //CAMPO2="Juzgados.nombre";
 
                     CAMPO1="Expediente";
                     CAMPO2="nombre";
                 }else if (datos_consulta.getQUE_ES()=="POSTERIOR"){
 
-                    Con_sql conStr = new Con_sql();
-                    connect = conStr.connections();
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                    }
+
+
                     query = "SELECT Vta_ResiAcuerdosPromos.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosPromos,Juzgados where IdPosterior="+no_expediente.getText().toString()+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosPromos.IdJuzgado=Juzgados.id_juzgado";
                    // CAMPO1="Vta_ResiAcuerdosPromos.Expediente";
                     //CAMPO2="Juzgados.nombre";

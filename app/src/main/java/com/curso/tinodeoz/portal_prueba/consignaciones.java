@@ -36,7 +36,7 @@ public class consignaciones extends Fragment {
 
 
     TableLayout tabla;
-    Datos datos_consulta;
+    Datos datos_consulta,Seleccion;
 
 
     WebView web;
@@ -259,6 +259,8 @@ public class consignaciones extends Fragment {
                     juzgado1.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.GONE);
                     juzgado3.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
 
 
                 } else if (position==2) {
@@ -266,12 +268,16 @@ public class consignaciones extends Fragment {
                     juzgado2.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.GONE);
                     juzgado3.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("2");
 
                 }else if (position==3) {
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado3.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.GONE);
                     juzgado2.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("3");
                 }
             }
 
@@ -414,12 +420,27 @@ public class consignaciones extends Fragment {
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] datos =new String[3];;
+                String[] datos =new String[3];
+                String query="";
                 try {
-                    Con_sql conStr=new Con_sql();
-                    connect =conStr.connections();
-                    //Encabezado("Fecha","Area");
 
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+                        query = "SELECT  Top 5 de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by de_fecha DESC;";
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+                        query = "SELECT  Top 5 de_fecha FROM Vta_ResiDepositosTula Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by de_fecha DESC;";
+
+
+                    }else if (Seleccion.getID()=="3") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                         query = "SELECT  Top 5 de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by de_fecha DESC;";
+
+                    }
 
                     if (connect == null)
                     {
@@ -436,7 +457,6 @@ public class consignaciones extends Fragment {
                         }
 
 
-                        String query = "SELECT  Top 5 de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by de_fecha DESC;";
                         Statement stmt = connect.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if(!rs.isBeforeFirst()){

@@ -37,7 +37,7 @@ public class AudienciasOrales extends Fragment {
 
 
     TableLayout tabla;
-    Datos datos_consulta, datos_consulta2,datos_consulta3;
+    Datos datos_consulta, datos_consulta2,datos_consulta3, Seleccion;
 
     TextView txt_año,txt_mes,txt_distrito;
 
@@ -242,6 +242,8 @@ public class AudienciasOrales extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90)");
                     datos_consulta.setQUE_ES("PACHUCA DE SOTO.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
 
                 }else if (position==2){
 
@@ -254,6 +256,8 @@ public class AudienciasOrales extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("IN(28,29,30,34,48,71)");
                     datos_consulta.setQUE_ES("TULANCINGO DE BRAVO.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
 
                 }
             }
@@ -390,8 +394,14 @@ public class AudienciasOrales extends Fragment {
                 int x=0;
                 try {
 
-                    Con_sql conStr=new Con_sql();
-                    connect =conStr.connections();
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                    }
 
                     if (connect == null)
                     {

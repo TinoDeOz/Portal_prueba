@@ -50,7 +50,7 @@ public class consejo_familiar extends Fragment {
     Spinner distrito, juzgado1,juzgado2;
     TableLayout tabla;
 
-    Datos datos_consulta;
+    Datos datos_consulta, Seleccion;
 
 
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
@@ -261,12 +261,16 @@ Button nueva,salir;
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
 
 
                 } else if (position==2) {
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("2");
 
                 }
             }
@@ -345,9 +349,14 @@ Button nueva,salir;
                 String[] datos =new String[3];;
                 try {
 
-                    Con_sql conStr=new Con_sql();
-                    connect =conStr.connections();
-                    //Encabezado("Fecha","Area");
+                    if (Seleccion.getID()=="1") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+                    }
 
 
                     if (connect == null)
