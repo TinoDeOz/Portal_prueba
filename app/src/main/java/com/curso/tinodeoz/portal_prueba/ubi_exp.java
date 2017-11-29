@@ -282,20 +282,16 @@ public class ubi_exp extends Fragment {
 
 
     public void inicio(View v){
+        txt_distrito=(TextView)v.findViewById(R.id.txt_distrito);
         txt_juzgado=(TextView)v.findViewById(R.id.txt_juzgado);
-
-        txt_exp=(TextView)v.findViewById(R.id.txt_expediente);
-        consulta=(Button)v.findViewById(R.id.consultar);
-
-        web2 = (WebView) v.findViewById(R.id.WebView_nota);
-
-        no_expediente=(EditText)v.findViewById(R.id.txt_no_expediente) ;
-
         distrito=(Spinner)v.findViewById(R.id.spinner_distrito);
         juzgado1=(Spinner)v.findViewById(R.id.spinner_juzgado);
         juzgado2=(Spinner)v.findViewById(R.id.spinner_juzgado2);
 
-        txt_distrito=(TextView)v.findViewById(R.id.txt_distrito);
+        txt_exp=(TextView)v.findViewById(R.id.txt_expediente);
+        consulta=(Button)v.findViewById(R.id.consultar);
+        web2 = (WebView) v.findViewById(R.id.WebView_nota);
+        no_expediente=(EditText)v.findViewById(R.id.txt_no_expediente) ;
         tabla=(TableLayout)v.findViewById(R.id.Tabla_btn1);
 
         txt_juzgado.setVisibility(View.GONE);

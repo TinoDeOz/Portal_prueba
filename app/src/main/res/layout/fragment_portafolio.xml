@@ -91,6 +91,69 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/txt_busqueda"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione su opcion de busqueda:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_busqueda"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                android:hint="Seleccione aqui:"
+                />
+
+            <TextView
+                android:id="@+id/txt_distrito"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione su distrito:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
+
+            <Spinner
+                android:id="@+id/spinner_distrito"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                android:hint="Seleccione aqui:"
+                />
+
+            <TextView
+                android:id="@+id/txt_juzgado"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Seleccione su juzgado:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_juzgado"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                android:hint="Seleccione aqui:"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_juzgado2"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:background="@android:color/darker_gray"
+                android:hint="Seleccione aqui:"
+                />
+
+
 
             <HorizontalScrollView
                 android:layout_width="fill_parent"

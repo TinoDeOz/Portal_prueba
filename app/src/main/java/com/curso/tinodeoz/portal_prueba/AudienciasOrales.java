@@ -250,6 +250,11 @@ public class AudienciasOrales extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("IN(26,27,33,39,49,75)");
                     datos_consulta.setQUE_ES("TULA DE ALLENDE.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("1");
+
+
+
 
                 }else if (position==3) {
 
@@ -257,7 +262,7 @@ public class AudienciasOrales extends Fragment {
                     datos_consulta.setID("IN(28,29,30,34,48,71)");
                     datos_consulta.setQUE_ES("TULANCINGO DE BRAVO.");
                     Seleccion =new Datos();
-                    Seleccion.setID("1");
+                    Seleccion.setID("2");
 
                 }
             }

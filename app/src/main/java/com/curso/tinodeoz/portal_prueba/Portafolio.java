@@ -34,9 +34,28 @@ public class Portafolio extends Fragment {
 
     Button consulta,agregar,mostrar,nuevaa,salir;
     TableLayout tabla;
+    Spinner opc,distrito, juzgado1,juzgado2;
+    TextView opcion,txt_juzgado,txt_exp, txt_distrito;
+
+
+
+    String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
+    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
+    String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
+            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
+    //String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
+
 
 
     public void inicio(View v){
+
+        opcion=(TextView)v.findViewById(R.id.txt_busqueda);
+        opc=(Spinner)v.findViewById(R.id.spinner_busqueda);
+        txt_distrito=(TextView)v.findViewById(R.id.txt_distrito);
+        txt_juzgado=(TextView)v.findViewById(R.id.txt_juzgado);
+        distrito=(Spinner)v.findViewById(R.id.spinner_distrito);
+        juzgado1=(Spinner)v.findViewById(R.id.spinner_juzgado);
+        juzgado2=(Spinner)v.findViewById(R.id.spinner_juzgado2);
 
         agregar=(Button)v.findViewById(R.id.Agregar_Expediente);
         mostrar=(Button)v.findViewById(R.id.Mostrar);
@@ -46,7 +65,152 @@ public class Portafolio extends Fragment {
 
         nuevaa.setVisibility(View.GONE);
         salir.setVisibility(View.GONE);
+        txt_juzgado.setVisibility(View.GONE);
+        juzgado1.setVisibility(View.GONE);
+        juzgado2.setVisibility(View.GONE);
+
+        distrito.setVisibility(View.GONE);
+        txt_distrito.setVisibility(View.GONE);
+        opc.setVisibility(View.GONE);
+        opcion.setVisibility(View.GONE);
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void llenado_spiners(){
+        ArrayAdapter<String> adaptador=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_distrito);
+        distrito.setAdapter(adaptador);
+
+        ArrayAdapter<String> adaptador2=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado);
+        juzgado1.setAdapter(adaptador2);
+
+        //ArrayAdapter<String> adaptador3=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado2);
+        //juzgado2.setAdapter(adaptador3);
+
+        ArrayAdapter<String> adaptador4=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_opcion);
+        opc.setAdapter(adaptador4);
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void acciones(final View v){
+
+        opc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==1){
+                    txt_distrito.setVisibility(View.VISIBLE);
+                    distrito.setVisibility(View.VISIBLE);
+                    txt_juzgado.setVisibility(View.GONE);
+                    juzgado1.setVisibility(View.GONE);
+
+
+
+                } else if (position==2) {
+                    txt_distrito.setVisibility(View.GONE);
+                    distrito.setVisibility(View.GONE);
+                    txt_juzgado.setVisibility(View.VISIBLE);
+                    juzgado1.setVisibility(View.VISIBLE);
+
+
+                } else if (position==3) {
+                    Consulta("");
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==1){
+                    nuevo_registro= new Data_Portafolio();
+                    nuevo_registro.setDistrito("Pachuca de Soto.");
+                    Consulta("distrito='"+nuevo_registro.getDistrito()+"'");
+
+
+                } else if (position==2) {
+                    nuevo_registro= new Data_Portafolio();
+                    nuevo_registro.setDistrito("Tulancingo de Bravo.");
+                    Consulta("distrito='"+nuevo_registro.getDistrito()+"'");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        juzgado1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nuevo_registro= new Data_Portafolio();
+                if (position==1){
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                } else if (position==2) {
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+                }
+                else if (position==3) {
+                    nuevo_registro.setJuzgado("TERCERO CIVIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }
+                else if (position==4) {
+                    nuevo_registro.setJuzgado("CUARTO CIVIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+                }
+                else if (position==5) {
+                    nuevo_registro.setJuzgado("PRIMERO MERCANTIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+
+                }else if (position==6) {
+                    nuevo_registro.setJuzgado("SEGUNDO MERCANTIL PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==7) {
+                    nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==8) {
+
+                    nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==9) {
+                    nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+                }else if (position==10) {
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==11) {
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==12) {
+                    nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void agregar() {
@@ -66,55 +230,14 @@ public class Portafolio extends Fragment {
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
     public void mostrar(){
-
         mostrar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                String []contenido= new String[7];
-                String frase="";
-                String columnas []={"distrito","juzgado","expediente","ubicacion","fecha"};
-
-                //String columnas []={"distrito","juzgado"};
-
-                SQLiteDatabase db=base.getReadableDatabase();
-
-                try {    Cursor c=db.query("portafolio",columnas,null,null,null,null,null);
-
-                    int dis,juz,exp,ubi,fech;
-
-                    dis=c.getColumnIndex("distrito");
-                    juz=c.getColumnIndex("juzgado");
-                    exp=c.getColumnIndex("expediente");
-                    ubi=c.getColumnIndex("ubicacion");
-                    fech=c.getColumnIndex("fecha");
-                    Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
-                    nuevaa.setVisibility(View.VISIBLE);
-                    salir.setVisibility(View.VISIBLE);
-                    agregar.setVisibility(View.GONE);
-                    mostrar.setVisibility(View.GONE);
-
-                    if(c.moveToFirst()){
-                        do{
-
-                        contenido[1] = c.getString(dis);
-                        contenido[2] = c.getString(juz);
-                        contenido[3] = c.getString(exp);
-                        contenido[4] = c.getString(ubi);
-                        contenido[5] = c.getString(fech);
-                        llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
-
-                    } while (c.moveToNext());
-
-                    }
-
-                    //frase ="El total de matas es"+c.getString(id)+c.getString(an)+c.getString(lar)+c.getString(to);
-                    base.closeDB();
-                    Toast.makeText(getActivity(),"GUARDADO", Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    base.closeDB();
-                    Toast.makeText(getActivity(),"Error al guardar", Toast.LENGTH_SHORT).show();
-
-                }
+                opc.setVisibility(View.VISIBLE);
+                opcion.setVisibility(View.VISIBLE);
+                mostrar.setVisibility(View.GONE);
+                agregar.setVisibility(View.GONE);
 
 
 
@@ -122,8 +245,62 @@ public class Portafolio extends Fragment {
         });
 
 
+    }
 
+    public void Consulta(String query){
 
+        String []contenido= new String[7];
+        String frase="";
+        String columnas []={"distrito","juzgado","expediente","ubicacion","fecha"};
+
+        //String columnas []={"distrito","juzgado"};
+
+        SQLiteDatabase db=base.getReadableDatabase();
+
+        try {    Cursor c=db.query("portafolio",columnas,query,null,null,null,null);
+
+            int dis,juz,exp,ubi,fech;
+
+            dis=c.getColumnIndex("distrito");
+            juz=c.getColumnIndex("juzgado");
+            exp=c.getColumnIndex("expediente");
+            ubi=c.getColumnIndex("ubicacion");
+            fech=c.getColumnIndex("fecha");
+            Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
+            nuevaa.setVisibility(View.VISIBLE);
+            salir.setVisibility(View.VISIBLE);
+            agregar.setVisibility(View.GONE);
+            mostrar.setVisibility(View.GONE);
+            txt_juzgado.setVisibility(View.GONE);
+            juzgado1.setVisibility(View.GONE);
+            juzgado2.setVisibility(View.GONE);
+            distrito.setVisibility(View.GONE);
+            txt_distrito.setVisibility(View.GONE);
+            opc.setVisibility(View.GONE);
+            opcion.setVisibility(View.GONE);
+
+            if(c.moveToFirst()){
+                do{
+
+                    contenido[1] = c.getString(dis);
+                    contenido[2] = c.getString(juz);
+                    contenido[3] = c.getString(exp);
+                    contenido[4] = c.getString(ubi);
+                    contenido[5] = c.getString(fech);
+                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
+
+                } while (c.moveToNext());
+
+            }
+
+            //frase ="El total de matas es"+c.getString(id)+c.getString(an)+c.getString(lar)+c.getString(to);
+            base.closeDB();
+            Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            base.closeDB();
+            Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
+
+        }
 
 
     }
@@ -390,10 +567,12 @@ public class Portafolio extends Fragment {
 
         base= new DB(getActivity());
         inicio(v);
+        acciones(v);
         nueva();
         mostrar();
         salir();
         agregar();
+        llenado_spiners();
 
         return v;
     }

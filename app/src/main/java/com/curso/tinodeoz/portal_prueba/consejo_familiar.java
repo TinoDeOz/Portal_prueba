@@ -110,11 +110,11 @@ public class consejo_familiar extends Fragment {
         llenado_spiners(v);
         acciones(v);
 
-        nueva();
+        finales(v);
         visibilidad(false);
         salir();
-        finales(v);
 
+        nueva();
 
 
 
@@ -346,7 +346,7 @@ Button nueva,salir;
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] datos =new String[3];;
+                String[] datos =new String[3];
                 try {
 
                     if (Seleccion.getID()=="1") {
@@ -367,6 +367,11 @@ Button nueva,salir;
                     }
                     else
                     {
+                        while (no_expediente.getText().toString().length()<11){
+                            String ejemplo=no_expediente.getText().toString();
+                            ejemplo="0"+ejemplo;
+                            no_expediente.setText(ejemplo);
+                        }
 
                         String query = "SELECT FechaIntervencion  FROM Vta_ResiIntevencionesCF Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'";
                         Statement stmt = connect.createStatement();
@@ -376,13 +381,6 @@ Button nueva,salir;
                         }
 
                         else {
-
-                            while (no_expediente.getText().toString().length()<11){
-                                String ejemplo=no_expediente.getText().toString();
-                                ejemplo="0"+ejemplo;
-                                no_expediente.setText(ejemplo);
-                            }
-
 
                             Encabezado("Fecha De Intervencion.");
                             txt_juzgado.setVisibility(View.GONE);

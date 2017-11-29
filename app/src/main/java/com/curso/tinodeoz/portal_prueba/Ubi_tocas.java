@@ -72,11 +72,9 @@ public class Ubi_tocas extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_ubi_tocas, container, false);
         inicio(v);
+
         llenado_spiners(v);
         acciones(v);
-        visibilidad(false);
-        nueva();
-        salir();
         return v;
     }
 
