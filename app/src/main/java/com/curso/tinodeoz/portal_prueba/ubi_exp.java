@@ -65,7 +65,7 @@ public class ubi_exp extends Fragment {
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
             "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
-    String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
+    String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -178,7 +178,7 @@ public class ubi_exp extends Fragment {
 
         dialogo1.setPositiveButton("Guardar y Salir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                base.borrar(nuevo_registro.getExpediente());
+                base.borrar(nuevo_registro.getExpediente(),nuevo_registro.getJuzgado());
                 base.Agregar_portafolio(nuevo_registro);
                 base.closeDB();
                 aceptar2();

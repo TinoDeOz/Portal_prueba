@@ -78,10 +78,10 @@ public class DB extends SQLiteOpenHelper {
     }
 
 
-    public void borrar(String exp){
+    public void borrar(String exp,String juz){
         try {
             SQLiteDatabase db =this.getWritableDatabase();
-            db.delete(TABLE_SIS,"expediente='"+exp+"'",null);
+            db.delete(TABLE_SIS,"expediente='"+exp+"' and juzgado='"+juz+"'",null);
             closeDB();
         }catch (Exception e) {
             closeDB();

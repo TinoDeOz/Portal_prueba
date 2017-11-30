@@ -17,7 +17,7 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         fuente();
 
-        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        /*AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("Importante");
         dialogo1.setMessage("? Acepta la ejecuci¨®n de este programa en modo prueba ?");
         dialogo1.setCancelable(false);
@@ -31,11 +31,12 @@ public class menu extends AppCompatActivity {
                 cancelar();
             }
         });
-        dialogo1.show();
+        dialogo1.show();*/
+
     }
 
     private void aceptar() {
-        Toast.makeText(getApplicationContext(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Informacion ",Toast.LENGTH_LONG).show();
 
     }
     private void cancelar() {

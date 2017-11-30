@@ -317,7 +317,7 @@ Button nueva,salir;
 
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connections();
-                        query = "SELECT  ExpeNuevo,JuzNuevo  FROM Vta_ResiExpeExtinto where JuzAnte="+datos_consulta.getID()+ "and ExpeAnte='"+no_expediente.getText().toString()+"'";
+                        query = "SELECT  ExpeNuevo,JuzNuevo  FROM Vta_ResiExpeExtinto where JuzAnte="+datos_consulta.getID()+ " and ExpeAnte='"+no_expediente.getText().toString()+"'";
 
                         CAMPO1="ExpeNuevo";
                         CAMPO2="JuzNuevo";
@@ -332,7 +332,7 @@ Button nueva,salir;
 
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connection_penales();
-                        query = "SELECT Nva_causa, Nvo_Juzgado FROM Vta_ResiCausaExtinta where Juzga_anterior="+datos_consulta.getID()+ "and NoCausa='"+no_expediente.getText().toString()+"'";
+                        query = "SELECT Nva_causa, Nvo_Juzgado FROM Vta_ResiCausaExtinta where Juzga_anterior="+datos_consulta.getID()+ " and NoCausa='"+no_expediente.getText().toString()+"'";
                         CAMPO1="Nva_causa";
                         CAMPO2="Nvo_Juzgado";
 
