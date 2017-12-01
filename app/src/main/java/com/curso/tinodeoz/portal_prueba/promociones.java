@@ -345,6 +345,7 @@ public void accion(final View v){
                 else
                 {
 
+                    Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
 
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);

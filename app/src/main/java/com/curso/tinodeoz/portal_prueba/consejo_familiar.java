@@ -367,6 +367,7 @@ Button nueva,salir;
                     }
                     else
                     {
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                         while (no_expediente.getText().toString().length()<11){
                             String ejemplo=no_expediente.getText().toString();
                             ejemplo="0"+ejemplo;

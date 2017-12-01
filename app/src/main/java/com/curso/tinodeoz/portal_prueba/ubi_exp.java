@@ -504,6 +504,7 @@ public class ubi_exp extends Fragment {
                     }
                     else
                     {
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
 
                         while (no_expediente.getText().toString().length()<11){
                             String ejemplo=no_expediente.getText().toString();

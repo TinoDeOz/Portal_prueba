@@ -417,6 +417,8 @@ public class AudienciasOrales extends Fragment {
                     else
                     {
 
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
+
                         String query = "SELECT * FROM Vta_ResiAudiOralMercantil where DATEPART(MONTH, FechaAudi)="+datos_consulta3.getMES()+ " and DATEPART(YEAR,FechaAudi)="+datos_consulta2.getAÑO()+" and IdJuzgado "+datos_consulta.getID();
                         Statement stmt = connect.createStatement();
                         ResultSet rs = stmt.executeQuery(query);

@@ -309,6 +309,7 @@ Button nueva,salir;
                     if(datos_consulta.getQUE_ES()=="MERCANTIL") {
 
 
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                         while (no_expediente.getText().toString().length()<11){
                             String ejemplo=no_expediente.getText().toString();
                             ejemplo="0"+ejemplo;

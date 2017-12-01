@@ -262,7 +262,7 @@ public class Pub_toca extends Fragment {
                     }
                     else
                     {
-
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                         while (numero_toca.getText().toString().length()<9){
                             String ejemplo=numero_toca.getText().toString();
                             ejemplo="0"+ejemplo;

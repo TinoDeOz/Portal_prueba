@@ -618,6 +618,7 @@ public class Notificaciones extends Fragment {
             }
             else
             {
+                Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                 if(datos.getMES()=="FECHA"){
                     query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
                 }else if (datos.getMES()=="EXPEDIENTE"){
@@ -716,6 +717,7 @@ public class Notificaciones extends Fragment {
             }
             else
             {
+                Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                 if(datos.getMES()=="FECHA"){
                     query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
                 }else if (datos.getMES()=="EXPEDIENTE"){
@@ -811,6 +813,7 @@ public class Notificaciones extends Fragment {
             }
             else
             {
+                Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                 if(datos.getMES()=="FECHA"){
                  query ="SELECT *  FROM Vta_ResiNotificaJuzAdoles where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
                 }else if (datos.getMES()=="EXPEDIENTE"){
