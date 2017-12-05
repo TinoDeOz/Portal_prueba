@@ -19,9 +19,9 @@ public class principal extends AppCompatActivity {
 
         String data = "";
 
-        String info="El consejo de la Judicatura trabaja para acercar servicios de utilidad a la comunidad jurídica y a los justiciables. Es por ello que pone a su disposicíon este portal de consulta.<br>" +
-                "<br>El portal de Datos Jurisdiccional le ofrece acceso a información de carácter informativo, relativa a los asuntos radicados en primera instancia como es la publicación electrónica de las listas de notificaciones de todos los juzgados del Estado, o las demás consultas que se ofrecen respecto de los doce juzgados que conocen de las materias civil y familiar de los distritus judiciales de Pachuca y Tulancingo. Para esta versión del portal es posible consultar datos_consulta de los asuntos radicados en las Salas de Segunda Instancia de las materias civil y familiar.<br>" +
-                "<br>Esperando que los datos_consulta aquí presentados le sean de utilidad, sea usted bienvenido.<br>";
+        String info="El consejo de la Judicatura trabaja para acercar servicios de utilidad a la comunidad jurídica y a los justiciables. Es por ello que pone a su la aplicacion movil denominada APP-PJHIDALGO.<br>" +
+                "<br>APP-PJHIDALGO le ofrece acceso a información de carácter informativo, relativa a los asuntos radicados en primera instancia como es la publicación electrónica de las listas de notificaciones de todos los juzgados del Estado, o las demás consultas que se ofrecen respecto de los doce juzgados que conocen de las materias civil y familiar de los distritus judiciales de Pachuca y Tulancingo. Para esta versión de la app es posible consultar datos de los asuntos radicados en las Salas de Segunda Instancia de las materias civil y familiar.<br>" +
+                "<br>Esperando que los datos aquí presentados le sean de utilidad, sea usted bienvenido.<br>";
 
         WebView webView = (WebView) findViewById(R.id.WebView1);
         WebView webView2 = (WebView) findViewById(R.id.WebView2);
