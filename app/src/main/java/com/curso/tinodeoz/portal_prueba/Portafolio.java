@@ -195,7 +195,6 @@ public class Portafolio extends Fragment {
                     nuevo_registro.setJuzgado("PRIMERO MERCANTIL PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
-
                 }else if (position==6) {
                     nuevo_registro.setJuzgado("SEGUNDO MERCANTIL PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
