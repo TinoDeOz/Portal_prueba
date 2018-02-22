@@ -380,12 +380,14 @@ public class ubi_exp extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("28");
                     nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    nuevo_registro.setIDJuzgado("28");
 
                 } else if (position==2) {
                     seleccion_juzgado(v);
                     datos_consulta =new Datos();
                     datos_consulta.setID("30");
                     nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO");
+                    nuevo_registro.setIDJuzgado("30");
 
                 }
                 else if (position==3) {
@@ -393,6 +395,7 @@ public class ubi_exp extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("48");
                     nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    nuevo_registro.setIDJuzgado("48");
 
                 }
             }
@@ -411,6 +414,7 @@ public class ubi_exp extends Fragment {
             datos_consulta =new Datos();
             datos_consulta.setID("1");
             nuevo_registro.setJuzgado("PRIMERO CIVIL PACHUCA");
+            nuevo_registro.setIDJuzgado("1");
 
 
 
@@ -418,14 +422,15 @@ public class ubi_exp extends Fragment {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("2");
-
             nuevo_registro.setJuzgado("SEGUNDO CIVIL PACHUCA");
+            nuevo_registro.setIDJuzgado("2");
         }
         else if (position==3) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("3");
             nuevo_registro.setJuzgado("TERCERO CIVIL PACHUCA");
+            nuevo_registro.setIDJuzgado("3");
 
         }
         else if (position==4) {
@@ -433,12 +438,14 @@ public class ubi_exp extends Fragment {
             datos_consulta =new Datos();
             datos_consulta.setID("36");
             nuevo_registro.setJuzgado("CUARTO CIVIL PACHUCA");
+            nuevo_registro.setIDJuzgado("36");
         }
         else if (position==5) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("38");
             nuevo_registro.setJuzgado("PRIMERO MERCANTIL PACHUCA");
+            nuevo_registro.setIDJuzgado("38");
 
 
         }else if (position==6) {
@@ -446,24 +453,28 @@ public class ubi_exp extends Fragment {
             datos_consulta =new Datos();
             datos_consulta.setID("46");
             nuevo_registro.setJuzgado("SEGUNDO MERCANTIL PACHUCA");
+            nuevo_registro.setIDJuzgado("46");
 
         }else if (position==7) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("5");
             nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
+            nuevo_registro.setIDJuzgado("5");
 
         }else if (position==8) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("40");
             nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
+            nuevo_registro.setIDJuzgado("40");
 
         }else if (position==9) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("52");
             nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
+            nuevo_registro.setIDJuzgado("52");
 
 
         }
@@ -483,16 +494,18 @@ public class ubi_exp extends Fragment {
                 //MyData= mydata.getdata("SELECT Fecha, Perfil from Vta_ResiUbicacion Where IdJuzgado=1 and Expediente='000021/2009'");
                 //Toast.makeText(getActivity(),MyData.get(1).toString(), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(),MyData.get(2).toString(), Toast.LENGTH_SHORT).show();
-                String[] datos =new String[3];;
+                String[] datos =new String[3];
                 try {
 
                     if (Seleccion.getID()=="1") {
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connections();
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
 
                     }else if (Seleccion.getID()=="2") {
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connectionstulancingo();
+                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -504,7 +517,6 @@ public class ubi_exp extends Fragment {
                     }
                     else
                     {
-                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
 
                         while (no_expediente.getText().toString().length()<11){
                             String ejemplo=no_expediente.getText().toString();
@@ -578,7 +590,7 @@ public void llenadoTabla(String txt1,String txt2){
     TextView txtTabla, txtTabla2;
 
     txtTabla=new TextView(getActivity());
-    txtTabla.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla.setGravity(Gravity.CENTER_HORIZONTAL);
     txtTabla.setBackgroundColor(Color.TRANSPARENT);
     txtTabla.setText(txt1);
     txtTabla.setTextColor(Color.parseColor("#B1613e"));

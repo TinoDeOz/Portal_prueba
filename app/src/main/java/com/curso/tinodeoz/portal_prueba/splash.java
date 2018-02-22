@@ -53,8 +53,7 @@ public class splash extends AppCompatActivity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(splash.this,
-                            principal.class);
+                    Intent intent = new Intent(splash.this,menu2.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     splash.this.finish();

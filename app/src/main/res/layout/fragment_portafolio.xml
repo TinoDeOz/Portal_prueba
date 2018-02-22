@@ -12,7 +12,7 @@
         android:id="@+id/banner"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:background="@drawable/banner"
+        android:background="@drawable/bannerp"
         />
     <TextView
         android:id="@+id/banner2"
@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="15dp"
-        android:text="Mi Portafolio."
+        android:text="Mi Portafolio Móvil."
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -40,9 +40,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="15dp"
-            android:background="@android:color/transparent"
+            android:background="#77ffffff"
             android:orientation="vertical"
            >
 
@@ -89,6 +89,25 @@
                         android:layout_gravity="center_horizontal"
                         />
                 </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+                <Button
+                    android:id="@+id/Actualizar"
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@drawable/fondo_btn"
+                    android:text="Actualizar Expedientes."
+                    android:textSize="10sp"
+                    android:layout_gravity="center"
+                    />
             </LinearLayout>
 
             <TextView
@@ -158,6 +177,7 @@
             <HorizontalScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+
                 >
 
                 <TableLayout
@@ -169,17 +189,19 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     >
                 </TableLayout>
             </HorizontalScrollView>
 
 
             <RelativeLayout
+                android:id="@+id/Relative"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="70dp">
+                android:layout_marginBottom="30dp">
                 <LinearLayout
+                    android:id="@+id/Contenedor"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -221,12 +243,63 @@
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_borrar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@id/Contenedor"
+                    >
+
+                    <Button
+                        android:id="@+id/borrar"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/fondo_btn"
+                        android:text="Eliminar Del Portafolio Y Salir."
+                        android:textSize="10sp" />
                 </LinearLayout>
             </RelativeLayout>
+            <TextView
+                android:id="@+id/txt_expediente"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Ingrese su numero de expediente a eliminar:"
+                android:textColor="?android:attr/colorBackground"
+                android:textSize="17sp"/>
 
-
-
-
+            <EditText
+                android:id="@+id/txt_no_expediente"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:maxLength="11"
+                android:background="@android:color/darker_gray"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Ingrese aqui:"
+                android:inputType="text"/>
+            <Button
+                android:id="@+id/eliminar"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/fondo_btn"
+                android:text="Eliminar"
+                android:textSize="10sp"
+                android:layout_gravity="center_horizontal"
+                />
         </LinearLayout>
     </ScrollView>
 

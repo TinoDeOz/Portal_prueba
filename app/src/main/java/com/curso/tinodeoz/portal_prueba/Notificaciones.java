@@ -1406,7 +1406,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     public void mensaje(){
 
         String text_web = "<html><body style=\"text-align:justify; font-size:12px; line-height:20px; color:white;\"> %s </body></html>";
-        String texto= "Consulte en línea las listas de notificaciones que se publican a diario en los juzgados de todo el estado.";
+        String texto= "Puede consultar en línea las listas de notificaciones que se han publicado en los organos jurisdiccionales.";
         web= new WebView(getContext());
         web.loadData(String.format(text_web, texto), "text/html; charset=utf-8","UTF-8");
         web.setBackgroundColor(Color.parseColor("#00FFFFFF"));

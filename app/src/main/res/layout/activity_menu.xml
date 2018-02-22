@@ -12,7 +12,7 @@
         android:id="@+id/banner"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:background="@drawable/banner"
+        android:background="@drawable/bannerp"
         />
 
 <RelativeLayout
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/banner2"
         android:textSize="18dp"
-        android:text="Servicios De Consulta Electronica A Su Disposicion."
+        android:text="Servicios de Consulta Electrónica a su disposición."
         android:textColor="#000000"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
@@ -49,7 +49,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/txtmazo"
         android:textSize="13sp"
-        android:text="Ante algún inconveniente con el funcionamiento de este portal, mucho agradeceremos su reporte al 01-771-71-79000 Ext. 9066, 9510 o al correo electrónico desarrollo.sistemas@pjhidalgo.gob.mx"
+        android:text="Ante algún inconveniente con el funcionamiento de esta app, agradeceremos su reporte al 01-771-71-79000 Ext. 9066, 9510 o al correo electrónico desarrollo.sistemas@pjhidalgo.gob.mx"
         android:textColor="#000000"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"

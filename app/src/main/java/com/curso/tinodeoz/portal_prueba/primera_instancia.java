@@ -85,9 +85,9 @@ public class primera_instancia extends Fragment {
 
         String text_tit = "<html><body style=\"text-align:center; font-size:18px; line-height:20px; background-color:#72ffffff;\"> %s </body></html>";
         String text = "<html><body style=\"text-align:justify; font-size:14px; line-height:20px; background-color:#72ffffff;\"> %s </body></html>";
-        String info=getString(R.string.descripcion);
+        //String info=getString(R.string.descripcion);
         String inf=getString(R.string.descripcion1);
-
+        String info="";
         web_tit = (WebView) v.findViewById(R.id.Web_title);
         webView = (WebView) v.findViewById(R.id.WebView1);
         webView.loadData(String.format(text, info), "text/html; charset=utf-8","UTF-8");

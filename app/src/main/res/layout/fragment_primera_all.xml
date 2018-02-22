@@ -11,7 +11,7 @@
         android:id="@+id/banner"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:background="@drawable/banner"
+        android:background="@drawable/bannerp"
         />
 
     <ImageView

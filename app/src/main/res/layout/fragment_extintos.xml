@@ -11,7 +11,7 @@
         android:id="@+id/banner"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:background="@drawable/banner"
+        android:background="@drawable/bannerp"
         />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text="Ubicación De Expedientes y/o Causas Radicadas En Juzgados Extintos."
+        android:text="Ubicación de expedientes y/o causas radicadas en juzgados extintos."
         android:textSize="18dp"
         android:textAlignment="center"
         android:textColor="#000000"

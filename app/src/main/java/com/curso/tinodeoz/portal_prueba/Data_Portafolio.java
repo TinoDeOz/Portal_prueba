@@ -8,14 +8,15 @@ public class Data_Portafolio {
     private String Expediente;
     private String Ubicacion;
     private String Fecha;
+    private String IDJuzgado;
 
-    /*public String getId() {
-        return id;
+    public String getIDJuzgado() {
+        return IDJuzgado;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }*/
+    public void setIDJuzgado(String IDJuzgado) {
+        this.IDJuzgado = IDJuzgado;
+    }
 
     public String getDistrito() {
         return Distrito;

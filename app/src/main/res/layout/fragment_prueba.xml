@@ -12,7 +12,7 @@
         android:id="@+id/banner"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:background="@drawable/banner"
+        android:background="@drawable/bannerp"
         />
 
     <RelativeLayout
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/banner2"
             android:textSize="18dp"
-            android:text="Servicios De Consulta Electronica A Su Disposicion."
+            android:text="Servicios de Consulta Electrónica a su disposición."
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
             android:textAlignment="center"

@@ -1,6 +1,7 @@
 package com.curso.tinodeoz.portal_prueba;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,25 +20,33 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Portafolio extends Fragment {
 
+    Connection connect;
+    String ConnectionResult="";
+    Boolean esSatisfactorio=false;
+
+
+    RelativeLayout RL;
     DB base;
     Data_Portafolio nuevo_registro;
 
-    Button consulta,agregar,mostrar,nuevaa,salir;
+    Button consulta,agregar,mostrar,nuevaa,salir, btn_eliminar, Btn_opc_eliminar, Actualizar;
     TableLayout tabla;
     Spinner opc,distrito, juzgado1,juzgado2;
-    TextView opcion,txt_juzgado,txt_exp, txt_distrito;
-
+    TextView opcion,txt_juzgado,txt_exp, txt_distrito, txt_eliminar;
+    EditText Expediente;
 
 
     String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
@@ -48,6 +58,14 @@ public class Portafolio extends Fragment {
 
 
     public void inicio(View v){
+        RL= (RelativeLayout)v.findViewById(R.id.Relative) ;
+        Btn_opc_eliminar=(Button)v.findViewById(R.id.borrar);
+        Actualizar=(Button)v.findViewById(R.id.Actualizar);
+        txt_eliminar=(TextView)v.findViewById(R.id.txt_expediente);
+        Expediente=(EditText)v.findViewById(R.id.txt_no_expediente);
+        btn_eliminar=(Button)v.findViewById(R.id.eliminar);
+
+
 
         opcion=(TextView)v.findViewById(R.id.txt_busqueda);
         opc=(Spinner)v.findViewById(R.id.spinner_busqueda);
@@ -73,6 +91,11 @@ public class Portafolio extends Fragment {
         txt_distrito.setVisibility(View.GONE);
         opc.setVisibility(View.GONE);
         opcion.setVisibility(View.GONE);
+
+        Btn_opc_eliminar.setVisibility(View.GONE);
+        txt_eliminar.setVisibility(View.GONE);
+        Expediente.setVisibility(View.GONE);
+        btn_eliminar.setVisibility(View.GONE);
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void llenado_spiners(){
@@ -238,20 +261,17 @@ public class Portafolio extends Fragment {
                 opcion.setVisibility(View.VISIBLE);
                 mostrar.setVisibility(View.GONE);
                 agregar.setVisibility(View.GONE);
-
-
-
+                Actualizar.setVisibility(View.GONE);
             }
         });
-
-
     }
 
-    public void Consulta(String query){
+    public void ActualizarTabla(String query){
 
-        String []contenido= new String[7];
+        String []contenido= new String[8];
+        String[] datos =new String[3];
         String frase="";
-        String columnas []={"distrito","juzgado","expediente","ubicacion","fecha"};
+        String columnas []={"distrito","juzgado","expediente","ubicacion","fecha","idjuzgado"};
 
         //String columnas []={"distrito","juzgado"};
 
@@ -259,16 +279,19 @@ public class Portafolio extends Fragment {
 
         try {    Cursor c=db.query("portafolio",columnas,query,null,null,null,null);
 
-            int dis,juz,exp,ubi,fech;
+            int dis,juz,exp,ubi,fech,idjuz;
 
             dis=c.getColumnIndex("distrito");
             juz=c.getColumnIndex("juzgado");
+            idjuz=c.getColumnIndex("idjuzgado");
             exp=c.getColumnIndex("expediente");
             ubi=c.getColumnIndex("ubicacion");
             fech=c.getColumnIndex("fecha");
+
             Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
             nuevaa.setVisibility(View.VISIBLE);
             salir.setVisibility(View.VISIBLE);
+            Btn_opc_eliminar.setVisibility(View.GONE);
             agregar.setVisibility(View.GONE);
             mostrar.setVisibility(View.GONE);
             txt_juzgado.setVisibility(View.GONE);
@@ -287,24 +310,152 @@ public class Portafolio extends Fragment {
                     contenido[3] = c.getString(exp);
                     contenido[4] = c.getString(ubi);
                     contenido[5] = c.getString(fech);
-                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
+                    contenido[6] = c.getString(idjuz);
+                    try {
+                    if ( contenido[1].equals("Pachuca de Soto.")){
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connections();
+
+                    }
+                   else if ( contenido[1].equals("Tulancingo de Bravo.")){
+                        Con_sql conStr = new Con_sql();
+                        connect = conStr.connectionstulancingo();
+
+
+                       // llenadoTabla(contenido[1]+" "+contenido[6],contenido[2],contenido[3],contenido[4],contenido[5]);
+                    }
+
+
+                            if (connect == null)
+                            {
+                                ConnectionResult = "Check Your Internet Access!";
+                                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_SHORT).show();
+
+                            }
+                            else
+                            {
+
+                                String consulta = "Select * from Vta_ResiUbicacion Where IdJuzgado="+contenido[6]+ " and Expediente='"+contenido[3]+"' Order by Fecha DESC;";
+                                Statement stmt = connect.createStatement();
+                                ResultSet rs = stmt.executeQuery(consulta);
+                                if(!rs.isBeforeFirst()){
+                                    Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
+                                }
+
+                                else {
+
+                                    while (rs.next()){
+
+                                        datos[1]=rs.getString("Fecha");
+                                        datos[2]=rs.getString("Perfil");
+
+                                    }
+                                /*    nuevo_registro.setExpediente(contenido[3]);
+                                    nuevo_registro.setUbicacion(datos[2]);
+                                    nuevo_registro.setFecha(datos[1]+"tt");
+                                    nuevo_registro.setIDJuzgado(contenido[6]);
+                                    nuevo_registro.setJuzgado(contenido[2]);
+                                    nuevo_registro.setDistrito(contenido[1]);*/
+
+                                    base.borrar(contenido[3],contenido[2]);
+                                    base.Agregar(contenido[1],contenido[2],contenido[6],contenido[3],datos[2],datos[1]);
+                                    llenadoTabla(contenido[1],contenido[2],contenido[3],datos[2],datos[1] );
+                                }
+
+                            }
+
+                        }catch (Exception ex){
+                            esSatisfactorio = false;
+                            ConnectionResult = ex.getMessage();
+                            Toast.makeText(getActivity(),"Error"+ ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+
+                       // base.closeDB();
+
 
                 } while (c.moveToNext());
-
             }
-
-            //frase ="El total de matas es"+c.getString(id)+c.getString(an)+c.getString(lar)+c.getString(to);
             base.closeDB();
             Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             base.closeDB();
             Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
+        }
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void Consulta(String query){
+
+    String []contenido= new String[7];
+    String frase="";
+    String columnas []={"distrito","juzgado","expediente","ubicacion","fecha"};
+
+    //String columnas []={"distrito","juzgado"};
+
+    SQLiteDatabase db=base.getReadableDatabase();
+
+    try {    Cursor c=db.query("portafolio",columnas,query,null,null,null,null);
+
+        int dis,juz,exp,ubi,fech;
+
+        dis=c.getColumnIndex("distrito");
+        juz=c.getColumnIndex("juzgado");
+        exp=c.getColumnIndex("expediente");
+        ubi=c.getColumnIndex("ubicacion");
+        fech=c.getColumnIndex("fecha");
+        Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
+        nuevaa.setVisibility(View.VISIBLE);
+        salir.setVisibility(View.VISIBLE);
+        //Btn_opc_eliminar.setVisibility(View.VISIBLE);
+        agregar.setVisibility(View.GONE);
+        mostrar.setVisibility(View.GONE);
+        txt_juzgado.setVisibility(View.GONE);
+        juzgado1.setVisibility(View.GONE);
+        juzgado2.setVisibility(View.GONE);
+        distrito.setVisibility(View.GONE);
+        txt_distrito.setVisibility(View.GONE);
+        opc.setVisibility(View.GONE);
+        opcion.setVisibility(View.GONE);
+
+        if(c.moveToFirst()){
+            do{
+
+                contenido[1] = c.getString(dis);
+                contenido[2] = c.getString(juz);
+                contenido[3] = c.getString(exp);
+                contenido[4] = c.getString(ubi);
+                contenido[5] = c.getString(fech);
+
+                if ( contenido[1].equals("Pachuca de Soto.")){
+                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
+                }
+                if ( contenido[1].equals("Tulancingo de Bravo.")){
+                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
+                }
+            } while (c.moveToNext());
 
         }
 
+        base.closeDB();
+        Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
+    }catch (Exception e){
+        base.closeDB();
+        Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
 
     }
+}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void Actualizar_Datos(){
+        Actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActualizarTabla("");
+                Actualizar.setVisibility(View.GONE);
+            }
+        });
+
+
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -341,10 +492,64 @@ public class Portafolio extends Fragment {
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void Eliminar(){
+    Btn_opc_eliminar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Btn_opc_eliminar.setVisibility(View.GONE);
+            nuevaa.setVisibility(View.GONE);
+            salir.setVisibility(View.GONE);
+            txt_eliminar.setVisibility(View.VISIBLE);
+            Expediente.setVisibility(View.VISIBLE);
+            btn_eliminar.setVisibility(View.VISIBLE);
+            RL.setVisibility(View.GONE);
+        }
+    });
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+    public void Consulta_Eliminar(final String Exp, final String ju){
+    /*btn_eliminar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+        }
+    });*/
+        String text_web = "<html><body style=\"text-align:justify; font-size:12px; line-height:20px; color:white;\"> %s </body></html>";
+        String texto= "¿Esta seguro de eliminar el expediente numero  "+Exp+ "  del Juzgado "+ju+"  de su portafolio movíl?";
+        WebView web2= new WebView(getContext());
+        web2.loadData(String.format(text_web, texto), "text/html; charset=utf-8","UTF-8");
+        web2.setBackgroundColor(Color.parseColor("#00FFFFFF"));
 
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
+        dialogo1.setTitle("Confirmar");
+        dialogo1.setCancelable(false);
+        dialogo1.setView(web2);
+
+        dialogo1.setPositiveButton("Eliminar y Salir", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                base.borrar(Exp,ju);
+                base.closeDB();
+                Toast.makeText(getActivity(),"Eliminado Satisfactoriamente.",Toast.LENGTH_LONG).show();
+                Fragment fra= new prueba();
+                FragmentTransaction trans= getFragmentManager().beginTransaction();
+                getActivity().onBackPressed();// Elimina el fragment anterior
+                trans.replace(R.id.content_frame, fra);
+                trans.addToBackStack(null);
+                trans.commit();
+
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.cancel();
+                //cancelar2();
+            }
+        });
+        dialogo1.show();
+
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String txt5){
+    public void llenadoTabla(String txt1, final String txt2, String txt3, String txt4, String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -353,12 +558,12 @@ public class Portafolio extends Fragment {
         row.setGravity(Gravity.CENTER_VERTICAL);
 
 
-        TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5;
+        final TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5;
 
 
 
         txtTabla=new TextView(getActivity());
-        txtTabla.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla.setGravity(Gravity.CENTER);
         txtTabla.setBackgroundColor(Color.TRANSPARENT);
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.parseColor("#B1613e"));
@@ -366,8 +571,9 @@ public class Portafolio extends Fragment {
         row.addView(txtTabla);
 
 
+
         txtTabla2=new TextView(getActivity());
-        txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla2.setGravity(Gravity.CENTER);
         txtTabla2.setBackgroundColor(Color.TRANSPARENT);
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.parseColor("#B1613e"));
@@ -376,16 +582,16 @@ public class Portafolio extends Fragment {
 
 
         txtTabla3=new TextView(getActivity());
-        txtTabla3.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla3.setGravity(Gravity.CENTER);
         txtTabla3.setBackgroundColor(Color.TRANSPARENT);
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.parseColor("#B1613e"));
+        //txtTabla3.setTextColor(Color.BLUE);
         txtTabla3.setWidth(400);
         row.addView(txtTabla3);
 
-
         txtTabla4=new TextView(getActivity());
-        txtTabla4.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla4.setGravity(Gravity.CENTER);
         txtTabla4.setBackgroundColor(Color.TRANSPARENT);
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.parseColor("#B1613e"));
@@ -394,12 +600,29 @@ public class Portafolio extends Fragment {
 
 
         txtTabla5=new TextView(getActivity());
-        txtTabla5.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla5.setGravity(Gravity.CENTER);
         txtTabla5.setBackgroundColor(Color.TRANSPARENT);
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.parseColor("#B1613e"));
         txtTabla5.setWidth(400);
         row.addView(txtTabla5);
+
+        TextView txtTabla7=new TextView(getActivity());
+        txtTabla7.setGravity(Gravity.CENTER);
+        txtTabla7.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla7.setTextColor(Color.BLUE);
+        txtTabla7.setText("Eliminar del portafolio.");
+        txtTabla7.setWidth(400);
+        row.addView(txtTabla7);
+
+        txtTabla7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              Consulta_Eliminar(txtTabla3.getText().toString(),txtTabla2.getText().toString());
+            }
+        });
+
 
         tabla.addView(row);
 
@@ -440,6 +663,12 @@ public class Portafolio extends Fragment {
         borde5.setHeight(10);
         borde.addView(borde5);
 
+        TextView borde6=new TextView(getActivity());
+        borde6.setBackgroundColor(Color.parseColor("#000000"));
+        borde6.setWidth(400);
+        borde6.setHeight(10);
+        borde.addView(borde6);
+
         //tabla.addView(row ,new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         tabla.addView(borde);
     }
@@ -468,8 +697,6 @@ public class Portafolio extends Fragment {
         txtTabla.setWidth(400);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
-
-
 
 
         txtTabla2=new TextView(getActivity());
@@ -509,6 +736,16 @@ public class Portafolio extends Fragment {
         txtTabla5.setHeight(x);
         row.addView(txtTabla5);
 
+        TextView txtTabla7=new TextView(getActivity());
+        txtTabla7.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla7.setBackgroundColor(Color.parseColor("#B1613e"));
+        txtTabla7.setTextColor(Color.WHITE);
+        txtTabla7.setText("Eliminar");
+        txtTabla7.setWidth(400);
+        txtTabla7.setHeight(x);
+        row.addView(txtTabla7);
+
+
         txtTabla6=new TextView(getActivity());
         txtTabla6.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla6.setBackgroundColor(Color.TRANSPARENT);
@@ -516,14 +753,10 @@ public class Portafolio extends Fragment {
         txtTabla6.setHeight(x);
         row.addView(txtTabla6);
 
+
         tabla.addView(row);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
-
-
-
-
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -573,7 +806,9 @@ public class Portafolio extends Fragment {
         salir();
         agregar();
         llenado_spiners();
-
+        Eliminar();
+        //Consulta_Eliminar();
+        Actualizar_Datos();
         return v;
     }
 
