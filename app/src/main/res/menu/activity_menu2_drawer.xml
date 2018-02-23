@@ -50,5 +50,17 @@
         </menu>
     </item>
 
+    <item android:title="Salir"  >
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/opcion5"
+                    android:icon="@mipmap/ic_cerrar"
+                    android:title="Cerrar App." />
+
+            </group>
+        </menu>
+    </item>
+
 
 </menu>

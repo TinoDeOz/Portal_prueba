@@ -361,6 +361,7 @@ public class Portafolio extends Fragment {
                                     llenadoTabla(contenido[1],contenido[2],contenido[3],datos[2],datos[1] );
                                 }
 
+                                altTableRow(4);
                             }
 
                         }catch (Exception ex){
@@ -416,6 +417,7 @@ public void Consulta(String query){
         opcion.setVisibility(View.GONE);
 
         if(c.moveToFirst()){
+
             do{
 
                 contenido[1] = c.getString(dis);
@@ -432,6 +434,7 @@ public void Consulta(String query){
                 }
             } while (c.moveToNext());
 
+            altTableRow(4);
         }
 
         base.closeDB();
@@ -442,6 +445,7 @@ public void Consulta(String query){
 
     }
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Actualizar_Datos(){
@@ -490,6 +494,32 @@ public void Consulta(String query){
         });
 
     }
+
+
+/////////////////////////////////////////////////////////////////////////
+
+    public void altTableRow(int alt_row) {
+        int childViewCount = tabla.getChildCount();
+
+        for (int i = 1; i < childViewCount; i++) {
+            TableRow row = (TableRow) tabla.getChildAt(i);
+
+            for (int j = 0; j < row.getChildCount(); j++) {
+
+                TextView tv = (TextView) row.getChildAt(j);
+                if (i % alt_row != 1) {
+                    // tv.setBackground(getResources().getDrawable(R.drawable.alt_row_color));
+                    tv.setTextColor(Color.parseColor("#B1613e"));
+                } else {
+                    //tv.setBackground(getResources().getDrawable(R.drawable.row_color));
+                    tv.setTextColor(Color.BLACK);
+                }
+
+            }
+        }
+    }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void Eliminar(){
     Btn_opc_eliminar.setOnClickListener(new View.OnClickListener() {
@@ -514,7 +544,8 @@ public void Eliminar(){
         }
     });*/
         String text_web = "<html><body style=\"text-align:justify; font-size:12px; line-height:20px; color:white;\"> %s </body></html>";
-        String texto= "¿Esta seguro de eliminar el expediente numero  "+Exp+ "  del Juzgado "+ju+"  de su portafolio movíl?";
+        //String texto= "¿Esta seguro de eliminar el expediente numero  "+Exp+ "  del Juzgado "+ju+"  de su portafolio movíl?";
+        String texto="¿Desea realmente eliminar el registro del portafolio de asuntos?";
         WebView web2= new WebView(getContext());
         web2.loadData(String.format(text_web, texto), "text/html; charset=utf-8","UTF-8");
         web2.setBackgroundColor(Color.parseColor("#00FFFFFF"));
@@ -523,18 +554,14 @@ public void Eliminar(){
         dialogo1.setTitle("Confirmar");
         dialogo1.setCancelable(false);
         dialogo1.setView(web2);
-
+        tabla.removeAllViews();
         dialogo1.setPositiveButton("Eliminar y Salir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 base.borrar(Exp,ju);
                 base.closeDB();
-                Toast.makeText(getActivity(),"Eliminado Satisfactoriamente.",Toast.LENGTH_LONG).show();
-                Fragment fra= new prueba();
-                FragmentTransaction trans= getFragmentManager().beginTransaction();
-                getActivity().onBackPressed();// Elimina el fragment anterior
-                trans.replace(R.id.content_frame, fra);
-                trans.addToBackStack(null);
-                trans.commit();
+                Consulta("");
+                tabla.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -606,12 +633,13 @@ public void Eliminar(){
         txtTabla5.setWidth(400);
         row.addView(txtTabla5);
 
-        TextView txtTabla7=new TextView(getActivity());
-        txtTabla7.setGravity(Gravity.CENTER);
+        final Button txtTabla7=new Button(getActivity());
+        txtTabla7.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla7.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla7.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_cancel_black_24dp,0,0);
         txtTabla7.setTextColor(Color.BLUE);
-        txtTabla7.setText("Eliminar del portafolio.");
-        txtTabla7.setWidth(400);
+        //txtTabla7.setText("Eliminar del portafolio.");
+        txtTabla7.setWidth(100);
         row.addView(txtTabla7);
 
         txtTabla7.setOnClickListener(new View.OnClickListener() {
@@ -619,6 +647,13 @@ public void Eliminar(){
             public void onClick(View v) {
 
               Consulta_Eliminar(txtTabla3.getText().toString(),txtTabla2.getText().toString());
+              //  txtTabla.setVisibility(View.GONE);
+              //  txtTabla2.setVisibility(View.GONE);
+              //  txtTabla3.setVisibility(View.GONE);
+                // //txtTabla4.setVisibility(View.GONE);
+                //txtTabla5.setVisibility(View.GONE);
+                //txtTabla7.setVisibility(View.GONE);
+                //tabla.setVisibility(View.GONE);
             }
         });
 
@@ -751,7 +786,6 @@ public void Eliminar(){
         txtTabla6.setWidth(200);
         txtTabla6.setHeight(x);
         row.addView(txtTabla6);
-
 
         tabla.addView(row);
     }

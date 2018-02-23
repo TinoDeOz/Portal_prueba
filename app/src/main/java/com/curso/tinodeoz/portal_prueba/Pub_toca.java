@@ -300,10 +300,6 @@ public class Pub_toca extends Fragment {
 
                     }
 
-                    //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
-
-
-
                 }catch (Exception ex)
                 {
                     esSatisfactorio = false;

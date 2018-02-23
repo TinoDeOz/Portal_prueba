@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="15dp"
-        android:text="Mi Portafolio Móvil."
+        android:text="Mi portafolio móvil."
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -84,7 +84,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="0dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Mostrar Expedientes."
+                        android:text="Portafolio de asuntos"
                         android:textSize="10sp"
                         android:layout_gravity="center_horizontal"
                         />
@@ -221,7 +221,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Nueva Consulta"
+                            android:text="Regresar"
                             android:textSize="10sp"
                             android:layout_gravity="center_horizontal"
                             />

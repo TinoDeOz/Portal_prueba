@@ -1,5 +1,6 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.os.AsyncTask;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -475,8 +476,6 @@ public class ubi_exp extends Fragment {
             datos_consulta.setID("52");
             nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("52");
-
-
         }
     }
 
@@ -723,4 +722,8 @@ public void Encabezado(String txt1,String txt2){
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
+
+
+

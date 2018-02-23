@@ -111,7 +111,10 @@ Notificaciones.OnFragmentInteractionListener,Pub_toca.OnFragmentInteractionListe
         }else if (id == R.id.opcion4) {
             fra= new Portafolio();
             seleccionfragment=true;
+        }else if (id == R.id.opcion5) {
+            finish();
         }
+
             if (seleccionfragment){
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fra).commit();
