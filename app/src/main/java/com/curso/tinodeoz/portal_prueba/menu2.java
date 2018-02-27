@@ -86,7 +86,6 @@ Notificaciones.OnFragmentInteractionListener,Pub_toca.OnFragmentInteractionListe
             startActivity(ini);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -124,13 +123,10 @@ Notificaciones.OnFragmentInteractionListener,Pub_toca.OnFragmentInteractionListe
         return true;
     }
 
-
     public void ir_prueba(View v) {
         Intent ini= new Intent(this, menu.class);
         startActivity(ini);
     }
-
-
 
     @Override
     public void onFragmentInteraction(Uri uri) {

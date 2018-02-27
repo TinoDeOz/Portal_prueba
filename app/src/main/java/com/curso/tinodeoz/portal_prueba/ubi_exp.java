@@ -1,5 +1,6 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,7 +30,9 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 /**
@@ -348,7 +351,6 @@ public class ubi_exp extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position==1){
 
-
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.GONE);
@@ -487,6 +489,7 @@ public class ubi_exp extends Fragment {
     }
 });
 
+
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -497,6 +500,8 @@ public class ubi_exp extends Fragment {
                 //Toast.makeText(getActivity(),MyData.get(2).toString(), Toast.LENGTH_SHORT).show();
                 String[] datos =new String[3];
                 try {
+
+
 
                     if (Seleccion.getID()=="1") {
                         Con_sql conStr = new Con_sql();
@@ -570,8 +575,7 @@ public class ubi_exp extends Fragment {
                     esSatisfactorio = false;
                     ConnectionResult = ex.getMessage();
                 }
-
-            }
+           }
         });
 
 
@@ -726,6 +730,3 @@ public void Encabezado(String txt1,String txt2){
     }
 
 }
-
-
-
