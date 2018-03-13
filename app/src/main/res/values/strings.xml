@@ -1,4 +1,19 @@
 <resources>
+
+    <string name="hint_distrito">Seleccione su distrito:</string>
+    <string name="hint_juzgado">Seleccione su juzgado:</string>
+    <string name="hint_expediente">Ingrese su numero de expediente:</string>
+    <string name="ingrese">Ingrese aqui:</string>
+    <string name="consulta">Consultar</string>
+    <string name="nueva">Nueva Consulta</string>
+    <string name="salir">Salir</string>
+    <string name="opc_busqueda">Seleccione La Opción De Busqueda:</string>
+    <string name="hint_causa">Ingrese su número de Causa:</string>
+    <string name="regresar">Regresar</string>
+
+
+
+
     <string name="app_name">APP-PJHIDALGO</string>
     <string name="title_activity_menu2">APP-PJHIDALGO.</string>
 
@@ -24,5 +39,74 @@
 &lt;br&gt;&lt;br&gt;*No deberá dejar espacios y podrá utilizar mayúsculas y minúsculas*
 
 </string>
+
+    ////////////////////// Activity_menu  /////////////////////////////
+    <string name="pie_de_imagen">Servicios de Consulta Electrónica a su disposición.</string>
+    <string name="info">"Ante algún inconveniente con el funcionamiento de esta app, agradeceremos su reporte al 01-771-71-79000 Ext. 9066, 9510 o al correo electrónico desarrollo.sistemas@pjhidalgo.gob.mx </string>
+
+    //////////////////////// Principal ///////////////////////////////77777
+    <string name="continuar">Continuar</string>
+
+//////////////////////////// Audiencias Orales ////////////////////////////////////////////////////////
+    <string name="titulo_AO">Audiencias orales en materia mercantil.</string>
+    <string name="año">Año:</string>
+    <string name="mes">Mes:</string>
+
+///////////////////////////// Consejo Familiar ////////////////////////////////////////////////////////////////
+    <string name="titulo_CF">Agenda de intervenciones por expediente.</string>
+////////////////////////////// Consignaciones /////////////////////////////////////////////////////////////////
+    <string name="titulo_Consignaciones">Consulta de Depósitos.</string>
+
+///////////////////////////////// Extintos///////////////////////////////////////////////////////////
+    <string name="titulo_EXT">Ubicación de expedientes y/o causas radicadas en juzgados extintos.</string>
+    <string name="juz_procedencia">Juzgado de procedencia:</string>
+    <string name="materia_perteneciente">Materia a la cual pertenece:</string>
+    <string name="causa_ante">Número de causa anterior:</string>
+
+//////////////////////////////////// Notificaciones /////////////////////////////////////////////////////////////
+    <string name="titulo_noti">Consulta De Notificaciones Por Lista.</string>
+    <string name="fecha_noti">Fecha De Notificación:</string>
+
+    ///////////////////////////// Portafolio ////////////////////////////////////////////////////////////////////777
+    <string name="titulo_portafolio">Mi portafolio móvil.</string>
+    <string name="agregar_exp">Agregar Expediente</string>
+    <string name="portafolio">Portafolio de asuntos</string>
+    <string name="actualizar">Actualizar Expedientes</string>
+    <string name="eliminar">Eliminar Del Portafolio Y Salir</string>
+
+    ///////////////////////////////Primera Instancia ///////////////////////////////////////////////////////////
+    <string name="ubi_exp">Ubicacion de Expediente.</string>
+    <string name="consignaciones">Consignaciones a expedientes.</string>
+    <string name="audiencias">Audiencias orales de materia mercantil.</string>
+    <string name="promociones">Consulta de Promociones acordadas.</string>
+    <string name="intervenciones">Intervenciones del consejo de familia.</string>
+    <string name="extintos">Ubicar expediente o causa de juzgados extintos. </string>
+
+    /////////////////////////////////// Acuerdo Promocion ///////////////////////////////////////////////////////7
+    <string name="titulo_acuerdo">Acuerdo de Promoción.</string>
+    <string name="tipo_promo">Seleccione el tipo de promoción:</string>
+    /////////////////////////////////// Publicacion de tocas //////////////////////////////////////////////////////
+    <string name="titulo_pub">Publicaciónes De Tocas.</string>
+    <string name="sala_proce">Sala De Procedencia:</string>
+    <string name="num_toca">Número de toca:</string>
+///////////////////////////////////// Ubicacion de Tocas. ///////////////////////////////////////////////////////
+    <string name="titulo_ubi">Ubicacion de Tocas.</string>
+
+
+    /////////////////////////////////// Ubicacion de expedientes ////////////////////////////////////////////////
+    <string name="titulo_UBI_EXP">Ubicación de expedientes.</string>
+    <string name="guardar">Guradar En Portafolio Y Salir</string>
+
+    //////////////////////////////////// Menu Drawer /////////////////////////////////////////////////////////////////
+    <string name="opc1">Primera Instancia Materia Civil y Familiar"</string>
+    <string name="opc2">Distritos Pachuca Y Tulancingo.</string>
+    <string name="opc3">Primera Instancia Todas Las Materias</string>
+    <string name="opc4">Todos Los Distritos</string>
+    <string name="opc5">Segunda Instancia</string>
+    <string name="opc6">Materias Civil Y Familiar.</string>
+    <string name="opc7">Mi Portafolio</string>
+    <string name="opc8">Mis Expedientes.</string>
+    <string name="opc9">Salir</string>
+    <string name="opc10">Cerrar App.</string>
 
 </resources>

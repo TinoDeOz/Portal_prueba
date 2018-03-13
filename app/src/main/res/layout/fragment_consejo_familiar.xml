@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/banner2"
@@ -22,8 +22,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text="Agenda de intervenciones por expediente."
-        android:textSize="18dp"
+        android:text="@string/titulo_CF"
+        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:fontFamily="serif"
@@ -56,7 +56,7 @@
                 android:layout_height="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Seleccione su distrito:"
+                android:text="@string/hint_distrito"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -65,7 +65,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -73,7 +72,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Seleccione su juzgado:"
+                android:text="@string/hint_juzgado"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
@@ -83,7 +82,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <Spinner
@@ -91,7 +89,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -99,7 +96,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Ingrese su numero de expediente::"
+                android:text="@string/hint_expediente"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -113,17 +110,17 @@
                 android:maxLength="11"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Ingrese aqui:"
+                android:hint="@string/ingrese"
                 android:inputType="text"/>
             <Button
                 android:id="@+id/btn_familiar_consultar"
-                android:layout_width="100dp"
+                android:layout_width="105dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/fondo_btn"
-                android:text="Consultar"
-                android:textSize="10sp"
+                android:text="@string/consulta"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
                 />
             <HorizontalScrollView
@@ -133,7 +130,7 @@
 
                 <TableLayout
                     android:id="@+id/Tabla_btn_familiar"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
@@ -153,7 +150,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    tools:ignore="UselessParent">
 
                     <LinearLayout
                         android:layout_width="150dp"
@@ -168,8 +166,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Nueva Consulta"
-                            android:textSize="10sp"
+                            android:text="@string/nueva"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
@@ -185,8 +183,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Salir."
-                            android:textSize="10sp"
+                            android:text="@string/salir"
+                            android:textSize="20sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
@@ -195,22 +193,5 @@
 
         </LinearLayout>
     </ScrollView>
-   <!-- <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout">
 
-        <ImageView
-            android:id="@+id/pie"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/info"
-            android:layout_above="@+id/txtpie"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </LinearLayout>-->
 </RelativeLayout>

@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
     <TextView
         android:id="@+id/banner2"
         android:layout_width="250dp"
@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp"
         android:layout_marginTop="15dp"
-        android:text="Mi portafolio móvil."
+        android:text="@string/titulo_portafolio"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -67,8 +67,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Agregar Expediente"
-                        android:textSize="10sp"
+                        android:text="@string/agregar_exp"
+                        android:textSize="12sp"
                         android:layout_gravity="center_horizontal"
                         />
                 </LinearLayout>
@@ -84,8 +84,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="0dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Portafolio de asuntos"
-                        android:textSize="10sp"
+                        android:text="@string/portafolio"
+                        android:textSize="12sp"
                         android:layout_gravity="center_horizontal"
                         />
                 </LinearLayout>
@@ -104,8 +104,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="0dp"
                     android:background="@drawable/fondo_btn"
-                    android:text="Actualizar Expedientes."
-                    android:textSize="10sp"
+                    android:text="@string/actualizar"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     />
             </LinearLayout>
@@ -116,7 +116,7 @@
                 android:layout_height="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Seleccione su opcion de busqueda:"
+                android:text="@string/opc_busqueda"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -125,7 +125,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -134,7 +133,7 @@
                 android:layout_height="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Seleccione su distrito:"
+                android:text="@string/hint_distrito"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -143,7 +142,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -151,7 +149,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Seleccione su juzgado:"
+                android:text="@string/hint_juzgado"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
@@ -161,7 +159,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <Spinner
@@ -169,7 +166,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
 
@@ -221,8 +217,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Regresar"
-                            android:textSize="10sp"
+                            android:text="@string/regresar"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
@@ -238,8 +234,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Salir."
-                            android:textSize="10sp"
+                            android:text="@string/salir"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
@@ -264,8 +260,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Eliminar Del Portafolio Y Salir."
-                        android:textSize="10sp" />
+                        android:text="@string/eliminar"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </RelativeLayout>
             <TextView
@@ -273,7 +269,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Ingrese su numero de expediente a eliminar:"
+                android:text="@string/hint_expediente"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -287,7 +283,7 @@
                 android:background="@android:color/darker_gray"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Ingrese aqui:"
+                android:hint="@string/ingrese"
                 android:inputType="text"/>
             <Button
                 android:id="@+id/eliminar"
@@ -296,8 +292,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="60dp"
                 android:background="@drawable/fondo_btn"
-                android:text="Eliminar"
-                android:textSize="10sp"
+                android:text="@string/eliminar"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
                 />
         </LinearLayout>

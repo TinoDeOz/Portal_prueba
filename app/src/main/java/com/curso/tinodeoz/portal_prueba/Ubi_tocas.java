@@ -46,9 +46,6 @@ public class Ubi_tocas extends Fragment {
         // Required empty public constructor
     }
 
-
-
-
      public static Ubi_tocas newInstance(String param1, String param2) {
         Ubi_tocas fragment = new Ubi_tocas();
         Bundle args = new Bundle();
@@ -75,6 +72,7 @@ public class Ubi_tocas extends Fragment {
 
         llenado_spiners(v);
         acciones(v);
+        finales(v);
         return v;
     }
 
@@ -124,8 +122,6 @@ public class Ubi_tocas extends Fragment {
         });
 
 
-
-
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,7 +158,6 @@ public class Ubi_tocas extends Fragment {
         }else if (a==false) {
             nueva.setVisibility(View.GONE);
             salir.setVisibility(View.GONE);
-
         }
     }
 
@@ -182,7 +177,6 @@ public class Ubi_tocas extends Fragment {
 
     }
 
-
     public void nueva(){
 
         nueva.setOnClickListener(new View.OnClickListener() {
@@ -197,18 +191,7 @@ public class Ubi_tocas extends Fragment {
             }
         });
 
-
     }
-
-
-
-
-
-
-
-
-
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

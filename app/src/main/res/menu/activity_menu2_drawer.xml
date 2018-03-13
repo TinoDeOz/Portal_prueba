@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <!--<item android:title="Primera Instancia Materia Civil y Familiar"/>-->
-    <item android:title="Primera Instancia Materia Civil y Familiar"  >
+    <item android:title="@string/opc1"  >
     <menu>
         <group android:checkableBehavior="single">
         <item
             android:id="@+id/opcion1"
             android:icon="@mipmap/icon_uno"
-            android:title="Distritos Pachuca Y Tulancingo." />
+            android:title="@string/opc2" />
 
     </group>
         </menu>
         </item>
 
-        <item android:title="Primera Instancia Todas Las Materias"  >
+        <item android:title="@string/opc3"  >
         <menu>
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/opcion2"
                 android:icon="@drawable/icon_derecho"
-                android:title="Todos Los Distritos"
+                android:title="@string/opc4"
                 />
             </group>
         </menu>
@@ -27,36 +27,36 @@
 
 
 
-    <item android:title="Segunda Instancia">
+    <item android:title="@string/opc5">
         <menu>
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/opcion3"
                 android:icon="@drawable/icon_law"
-                android:title="Materias Civil Y Familiar." />
+                android:title="@string/opc6" />
             </group>
         </menu>
     </item>
 
-    <item android:title="Mi Portafolio"  >
+    <item android:title="@string/opc7"  >
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/opcion4"
                     android:icon="@drawable/folder"
-                    android:title="Mis Expedientes." />
+                    android:title="@string/opc8" />
 
             </group>
         </menu>
     </item>
 
-    <item android:title="Salir"  >
+    <item android:title="@string/opc9"  >
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/opcion5"
                     android:icon="@mipmap/ic_cerrar"
-                    android:title="Cerrar App." />
+                    android:title="@string/opc10" />
 
             </group>
         </menu>

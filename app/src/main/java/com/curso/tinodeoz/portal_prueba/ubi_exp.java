@@ -530,7 +530,6 @@ public class ubi_exp extends Fragment {
                             no_expediente.setText(ejemplo);
                         }
 
-
                         String query = "Select * from Vta_ResiUbicacion Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by Fecha DESC;";
                         Statement stmt = connect.createStatement();
                         ResultSet rs = stmt.executeQuery(query);

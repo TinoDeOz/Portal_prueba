@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/banner2"
@@ -22,8 +22,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text="Publicaciónes De Tocas."
-        android:textSize="18dp"
+        android:text="@string/titulo_pub"
+        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:fontFamily="serif"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Sala De Procedencia:"
+                android:text="@string/sala_proce"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -66,7 +66,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -74,7 +73,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Número de toca:"
+                android:text="@string/num_toca"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
@@ -90,19 +89,19 @@
                 android:inputType="text"
                 android:maxLength="9"
                 android:gravity="center"
-                android:hint="Ingrese aqui:"
+                android:hint="@string/ingrese"
                 />
 
 
             <Button
                 android:id="@+id/btn_publi_toca_consultar"
-                android:layout_width="100dp"
+                android:layout_width="105dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/fondo_btn"
-                android:text="Consultar"
-                android:textSize="10sp"
+                android:text="@string/consulta"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
                 />
 
@@ -136,7 +135,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    tools:ignore="UselessParent">
 
                     <LinearLayout
                         android:layout_width="150dp"
@@ -150,8 +150,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Nueva Consulta"
-                            android:textSize="10sp"
+                            android:text="@string/nueva"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>
@@ -167,8 +167,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
-                            android:text="Salir."
-                            android:textSize="10sp"
+                            android:text="@string/salir"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>

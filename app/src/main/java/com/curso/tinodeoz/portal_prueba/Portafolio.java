@@ -568,6 +568,7 @@ public void Eliminar(){
         dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 dialogo1.cancel();
+                Consulta("");
                 //cancelar2();
             }
         });

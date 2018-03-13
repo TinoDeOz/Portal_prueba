@@ -13,7 +13,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100dp"
             android:background="@drawable/bannerp"
-            />
+            tools:ignore="ContentDescription" />
 
 
         <ImageView
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-        />
+            tools:ignore="ContentDescription" />
 
 
     <ScrollView
@@ -38,23 +38,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/marco"
             android:orientation="vertical">
-
-            <!-- <TextView
-                    android:id="@+id/que_es"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#101010"
-                    android:textSize="30sp" />-->
 
 
             <WebView
@@ -67,7 +57,6 @@
                 android:id="@+id/WebView2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/WebView1"
                 android:layout_marginBottom="30dp"
                 />
 
@@ -79,8 +68,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/fondo_btn"
-                android:text="Continuar"
-                android:textSize="10sp"
+                android:text="@string/continuar"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
                 android:onClick="ir_menu"
                 />
@@ -96,28 +85,11 @@
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout">
 
-
-   <!-- <TextView
-
-        android:id="@+id/txtpie"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Ante algún inconveniente con el funcionamiento de este portal, mucho agradeceremos su reporte al 01-771-71-79000 Ext. 9066, 9510 o al correo electrónico desarrollo.sistemas@pjhidalgo.gob.mx"
-        android:textColor="#101010"
-        android:textSize="8sp"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />-->
-
         <ImageView
             android:id="@+id/pie"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/info"
-
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </RelativeLayout>

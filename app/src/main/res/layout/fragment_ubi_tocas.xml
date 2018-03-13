@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/banner2"
@@ -22,8 +22,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text="Ubicación De Toca."
-        android:textSize="18dp"
+        android:text="@string/titulo_ubi"
+        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:fontFamily="serif"
@@ -56,7 +56,7 @@
                 android:layout_height="33dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Sala De Procedencia:"
+                android:text="@string/sala_proce"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
@@ -65,7 +65,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
                 android:background="@android:color/darker_gray"
-                android:hint="Seleccione aqui:"
                 />
 
             <TextView
@@ -73,7 +72,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Número de toca:"
+                android:text="@string/num_toca"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
@@ -88,19 +87,19 @@
                 android:ems="10"
                 android:maxLength="9"
                 android:gravity="center"
-                android:hint="Ingrese aqui:"
+                android:hint="@string/ingrese"
                 android:inputType="text"/>
 
 
             <Button
                 android:id="@+id/btn_toca_consultar"
-                android:layout_width="100dp"
+                android:layout_width="105dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/fondo_btn"
-                android:text="Consultar"
-                android:textSize="10sp"
+                android:text="@string/consulta"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
                 />
 
@@ -120,8 +119,6 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/info"
-            android:layout_above="@+id/txtpie"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </RelativeLayout>

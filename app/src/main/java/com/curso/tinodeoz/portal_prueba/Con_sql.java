@@ -1,8 +1,6 @@
 package com.curso.tinodeoz.portal_prueba;
-
-
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
+
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -75,15 +73,11 @@ public class Con_sql {
 
     }
 
-
-
-
     public Connection connection_penales(){
         IP="";
         DB="";
         User="";
         Pass="";
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -135,9 +129,6 @@ public class Con_sql {
         }
 
         return connection;
-//Osorio_notifica
     }
-
-
 
 }

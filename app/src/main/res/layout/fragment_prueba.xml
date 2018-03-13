@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -28,15 +28,15 @@
             android:background="@drawable/mazo"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            />
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/txtmazo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/banner2"
-            android:textSize="18dp"
-            android:text="Servicios de Consulta Electrónica a su disposición."
+            android:textSize="18sp"
+            android:text="@string/pie_de_imagen"
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
             android:textAlignment="center"
@@ -47,54 +47,6 @@
 
     </RelativeLayout>
 
-
-    <!--<ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/banner2"
-        android:background="@android:color/transparent"
-        android:layout_above="@+id/linearLayout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/marco"
-            android:orientation="vertical">
-
-           <WebView
-                android:id="@+id/WebView1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp" />
-
-            <WebView
-                android:id="@+id/WebView2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/WebView1"
-                android:layout_marginBottom="30dp"
-                />
-
-
-            <Button
-                android:id="@+id/next"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/fondo_btn"
-                android:text="Continuar"
-                android:textSize="10sp"
-                android:layout_gravity="center_horizontal"
-                />
-
-        </LinearLayout>
-    </ScrollView>-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -109,8 +61,6 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/info"
-            android:layout_above="@+id/txtpie"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </RelativeLayout>

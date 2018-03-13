@@ -1,6 +1,7 @@
 package com.curso.tinodeoz.portal_prueba;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ Notificaciones.OnFragmentInteractionListener,Pub_toca.OnFragmentInteractionListe
     TextView TV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu2);
 

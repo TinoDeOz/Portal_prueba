@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="@drawable/bannerp"
-        />
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/banner2"
@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        />
+        tools:ignore="ContentDescription" />
 
     <ScrollView
         android:id="@+id/scroll"
@@ -35,7 +35,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -82,7 +82,7 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/fondo_btn"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:text="Ubicacion de Expediente."
+                        android:text="@string/ubi_exp"
                         android:textSize="12sp"
                         />
 
@@ -93,7 +93,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Consignaciones a expedientes."
+                        android:text="@string/consignaciones"
                         android:textSize="10sp"
                         android:layout_gravity="center"
                         />
@@ -105,7 +105,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Audiencias orales de materia mercantil."
+                        android:text="@string/audiencias"
                         android:textSize="12sp"
                         android:layout_gravity="center"
                         />
@@ -128,7 +128,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Consulta de Promociones acordadas."
+                        android:text="@string/promociones"
                         android:textSize="12sp"
 
                         />
@@ -140,7 +140,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Intervenciones del consejo de familia."
+                        android:text="@string/intervenciones"
                         android:textSize="10sp"
                         android:layout_gravity="center"
                         />
@@ -152,7 +152,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/fondo_btn"
-                        android:text="Ubicar expediente o causa de juzgados extintos. "
+                        android:text="@string/extintos"
                         android:textSize="12sp"
                         android:layout_gravity="center"
                         />
@@ -180,8 +180,6 @@
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/info"
-            android:layout_above="@+id/txtpie"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </RelativeLayout>
