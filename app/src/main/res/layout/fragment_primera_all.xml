@@ -58,15 +58,12 @@
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="130dp"
                 android:background="@drawable/fondo_btn"
-                android:fontFamily="serif"
-                android:textStyle="italic"
                 android:text="@string/btn_des"
-                android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:clickable="true"
-                android:lineSpacingExtra="5dp"/>
+               />
 
         </RelativeLayout>
     </ScrollView>

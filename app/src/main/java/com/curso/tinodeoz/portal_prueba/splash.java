@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class splash extends AppCompatActivity {
     public void onAttachedToWindow() {
@@ -62,7 +63,6 @@ public class splash extends AppCompatActivity {
                 } finally {
                     splash.this.finish();
                 }
-
             }
         };
         splashTread.start();

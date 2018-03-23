@@ -444,20 +444,17 @@ public class AudienciasOrales extends Fragment {
 
                             while (rs.next()){
                                 x=x+1;
-                                datos[1]=rs.getString("Expediente").toString();
-                                datos[2]=rs.getString("Juzgado").toString();
-                                datos[3]=rs.getString("FechaAudi").toString();
-                                datos[4]=rs.getString("Tipo").toString();
+                                datos[1]=rs.getString("Expediente");
+                                datos[2]=rs.getString("Juzgado");
+                                datos[3]=rs.getString("FechaAudi");
+                                datos[4]=rs.getString("Tipo");
 
                                 llenadoTabla(String.valueOf(x),datos[1],datos[2],datos[3],datos[4]);
                             }
                         }
 
                     }
-
-                    //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
-
-
+                    Cambio_color(4);
 
                 }catch (Exception ex)
                 {
@@ -473,7 +470,31 @@ public class AudienciasOrales extends Fragment {
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void Cambio_color(int alt_row) {
+    int childViewCount = tabla.getChildCount();
+
+    for (int i = 1; i < childViewCount; i++) {
+        TableRow row = (TableRow) tabla.getChildAt(i);
+
+        for (int j = 0; j < row.getChildCount(); j++) {
+
+            TextView tv = (TextView) row.getChildAt(j);
+            if (i % 4 != 1) {
+                // tv.setBackground(getResources().getDrawable(R.drawable.alt_row_color));
+                tv.setTextColor(Color.parseColor("#B1613e"));
+            } else {
+                //tv.setBackground(getResources().getDrawable(R.drawable.row_color));
+                tv.setTextColor(Color.BLACK);
+            }
+        }
+    }
+}
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String txt5){
     TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
             TableRow.LayoutParams.WRAP_CONTENT);

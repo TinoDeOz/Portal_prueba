@@ -1,7 +1,5 @@
 package com.curso.tinodeoz.portal_prueba;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -35,14 +33,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ubi_exp.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ubi_exp#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ubi_exp extends Fragment {
 
 
@@ -87,15 +77,6 @@ public class ubi_exp extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ubi_exp.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ubi_exp newInstance(String param1, String param2) {
         ubi_exp fragment = new ubi_exp();
         Bundle args = new Bundle();
@@ -451,30 +432,29 @@ public class ubi_exp extends Fragment {
             datos_consulta.setID("38");
             nuevo_registro.setJuzgado("PRIMERO MERCANTIL PACHUCA");
             nuevo_registro.setIDJuzgado("38");
-
-
-        }else if (position==6) {
+        }
+        else if (position==6) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("46");
             nuevo_registro.setJuzgado("SEGUNDO MERCANTIL PACHUCA");
             nuevo_registro.setIDJuzgado("46");
-
-        }else if (position==7) {
+        }
+        else if (position==7) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("5");
             nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("5");
-
-        }else if (position==8) {
+        }
+        else if (position==8) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("40");
             nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("40");
-
-        }else if (position==9) {
+        }
+        else if (position==9) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("52");
@@ -493,92 +473,76 @@ public class ubi_exp extends Fragment {
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //List<Map<Integer,String>> MyData = null;
-                //ObtenerDatos mydata =new ObtenerDatos();
-                //MyData= mydata.getdata("SELECT Fecha, Perfil from Vta_ResiUbicacion Where IdJuzgado=1 and Expediente='000021/2009'");
-                //Toast.makeText(getActivity(),MyData.get(1).toString(), Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getActivity(),MyData.get(2).toString(), Toast.LENGTH_SHORT).show();
-                String[] datos =new String[3];
-                try {
-
-
-
-                    if (Seleccion.getID()=="1") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connections();
-                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
-
-                    }else if (Seleccion.getID()=="2") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connectionstulancingo();
-                        Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                    if (connect == null)
-                    {
-                        ConnectionResult = "Check Your Internet Access!";
-                        Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_SHORT).show();
-
-                    }
-                    else
-                    {
-
-                        while (no_expediente.getText().toString().length()<11){
-                            String ejemplo=no_expediente.getText().toString();
-                            ejemplo="0"+ejemplo;
-                            no_expediente.setText(ejemplo);
-                        }
-
-                        String query = "Select * from Vta_ResiUbicacion Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by Fecha DESC;";
-                        Statement stmt = connect.createStatement();
-                        ResultSet rs = stmt.executeQuery(query);
-                        if(!rs.isBeforeFirst()){
-                            Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
-                        }
-
-                        else {
-                            Encabezado("Fecha","Area");
-                            txt_juzgado.setVisibility(View.GONE);
-                            txt_distrito.setVisibility(View.GONE);
-                            distrito.setVisibility(View.GONE);
-                            juzgado1.setVisibility(View.GONE);
-                            juzgado2.setVisibility(View.GONE);
-                            txt_exp.setVisibility(View.GONE);
-                            web2.setVisibility(View.GONE);
-                            no_expediente.setVisibility(View.GONE);
-                            consulta.setVisibility(View.GONE);
-                            visibilidad(true);
-
-
-                            while (rs.next()){
-
-                                datos[1]=rs.getString("Fecha").toString();
-                                datos[2]=rs.getString("Perfil").toString();
-
-                                nuevo_registro.setExpediente(rs.getString("Expediente"));
-                                nuevo_registro.setUbicacion(datos[2]);
-                                nuevo_registro.setFecha(datos[1]);
-
-                                llenadoTabla(datos[1],datos[2]);
-                            }
-                        }
-
-                    }
-                    //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
-
-
-
-                }catch (Exception ex)
-                {
-                    esSatisfactorio = false;
-                    ConnectionResult = ex.getMessage();
-                }
+               exp_consulta();
            }
         });
+    }
 
 
+    public void exp_consulta(){
+        String[] datos =new String[3];
+        try {
+            if (Seleccion.getID()=="1") {
+                Con_sql conStr = new Con_sql();
+                connect = conStr.connections();
+                Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
 
+            }else if (Seleccion.getID()=="2") {
+                Con_sql conStr = new Con_sql();
+                connect = conStr.connectionstulancingo();
+                Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
+            }
+
+            if (connect == null){
+                ConnectionResult = "Check Your Internet Access!";
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                while (no_expediente.getText().toString().length()<11){
+                    String ejemplo=no_expediente.getText().toString();
+                    ejemplo="0"+ejemplo;
+                    no_expediente.setText(ejemplo);
+                }
+                String query = "Select Perfil,CONVERT(VARCHAR, Fecha, 105)Fecha,Motivo,Expediente,IdJuzgado from Vta_ResiUbicacion Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+no_expediente.getText().toString()+"'Order by Fecha DESC;";
+                Statement stmt = connect.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if(!rs.isBeforeFirst()){
+                    Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
+                }else {
+                    Encabezado("Fecha","Area");
+                    txt_juzgado.setVisibility(View.GONE);
+                    txt_distrito.setVisibility(View.GONE);
+                    distrito.setVisibility(View.GONE);
+                    juzgado1.setVisibility(View.GONE);
+                    juzgado2.setVisibility(View.GONE);
+                    txt_exp.setVisibility(View.GONE);
+                    web2.setVisibility(View.GONE);
+                    no_expediente.setVisibility(View.GONE);
+                    consulta.setVisibility(View.GONE);
+                    visibilidad(true);
+
+
+                    while (rs.next()){
+
+                        datos[1]=rs.getString("Fecha");
+                        datos[2]=rs.getString("Perfil");
+
+                        nuevo_registro.setExpediente(rs.getString("Expediente"));
+                        nuevo_registro.setUbicacion(datos[2]);
+                        nuevo_registro.setFecha(datos[1]);
+
+                        llenadoTabla(datos[1],datos[2]);
+                    }
+                }
+
+            }
+            //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
+
+        }catch (Exception ex)
+        {
+            esSatisfactorio = false;
+            ConnectionResult = ex.getMessage();
+        }
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -600,7 +564,6 @@ public void llenadoTabla(String txt1,String txt2){
     txtTabla.setTextColor(Color.parseColor("#B1613e"));
     txtTabla.setWidth(500);
     row.addView(txtTabla);
-
 
     txtTabla2=new TextView(getActivity());
     txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -624,15 +587,13 @@ public void llenadoTabla(String txt1,String txt2){
     borde1.setHeight(10);
     borde.addView(borde1);
 
-
     borde2=new TextView(getActivity());
     borde2.setBackgroundColor(Color.parseColor("#000000"));
     borde2.setWidth(500);
     borde2.setHeight(10);
     borde.addView(borde2);
 
-    //tabla.addView(row ,new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-    tabla.addView(borde);
+   tabla.addView(borde);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
@@ -675,8 +636,6 @@ public void Encabezado(String txt1,String txt2){
 
     }
 
-
-
     private void aceptar() {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
@@ -685,7 +644,6 @@ public void Encabezado(String txt1,String txt2){
 
         getActivity().finish();
     }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7777
 
@@ -712,17 +670,6 @@ public void Encabezado(String txt1,String txt2){
         super.onDetach();
         mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

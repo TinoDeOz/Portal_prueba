@@ -27,21 +27,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link consejo_familiar.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link consejo_familiar#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class consejo_familiar extends Fragment {
 
     Connection connect;
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
-
 
     WebView web;
     TextView txt_juzgado,txt_exp,txt_distrito;

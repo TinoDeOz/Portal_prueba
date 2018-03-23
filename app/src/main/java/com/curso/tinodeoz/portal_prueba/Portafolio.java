@@ -287,7 +287,7 @@ public class Portafolio extends Fragment {
             ubi=c.getColumnIndex("ubicacion");
             fech=c.getColumnIndex("fecha");
 
-            Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
+            Encabezado("Distrito","Juzgado","No.de Expediente","Ubicación","Fecha");
             nuevaa.setVisibility(View.VISIBLE);
             salir.setVisibility(View.VISIBLE);
             Btn_opc_eliminar.setVisibility(View.GONE);
@@ -402,7 +402,7 @@ public void Consulta(String query){
         exp=c.getColumnIndex("expediente");
         ubi=c.getColumnIndex("ubicacion");
         fech=c.getColumnIndex("fecha");
-        Encabezado("Distrito","Juzgado","No.de Expediente","Ubicacion","Fecha");
+        Encabezado("Distrito","Juzgado","No.de Expediente","Ubicación","Fecha");
         nuevaa.setVisibility(View.VISIBLE);
         salir.setVisibility(View.VISIBLE);
         //Btn_opc_eliminar.setVisibility(View.VISIBLE);
@@ -591,7 +591,7 @@ public void Eliminar(){
 
         txtTabla=new TextView(getActivity());
         txtTabla.setGravity(Gravity.CENTER);
-        txtTabla.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla.setBackgroundResource(R.drawable.border);
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.parseColor("#B1613e"));
         txtTabla.setWidth(400);
@@ -601,7 +601,8 @@ public void Eliminar(){
 
         txtTabla2=new TextView(getActivity());
         txtTabla2.setGravity(Gravity.CENTER);
-        txtTabla2.setBackgroundColor(Color.TRANSPARENT);
+        //txtTabla2.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla2.setBackgroundResource(R.drawable.border);
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.parseColor("#B1613e"));
         txtTabla2.setWidth(400);
@@ -610,7 +611,8 @@ public void Eliminar(){
 
         txtTabla3=new TextView(getActivity());
         txtTabla3.setGravity(Gravity.CENTER);
-        txtTabla3.setBackgroundColor(Color.TRANSPARENT);
+        //txtTabla3.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla3.setBackgroundResource(R.drawable.border);
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.parseColor("#B1613e"));
         //txtTabla3.setTextColor(Color.BLUE);
@@ -619,7 +621,8 @@ public void Eliminar(){
 
         txtTabla4=new TextView(getActivity());
         txtTabla4.setGravity(Gravity.CENTER);
-        txtTabla4.setBackgroundColor(Color.TRANSPARENT);
+        //txtTabla4.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla4.setBackgroundResource(R.drawable.border);
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.parseColor("#B1613e"));
         txtTabla4.setWidth(400);
@@ -628,7 +631,8 @@ public void Eliminar(){
 
         txtTabla5=new TextView(getActivity());
         txtTabla5.setGravity(Gravity.CENTER);
-        txtTabla5.setBackgroundColor(Color.TRANSPARENT);
+        //txtTabla5.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla5.setBackgroundResource(R.drawable.border);
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.parseColor("#B1613e"));
         txtTabla5.setWidth(400);
@@ -636,7 +640,8 @@ public void Eliminar(){
 
         final Button txtTabla7=new Button(getActivity());
         txtTabla7.setGravity(Gravity.CENTER_HORIZONTAL);
-        txtTabla7.setBackgroundColor(Color.TRANSPARENT);
+        //txtTabla7.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla7.setBackgroundResource(R.drawable.border);
         txtTabla7.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_cancel_black_24dp,0,0);
         txtTabla7.setTextColor(Color.BLUE);
         //txtTabla7.setText("Eliminar del portafolio.");

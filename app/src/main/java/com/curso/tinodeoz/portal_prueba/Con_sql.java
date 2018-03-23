@@ -97,9 +97,8 @@ public class Con_sql {
         }catch (Exception ex){
             Log.e("Error en Exception",ex.getMessage());
         }
-
         return connection;
-//Osorio_notifica
+
     }
 
     public Connection connection_notifica(){
