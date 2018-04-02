@@ -1,10 +1,12 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -45,10 +47,11 @@ public class AudienciasOrales extends Fragment {
     WebView web;
     Button consulta;
     Spinner distrito, año,mes;
+    ProgressDialog pDialog;
 
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
     String[] string_mes={"Selecciona Aqui:","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO", "AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"};
-    String[] string_año={"Selecciona Aqui:","2017","2016","2015","2014"};
+    String[] string_año={"Selecciona Aqui:","2018","2017","2016","2015","2014"};
 
 
 
@@ -254,8 +257,6 @@ public class AudienciasOrales extends Fragment {
                     Seleccion.setID("1");
 
 
-
-
                 }else if (position==3) {
 
                     datos_consulta =new Datos();
@@ -280,20 +281,24 @@ public class AudienciasOrales extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position==1) {
                     datos_consulta2 =new Datos();
-                    datos_consulta2.setAÑO("2017");
+                    datos_consulta2.setAÑO("2018");
 
                 }else if (position==2){
 
                     datos_consulta2 =new Datos();
-                    datos_consulta2.setAÑO("2016");
+                    datos_consulta2.setAÑO("2017");
 
                 }else if (position==3) {
 
                     datos_consulta2 =new Datos();
-                    datos_consulta2.setAÑO("2015");
+                    datos_consulta2.setAÑO("2016");
 
                 }
                 else if (position==4){
+                    datos_consulta2 =new Datos();
+                    datos_consulta2.setAÑO("2015");
+                }
+                else if (position==5){
                     datos_consulta2 =new Datos();
                     datos_consulta2.setAÑO("2014");
                 }
@@ -395,7 +400,16 @@ public class AudienciasOrales extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String[] datos =new String[5];
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                Consulta_AO AO=new Consulta_AO();
+                AO.execute();
+
+               /* String[] datos =new String[5];
                 int x=0;
                 try {
 
@@ -461,7 +475,7 @@ public class AudienciasOrales extends Fragment {
                     esSatisfactorio = false;
                     ConnectionResult = ex.getMessage();
                 }
-
+*/
             }
         });
 
@@ -556,7 +570,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
     TableRow borde= new TableRow(getActivity());
     row.setLayoutParams(layoutFila);
-
 
     TextView borde1, borde2,borde3,borde4,borde5,border1;
 
@@ -671,24 +684,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -716,4 +711,156 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Consulta_AO extends AsyncTask<Void, Integer, Void>{
+        String Obj_mes="";
+        String Obj_año="";
+        String Obj_id="";
+        String Selec_ID="";
+        String[][] datos =new String[100][5];
+        int x=0;
+        Con_sql conStr = new Con_sql();
+        String Resultado="";
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Selec_ID=Seleccion.getID();
+            Obj_mes=datos_consulta3.getQUE_ES();
+            Obj_año=datos_consulta2.getQUE_ES();
+            Obj_id=datos_consulta.getID();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Consulta_AO.this.cancel(true);
+                }
+            });
+        }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+
+                if (Selec_ID=="1") {
+                    connect = conStr.connections();
+
+                }else if (Selec_ID=="2") {
+
+                    connect = conStr.connectionstulancingo();
+                }
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+
+                    //String query = "SELECT * FROM Vta_ResiAudiOralMercantil where DATEPART(MONTH, FechaAudi)="+Obj_mes+ " and DATEPART(YEAR,FechaAudi)="+Obj_año+" and IdJuzgado "+Obj_id;
+                    String query = "SELECT * FROM Vta_ResiAudiOralMercantil where DATEPART(MONTH, FechaAudi)="+datos_consulta3.getMES()+ " and DATEPART(YEAR,FechaAudi)="+datos_consulta2.getAÑO()+" and IdJuzgado "+datos_consulta.getID();
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        Resultado="no";
+                        ConnectionResult = "No se encontraron datos.";
+                    }
+
+                    else {
+
+                        Resultado="si";
+
+
+                        while (rs.next()){
+                            x=x+1;
+                            datos[x][1]=rs.getString("Expediente");
+                            datos[x][2]=rs.getString("Juzgado");
+                            datos[x][3]=rs.getString("FechaAudi");
+                            datos[x][4]=rs.getString("Tipo");
+                        }
+                    }
+
+                }
+
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pDialog.dismiss();
+
+
+            if (Resultado=="no"){
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else if(Resultado=="si") {
+                Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
+
+                txt_distrito.setText("AUDIENCIAS ORALES EN MATERIA MERCANTIL PARA EL MES DE " + datos_consulta3.getQUE_ES() + " DEL AÑO " + datos_consulta2.getAÑO() + "  DEL DISTRITO JUDICIAL DE " + datos_consulta.getQUE_ES());
+                txt_distrito.setPadding(50, 50, 50, 0);
+
+                Encabezado("#", "No.expediente", "Juzgado", "Fecha y hora de la audiencia", "Tipo de audiencia.");
+
+                txt_mes.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                txt_año.setVisibility(View.GONE);
+                año.setVisibility(View.GONE);
+                mes.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                visibilidad(true);
+
+
+                for (int i = 1; i <= x; i++) {
+                    llenadoTabla(String.valueOf(i), datos[i][1], datos[i][2], datos[i][3], datos[i][4]);
+                }
+
+                Cambio_color(4);
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(), "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 }

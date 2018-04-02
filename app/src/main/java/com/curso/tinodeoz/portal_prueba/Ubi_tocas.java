@@ -71,8 +71,9 @@ public class Ubi_tocas extends Fragment {
         inicio(v);
 
         llenado_spiners(v);
+
         acciones(v);
-        finales(v);
+
         return v;
     }
 

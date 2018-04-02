@@ -1,11 +1,13 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -31,6 +34,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class ubi_exp extends Fragment {
@@ -41,10 +45,11 @@ public class ubi_exp extends Fragment {
     Data_Portafolio nuevo_registro;
 
     Button nueva,salir,guardar;
+
+
     Connection connect;
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
-
 
     WebView web, web2;
     TextView txt_juzgado,txt_exp, txt_distrito;
@@ -52,6 +57,7 @@ public class ubi_exp extends Fragment {
     Button consulta;
     TableLayout tabla;
 
+    ProgressDialog pDialog;
 
     Datos datos_consulta,Seleccion;
 
@@ -176,8 +182,6 @@ public class ubi_exp extends Fragment {
             }
         });
         dialogo1.show();
-
-
 
     }
 
@@ -480,8 +484,17 @@ public class ubi_exp extends Fragment {
 
 
     public void exp_consulta(){
+
+        pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pDialog.setMessage("Procesando...");
+        pDialog.setCancelable(true);
+        pDialog.setMax(100);
+
         String[] datos =new String[3];
-        try {
+        Consulta_sql co=new Consulta_sql();
+        co.execute();
+       /* try {
             if (Seleccion.getID()=="1") {
                 Con_sql conStr = new Con_sql();
                 connect = conStr.connections();
@@ -542,7 +555,7 @@ public class ubi_exp extends Fragment {
         {
             esSatisfactorio = false;
             ConnectionResult = ex.getMessage();
-        }
+        }*/
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -675,4 +688,137 @@ public void Encabezado(String txt1,String txt2){
         void onFragmentInteraction(Uri uri);
     }
 
+
+
+    private class Consulta_sql extends AsyncTask<Void,Integer,Void> {
+        String Resultado="";
+        String ex="ABC";
+        String Selec_ID="";
+        Con_sql conStr = new Con_sql();
+        String[] datos =new String[3];
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Selec_ID =Seleccion.getID();
+            pDialog.setProgress(0);
+            pDialog.show();
+            ex=no_expediente.getText().toString();
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                Consulta_sql.this.cancel(true);
+                }
+            });
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+
+                if (Selec_ID=="1") {
+
+                    connect = conStr.connections();
+                   // Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
+
+                }else if (Selec_ID=="2") {
+                    //Con_sql conStr = new Con_sql();
+                    connect = conStr.connectionstulancingo();
+                    //Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
+                }
+                if (connect == null){
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado= "no";
+                }
+                else {
+                    while (ex.length()<11){
+                        String ejemplo=ex;
+                        ejemplo="0"+ejemplo;
+                        ex=ejemplo;
+                    }
+                    String query = "Select Perfil,CONVERT(VARCHAR, Fecha, 105)Fecha,Motivo,Expediente,IdJuzgado from Vta_ResiUbicacion Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by Fecha DESC;";
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        Resultado= "no";
+                        ConnectionResult = "No se encontraron datos.";
+                    }else {
+
+
+
+                        while (rs.next()){
+
+                            datos[1]=rs.getString("Fecha");
+                            datos[2]=rs.getString("Perfil");
+
+                            nuevo_registro.setExpediente(rs.getString("Expediente"));
+                            nuevo_registro.setUbicacion(rs.getString("Perfil"));
+                            nuevo_registro.setFecha(rs.getString("Fecha"));
+
+
+                        }
+                    }
+
+                }
+                //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pDialog.dismiss();
+
+
+            if(Resultado=="no"){
+
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+            }else {
+                // Encabezado(ex,"prueba");
+
+                Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
+
+                Encabezado("Fecha", "Area");
+                txt_juzgado.setVisibility(View.GONE);
+                txt_distrito.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                juzgado1.setVisibility(View.GONE);
+                juzgado2.setVisibility(View.GONE);
+                txt_exp.setVisibility(View.GONE);
+                web2.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                visibilidad(true);
+
+
+                llenadoTabla(datos[1], datos[2]);
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            Toast.makeText(getActivity(), "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
 }
+

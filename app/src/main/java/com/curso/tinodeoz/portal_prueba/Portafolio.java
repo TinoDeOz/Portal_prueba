@@ -310,22 +310,21 @@ public class Portafolio extends Fragment {
                     contenido[4] = c.getString(ubi);
                     contenido[5] = c.getString(fech);
                     contenido[6] = c.getString(idjuz);
+
                     try {
-                    if ( contenido[1].equals("Pachuca de Soto.")){
+
+                        if ( contenido[1].equals("Pachuca de Soto.")){
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connections();
 
-                    }
-                   else if ( contenido[1].equals("Tulancingo de Bravo.")){
+                        }
+                        else if ( contenido[1].equals("Tulancingo de Bravo.")){
                         Con_sql conStr = new Con_sql();
                         connect = conStr.connectionstulancingo();
 
+                        }
 
-                       // llenadoTabla(contenido[1]+" "+contenido[6],contenido[2],contenido[3],contenido[4],contenido[5]);
-                    }
-
-
-                            if (connect == null)
+                        if (connect == null)
                             {
                                 ConnectionResult = "Check Your Internet Access!";
                                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_SHORT).show();
@@ -347,7 +346,6 @@ public class Portafolio extends Fragment {
 
                                         datos[1]=rs.getString("Fecha");
                                         datos[2]=rs.getString("Perfil");
-
                                     }
                                 /*    nuevo_registro.setExpediente(contenido[3]);
                                     nuevo_registro.setUbicacion(datos[2]);
@@ -376,10 +374,10 @@ public class Portafolio extends Fragment {
                 } while (c.moveToNext());
             }
             base.closeDB();
-            Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_LONG).show();
         }catch (Exception e){
             base.closeDB();
-            Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Error al actualizar portafolio", Toast.LENGTH_LONG).show();
         }
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -537,12 +535,7 @@ public void Eliminar(){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
     public void Consulta_Eliminar(final String Exp, final String ju){
-    /*btn_eliminar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-        }
-    });*/
         String text_web = "<html><body style=\"text-align:justify; font-size:12px; line-height:20px; color:white;\"> %s </body></html>";
         //String texto= "¿Esta seguro de eliminar el expediente numero  "+Exp+ "  del Juzgado "+ju+"  de su portafolio movíl?";
         String texto="¿Desea realmente eliminar el registro del portafolio de asuntos?";
@@ -575,7 +568,7 @@ public void Eliminar(){
         dialogo1.show();
 
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void llenadoTabla(String txt1, final String txt2, String txt3, String txt4, String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
@@ -653,13 +646,6 @@ public void Eliminar(){
             public void onClick(View v) {
 
               Consulta_Eliminar(txtTabla3.getText().toString(),txtTabla2.getText().toString());
-              //  txtTabla.setVisibility(View.GONE);
-              //  txtTabla2.setVisibility(View.GONE);
-              //  txtTabla3.setVisibility(View.GONE);
-                // //txtTabla4.setVisibility(View.GONE);
-                //txtTabla5.setVisibility(View.GONE);
-                //txtTabla7.setVisibility(View.GONE);
-                //tabla.setVisibility(View.GONE);
             }
         });
 
@@ -668,7 +654,6 @@ public void Eliminar(){
 
         TableRow borde= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
-
 
         TextView borde1, borde2,borde3,borde4,borde5,border1;
 
@@ -719,8 +704,6 @@ public void Eliminar(){
                 TableRow.LayoutParams.WRAP_CONTENT);
         Resources res = getResources();
 
-
-
         int x=130;
 
         TableRow row= new TableRow(getActivity());
@@ -747,7 +730,6 @@ public void Eliminar(){
         txtTabla2.setWidth(400);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
-
 
         txtTabla3=new TextView(getActivity());
         txtTabla3.setGravity(Gravity.CENTER_HORIZONTAL);

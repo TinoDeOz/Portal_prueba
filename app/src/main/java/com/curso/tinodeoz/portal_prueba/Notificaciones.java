@@ -34,34 +34,32 @@ import java.sql.Statement;
 import java.util.Calendar;
 
 
-
 public class Notificaciones extends Fragment {
 
+    private  int dia,mes,ano;
 
     Obj_enteros suma= new Obj_enteros();
+    Datos datos,datos2;
+
 
     Connection connect;
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
 
-    private  int dia,mes,ano;
-    Datos datos,datos2;
 
     TableLayout tabla;
     WebView web;
+    Button consulta, atras, siguiente;
     TextView txtdistrito,juzgado,materia,opcion1,opcion2,no_expediente,no_causa,txtfcha;
     EditText numero_expediente, numero_causa,fecha;
     Spinner  distrito,opc1,opc2;
-
-
     Spinner ACTOPAN,APAN,ATOTONILCO,HUEJUTLA,HUICHAPAN,IXMIQUILPAN,
             JACALA,METZTITLAN,MOLANGO, MIXQUIAHUALA,PACHUCA,TENANGO,
             TIZAYUCA,TULA,TULANCINGO;
 
-    Button consulta, atras, siguiente;
+
 
     String[] string_distrito={"Selecciona Aqui:","ACTOPAN","APAN","HUEJUTLA DE REYES","HUICHAPAN DE VILLAGRAN","IXMIQUILPAN","MIXQUIAHUALA DE JUAREZ","PACHUCA DE SOTO ","TIZAYUCA","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
-
     String[] string_actopan={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR ACTOPAN","SEGUNDO CIVIL Y FAMILIAR ACTOPAN","PENAL ACTOPAN."};
     String[] string_apan={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR APAN.","SEGUNDO CIVIL Y FAMILIAR APAN.","PENAL APAN."};
     String[] string_huejutla={"Selecciona Aqui:","CIVIL Y FAMILIAR HUEJUTLA","PENAL DE JALTOCAN EN HUEJUTLA"};
@@ -79,7 +77,6 @@ public class Notificaciones extends Fragment {
 
         txtfcha=(TextView)v.findViewById(R.id.lbl_noti_fecha);
         fecha=(EditText)v.findViewById(R.id.txt_fecha);
-
 
         juzgado=(TextView)v.findViewById(R.id.lbl_noti_juzgado);
         opcion1=(TextView)v.findViewById(R.id.lbl_noti_opciones);
@@ -112,9 +109,7 @@ public class Notificaciones extends Fragment {
         tabla=(TableLayout)v.findViewById(R.id.Tabla_btn_noti);
 
 
-
-
-       juzgado.setVisibility(View.GONE);
+        juzgado.setVisibility(View.GONE);
         opcion1.setVisibility(View.GONE);
         opcion2.setVisibility(View.GONE);
         no_expediente.setVisibility(View.GONE);
@@ -199,7 +194,6 @@ public class Notificaciones extends Fragment {
         TULANCINGO.setVisibility(View.GONE);
         opc1.setVisibility(View.GONE);
         opc2.setVisibility(View.GONE);
-
     }
 
 
@@ -669,7 +663,6 @@ public class Notificaciones extends Fragment {
                     siguiente.setVisibility(View.VISIBLE);
 
 
-
                     while (rs.next()){
                         Encabezado3();
                         veces=veces+1;
@@ -681,18 +674,14 @@ public class Notificaciones extends Fragment {
                         da[6]=rs.getString(8);
 
                         llenadoTabla2(da[1],da[2],da[3],da[6],da[4],da[5]);
-
                     }
                 }
             }
 
-            //Toast.makeText(getActivity(),da[1], Toast.LENGTH_SHORT).show();
-            //Toast.makeText(getActivity(),String.valueOf(veces), Toast.LENGTH_SHORT).show();
             Cambio_color(4);
             altTableRow(1,10);
             suma.setMin(1);
             suma.setMax(10);
-
 
         }catch (Exception ex)
         {
@@ -802,7 +791,6 @@ public class Notificaciones extends Fragment {
                         da[4]=rs.getString(4);
                         da[5]=rs.getString(5);
                         da[6]=rs.getString(8);
-
 
                         //Toast.makeText(getActivity(),da[1], Toast.LENGTH_SHORT).show();
                         llenadoTabla2(da[1],da[2],da[3],da[6],da[4],da[5]);
@@ -1032,6 +1020,7 @@ public void Cambio_color(int alt_row) {
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.parseColor("#B1613e"));
         txtTabla5.setWidth(1100);
+
         row.addView(txtTabla5);
 
         tabla.addView(row);
@@ -1100,8 +1089,6 @@ public void Cambio_color(int alt_row) {
         txtTabla.setWidth(250);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
-
-
 
 
         txtTabla2=new TextView(getActivity());
@@ -1176,9 +1163,6 @@ public void Cambio_color(int alt_row) {
         txtTabla.setWidth(250);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
-
-
-
 
         txtTabla2=new TextView(getActivity());
         txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -1259,7 +1243,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     txtTabla2.setWidth(300);
     row.addView(txtTabla2);
 
-
     txtTabla3=new TextView(getActivity());
     txtTabla3.setGravity(Gravity.CENTER_VERTICAL);
     txtTabla3.setBackgroundColor(Color.TRANSPARENT);
@@ -1276,7 +1259,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     txtTabla9.setWidth(400);
     row.addView(txtTabla9);
 
-
     txtTabla4=new TextView(getActivity());
     txtTabla4.setGravity(Gravity.CENTER_VERTICAL);
     txtTabla4.setBackgroundColor(Color.TRANSPARENT);
@@ -1285,13 +1267,13 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     txtTabla4.setWidth(300);
     row.addView(txtTabla4);
 
-
     txtTabla5=new TextView(getActivity());
     txtTabla5.setGravity(Gravity.CENTER_VERTICAL);
     txtTabla5.setBackgroundColor(Color.TRANSPARENT);
     txtTabla5.setText(txt5);
     txtTabla5.setTextColor(Color.parseColor("#B1613e"));
     txtTabla5.setWidth(1100);
+
     row.addView(txtTabla5);
 
     tabla.addView(row);
@@ -1614,14 +1596,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Notificaciones.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static Notificaciones newInstance(String param1, String param2) {
         Notificaciones fragment = new Notificaciones();
@@ -1658,10 +1633,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
         salir();
         paginacion();
 
-
-
-
-
         return v;
     }
 
@@ -1697,9 +1668,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
     }
 
-
-
-
     private void aceptar() {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
@@ -1708,41 +1676,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
         getActivity().finish();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
     // TODO: Rename method, update argument and hook method into UI event
