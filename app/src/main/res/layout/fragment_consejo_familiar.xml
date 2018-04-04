@@ -184,7 +184,7 @@
                             android:layout_marginBottom="0dp"
                             android:background="@drawable/fondo_btn"
                             android:text="@string/salir"
-                            android:textSize="20sp"
+                            android:textSize="12sp"
                             android:layout_gravity="center_horizontal"
                             />
                     </LinearLayout>

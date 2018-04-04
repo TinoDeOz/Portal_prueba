@@ -702,10 +702,9 @@ public void Encabezado(String txt1,String txt2){
         protected void onPreExecute() {
             super.onPreExecute();
             Selec_ID =Seleccion.getID();
+            ex=no_expediente.getText().toString();
             pDialog.setProgress(0);
             pDialog.show();
-            ex=no_expediente.getText().toString();
-
             pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
@@ -719,7 +718,7 @@ public void Encabezado(String txt1,String txt2){
             super.onProgressUpdate(values);
             int progreso = values[0].intValue();
             pDialog.setProgress(progreso);
-        }
+    }
 
         @Override
         protected Void doInBackground(Void... params) {

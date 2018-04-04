@@ -1,9 +1,11 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +41,7 @@ public class consejo_familiar extends Fragment {
     Button consulta;
     Spinner distrito, juzgado1,juzgado2;
     TableLayout tabla;
+    ProgressDialog pDialog;
 
     Datos datos_consulta, Seleccion;
 
@@ -336,7 +339,17 @@ Button nueva,salir;
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] datos =new String[3];
+
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                Consulta_CF CF= new Consulta_CF();
+                CF.execute();
+
+               /* String[] datos =new String[3];
                 try {
 
                     if (Seleccion.getID()=="1") {
@@ -395,23 +408,14 @@ Button nueva,salir;
 
                     }
 
-                    //Toast.makeText(getActivity(),datos[1], Toast.LENGTH_SHORT).show();
-
-
-
                 }catch (Exception ex)
                 {
                     esSatisfactorio = false;
                     ConnectionResult = ex.getMessage();
                 }
-
+              */
             }
         });
-
-
-
-
-
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void llenadoTabla(String txt1){
@@ -478,8 +482,6 @@ Button nueva,salir;
         tabla.addView(row);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
-
     public void seleccion_juzgado(View v){
 
         txt_exp.setVisibility(View.VISIBLE);
@@ -490,15 +492,6 @@ Button nueva,salir;
         // no_expediente.setVisibility(View.GONE);
         // consulta.setVisibility(View.GONE);
     }
-
-
-
-
-
-
-
-
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -525,11 +518,131 @@ Button nueva,salir;
         mListener = null;
     }
 
-
-
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Consulta_CF extends AsyncTask<Void, Integer, Void>{
+        String[][] datos =new String[100][3];
+        String Selec_ID="";
+        String ex;
+        int x=0;
+        Con_sql conStr = new Con_sql();
+        String Resultado="";
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Selec_ID= Seleccion.getID();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+            while (no_expediente.getText().toString().length()<11){
+                String ejemplo=no_expediente.getText().toString();
+                ejemplo="0"+ejemplo;
+                no_expediente.setText(ejemplo);
+            }
+
+            ex=no_expediente.getText().toString();
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Consulta_CF.this.cancel(true);
+                }
+            });
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+
+                if (Selec_ID=="1") {
+                    connect = conStr.connections();
+
+                }else if (Selec_ID=="2") {
+                    connect = conStr.connectionstulancingo();
+                }
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+
+                    while (ex.length()<11){
+                        String ejemplo=ex;
+                        ejemplo="0"+ejemplo;
+                        ex=ejemplo;
+                    }
+
+                    String query = "SELECT CONVERT(VARCHAR, FechaIntervencion, 105)FechaIntervencion FROM Vta_ResiIntevencionesCF Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'";
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult = "No se encontraron datos.";
+                        Resultado="no";
+                    }
+
+                    else {
+
+                        while (rs.next()){
+                            x=x+1;
+                            datos[x][1]=rs.getString("FechaIntervencion").toString();
+
+                        }
+                    }
+                }
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pDialog.dismiss();
+            if (Resultado=="no"){
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+            }else{
+                Encabezado("Fecha De Intervencion.");
+                txt_juzgado.setVisibility(View.GONE);
+                txt_distrito.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                juzgado1.setVisibility(View.GONE);
+                juzgado2.setVisibility(View.GONE);
+                txt_exp.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                visibilidad(true);
+
+                for (int i = 1; i <= x; i++) {
+                    llenadoTabla(datos[x][1]);
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(), "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

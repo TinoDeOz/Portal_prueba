@@ -1,9 +1,11 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -44,6 +46,7 @@ public class consignaciones extends Fragment {
     EditText no_expediente;
     Button consulta;
     Spinner distrito, juzgado1,juzgado2, juzgado3;
+    ProgressDialog pDialog;
 
 
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
@@ -420,6 +423,17 @@ public class consignaciones extends Fragment {
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                Consulta_Consig Consig = new Consulta_Consig();
+                Consig.execute();
+
+                /*
                 String[] datos =new String[3];
                 String query="";
                 try {
@@ -494,6 +508,7 @@ public class consignaciones extends Fragment {
                     ConnectionResult = ex.getMessage();
                 }
 
+                */
             }
         });
 
@@ -571,12 +586,7 @@ public class consignaciones extends Fragment {
         no_expediente.setVisibility(View.VISIBLE);
         consulta.setVisibility(View.VISIBLE);
 
-        // txt_exp.setVisibility(View.GONE);
-        // no_expediente.setVisibility(View.GONE);
-        // consulta.setVisibility(View.GONE);
     }
-
-
 
     private void aceptar() {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
@@ -587,10 +597,7 @@ public class consignaciones extends Fragment {
         getActivity().finish();
     }
 
-
-
-
-    // TODO: Rename method, update argument and hook method into UI event
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -614,18 +621,147 @@ public class consignaciones extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Consulta_Consig extends AsyncTask<Void, Integer,Void>{
+        String[][] datos =new String[100][3];
+        String query="";
+        Con_sql conStr = new Con_sql();
+        String ex="";
+        String Selec_ID="";
+        String Resultado="";
+        int x=0;
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+            while (no_expediente.getText().toString().length()<11){
+                String ejemplo=no_expediente.getText().toString();
+                ejemplo="0"+ejemplo;
+                no_expediente.setText(ejemplo);
+            }
+
+            ex=no_expediente.getText().toString();
+            Selec_ID=Seleccion.getID();
+
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Consulta_Consig.this.cancel(true);
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            try {
+
+                if (Selec_ID=="1") {
+                    connect = conStr.connections();
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+
+                }else if (Selec_ID=="2") {
+
+                    connect = conStr.connections();
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositosTula Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+
+
+                }else if (Selec_ID=="3") {
+                    connect = conStr.connectionstulancingo();
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                }
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+
+                }
+                else
+                {
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                       ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+
+                    else {
+
+
+                        while (rs.next()){
+                            x=x+1;
+                            datos[x][1]=rs.getString("de_fecha").toString();
+
+                        }
+                    }
+
+                }
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pDialog.dismiss();
+
+            if (Resultado=="no"){
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else{
+                Encabezado("Fecha");
+                txt_juzgado.setVisibility(View.GONE);
+                txt_distrito.setText("Ultimos 5 Depositos.");
+                distrito.setVisibility(View.GONE);
+                juzgado1.setVisibility(View.GONE);
+                juzgado2.setVisibility(View.GONE);
+                txt_exp.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                visibilidad(true);
+
+                for (int i=1;i<=x;i++) {
+                    llenadoTabla(datos[i][1]);
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(), "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
+
+
 }

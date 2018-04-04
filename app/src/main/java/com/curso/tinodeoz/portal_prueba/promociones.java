@@ -1,9 +1,11 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -38,16 +40,13 @@ public class promociones extends Fragment {
     TextView txt_tipo,txt_exp, txtdistrito;
     EditText no_expediente;
     Button consulta;
+    ProgressDialog pDialog;
 
 
 
     Spinner distrito, inicial,posterior;
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
     String[] string_tipo={"Selecciona Aqui:","Inicial","Posterior"};
-
-
-
-
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -65,14 +64,7 @@ public class promociones extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment promociones.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static promociones newInstance(String param1, String param2) {
         promociones fragment = new promociones();
@@ -293,96 +285,15 @@ public void accion(final View v){
     consulta.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String CAMPO1="";
-            String CAMPO2="";
-            String query="";
-            String[] datos =new String[4];
-            try {
 
-                if(datos_consulta.getQUE_ES()=="INICIAL") {
+            pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pDialog.setMessage("Procesando...");
+            pDialog.setCancelable(true);
+            pDialog.setMax(100);
 
-                    if (Seleccion.getID()=="1") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connections();
-
-                    }else if (Seleccion.getID()=="2") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connectionstulancingo();
-                    }
-
-
-                    query = "SELECT Vta_ResiAcuerdosInicial.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosInicial, Juzgados where id_expediente ="+no_expediente.getText().toString()+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosInicial.IdJuzgado=Juzgados.id_juzgado";
-
-                    CAMPO1="Expediente";
-                    CAMPO2="nombre";
-                }else if (datos_consulta.getQUE_ES()=="POSTERIOR"){
-
-                    if (Seleccion.getID()=="1") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connections();
-
-                    }else if (Seleccion.getID()=="2") {
-                        Con_sql conStr = new Con_sql();
-                        connect = conStr.connectionstulancingo();
-                    }
-
-
-                    query = "SELECT Vta_ResiAcuerdosPromos.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosPromos,Juzgados where IdPosterior="+no_expediente.getText().toString()+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosPromos.IdJuzgado=Juzgados.id_juzgado";
-                   // CAMPO1="Vta_ResiAcuerdosPromos.Expediente";
-                    //CAMPO2="Juzgados.nombre";
-
-                    CAMPO1="Expediente";
-                    CAMPO2="nombre";
-
-
-                }
-
-                if (connect == null)
-                {
-                    ConnectionResult = "Check Your Internet Access!";
-                    Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-
-                    Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
-
-                    Statement stmt = connect.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    if(!rs.isBeforeFirst()){
-                        Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else {
-
-                        txt_tipo.setVisibility(View.GONE);
-                        inicial.setVisibility(View.GONE);
-                        posterior.setVisibility(View.GONE);
-                        txt_exp.setVisibility(View.GONE);
-                        no_expediente.setVisibility(View.GONE);
-                        consulta.setVisibility(View.GONE);
-                        distrito.setVisibility(View.GONE);
-                        visibilidad(true);
-
-                        while (rs.next()){
-                            datos[1]=rs.getString(CAMPO1).toString();
-                            datos[2]=rs.getString(CAMPO2).toString();
-                            txtdistrito.setText("LA PROMOCIÓN CON FOLIO "+no_expediente.getText()+" DEL EXPEDIENTE "+datos[1]+" DEL JUZGADO "+datos[2]+" YA FUE ACORDADA");
-                            txtdistrito.setPadding(50,200,50,200);
-
-                        }
-
-
-
-                    }
-
-                }
-
-            }catch (Exception ex)
-            {
-                esSatisfactorio = false;
-                ConnectionResult = ex.getMessage();
-            }
+            Consulta_promo Promo = new Consulta_promo();
+            Promo.execute();
         }
     });
 
@@ -400,8 +311,6 @@ public void accion(final View v){
 
     }
 
-
-
     private void aceptar() {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
@@ -410,11 +319,6 @@ public void accion(final View v){
 
         getActivity().finish();
     }
-
-
-
-
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -441,18 +345,145 @@ public void accion(final View v){
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Consulta_promo extends AsyncTask<Void, Integer, Void>{
+
+        String CAMPO1="";
+        String CAMPO2="";
+        String query="";
+        String[][] datos =new String[100][4];
+        String Que_es="";
+        String Selec_ID="";
+        String Resultado="";
+        Con_sql conStr = new Con_sql();
+        int x=0;
+        String ex="";
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Que_es=datos_consulta.getQUE_ES();
+            Selec_ID=Seleccion.getID();
+            ex=no_expediente.getText().toString();
+            pDialog.setProgress(0);
+            pDialog.show();
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Consulta_promo.this.cancel(true);
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                if(Que_es=="INICIAL") {
+
+                    if (Selec_ID=="1") {
+                        connect = conStr.connections();
+
+                    }else if (Selec_ID=="2") {
+                        connect = conStr.connectionstulancingo();
+                    }
+
+                    query = "SELECT Vta_ResiAcuerdosInicial.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosInicial, Juzgados where id_expediente ="+ex+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosInicial.IdJuzgado=Juzgados.id_juzgado";
+                    CAMPO1="Expediente";
+                    CAMPO2="nombre";
+                }else if (Que_es=="POSTERIOR"){
+
+                    if (Selec_ID=="1") {
+                        connect = conStr.connections();
+
+                    }else if (Seleccion.getID()=="2") {
+                        connect = conStr.connectionstulancingo();
+                    }
+
+                    query = "SELECT Vta_ResiAcuerdosPromos.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosPromos,Juzgados where IdPosterior="+ex+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosPromos.IdJuzgado=Juzgados.id_juzgado";
+                    CAMPO1="Expediente";
+                    CAMPO2="nombre";
+
+                }
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+
+                    else {
+
+                        while (rs.next()){
+                            x=x+1;
+                            datos[x][1]=rs.getString(CAMPO1);
+                            datos[x][2]=rs.getString(CAMPO2);
+
+                        }
+                    }
+                }
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            pDialog.dismiss();
+
+            if(Resultado=="no"){
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else {
+
+            txt_tipo.setVisibility(View.GONE);
+            inicial.setVisibility(View.GONE);
+            posterior.setVisibility(View.GONE);
+            txt_exp.setVisibility(View.GONE);
+            no_expediente.setVisibility(View.GONE);
+            consulta.setVisibility(View.GONE);
+            distrito.setVisibility(View.GONE);
+            visibilidad(true);
+
+                for (int i=1;i<=x;i++) {
+                txtdistrito.setText("LA PROMOCIÓN CON FOLIO " + no_expediente.getText() + " DEL EXPEDIENTE " + datos[i][
+                1]+" DEL JUZGADO " + datos[i][2] + " YA FUE ACORDADA");
+                txtdistrito.setPadding(50, 200, 50, 200);
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(),"Tarea Cancelada!", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

@@ -788,16 +788,11 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
                 }
 
-
             }catch (Exception ex)
             {
                 esSatisfactorio = false;
                 ConnectionResult = ex.getMessage();
             }
-
-
-
-
             return null;
         }
 

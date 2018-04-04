@@ -1,12 +1,14 @@
 package com.curso.tinodeoz.portal_prueba;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -56,6 +58,8 @@ public class Notificaciones extends Fragment {
     Spinner ACTOPAN,APAN,ATOTONILCO,HUEJUTLA,HUICHAPAN,IXMIQUILPAN,
             JACALA,METZTITLAN,MOLANGO, MIXQUIAHUALA,PACHUCA,TENANGO,
             TIZAYUCA,TULA,TULANCINGO;
+
+    ProgressDialog pDialog;
 
 
 
@@ -574,17 +578,29 @@ public class Notificaciones extends Fragment {
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
                 if(datos.getQUE_ES()=="NORMAL"){
 
-                    NORMAL(11);
+                    //NORMAL(11);
+                    Noti_Normal Noti=new Noti_Normal();
+                    Noti.execute();
 
                 }else if (datos.getQUE_ES()=="PENALES") {
-                   PENALES();
+                   //PENALES();
+                    Noti_penales Penales=new Noti_penales();
+                    Penales.execute();
 
 
                 }else if (datos.getQUE_ES()=="ADOLECENTES"){
-                    ADOLECENTES();
-
+                    //ADOLECENTES();
+                    Noti_Adolecentes Noti_ad = new Noti_Adolecentes();
+                    Noti_ad.execute();
 
                 }
             }
@@ -702,10 +718,21 @@ public class Notificaciones extends Fragment {
             row.setVisibility(View.GONE);
     }
 
+    if(childViewCount-1<max){
+        for (int i = 1; i < childViewCount; i++) {
+            TableRow row = (TableRow) tabla.getChildAt(i);
+            row.setVisibility(View.VISIBLE);
+            atras.setVisibility(View.GONE);
+            siguiente.setVisibility(View.GONE);
+        }
+
+    }else{
         for (int i = min; i <= max; i++) {
             TableRow row = (TableRow) tabla.getChildAt(i);
             row.setVisibility(View.VISIBLE);
         }
+
+    }
     }
 
 
@@ -880,10 +907,9 @@ public class Notificaciones extends Fragment {
 
 
                     while (rs.next()){
-                        //Encabezado("No. de Notificación.","No.expediente","Fecha de Publicación.","Fecha de Resolución.","Síntesis.");
+
                         Encabezado("","","","","");
 
-                        //Encabezado4("","","","","");
                         da[1]=rs.getString(1);
                         da[2]=rs.getString(2);
                         da[3]=rs.getString(3);
@@ -1579,8 +1605,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
 
     }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private static final String ARG_PARAM1 = "param1";
@@ -1676,9 +1700,8 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
         getActivity().finish();
     }
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -1702,18 +1725,487 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Noti_Normal extends AsyncTask<Void, Integer,Void>{
+        String[][] da =new String[500][7];
+        int veces=0;
+        Con_sql conStr=new Con_sql();
+        String Que_es="";
+        String Resultado="";
+        String Ex="";
+        int x=0;
+        String query="";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Que_es=datos.getMES();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Noti_Normal.this.cancel(true);
+                }
+            });
+
+
+            while (numero_expediente.getText().toString().length()<11) {
+                String ejemplo = numero_expediente.getText().toString();
+                ejemplo = "0" + ejemplo;
+                numero_expediente.setText(ejemplo);
+            }
+            Ex =numero_expediente.getText().toString();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                connect =conStr.connection_notifica();
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+                    if(Que_es=="FECHA"){
+                        query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
+                    }else if (Que_es=="EXPEDIENTE"){
+                        query ="SELECT  *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
+                    }
+
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+                    else {
+                        while (rs.next()){
+                            x=x+1;
+                            veces=veces+1;
+                            da[x][1]=rs.getString(1);
+                            da[x][2]=rs.getString(2);
+                            da[x][3]=rs.getString(3);
+                            da[x][4]=rs.getString(4);
+                            da[x][5]=rs.getString(5);
+                            da[x][6]=rs.getString(8);
+
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            pDialog.dismiss();
+            if (Resultado=="no"){
+
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else{
+
+                Encabezado2("No. de Notificación.","No.expediente","Fecha de Publicación.","Juicio.","Fecha de Resolución.","Síntesis.");
+
+                txtdistrito.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                juzgado.setVisibility(View.GONE);
+                opcion1.setVisibility(View.GONE);
+                opcion2.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                no_causa.setVisibility(View.GONE);
+                numero_expediente.setVisibility(View.GONE);
+                numero_causa.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                ACTOPAN.setVisibility(View.GONE);
+                APAN.setVisibility(View.GONE);
+                HUEJUTLA.setVisibility(View.GONE);
+                HUICHAPAN.setVisibility(View.GONE);
+                IXMIQUILPAN.setVisibility(View.GONE);
+                MIXQUIAHUALA.setVisibility(View.GONE);
+                PACHUCA.setVisibility(View.GONE);
+                TIZAYUCA.setVisibility(View.GONE);
+                TULA.setVisibility(View.GONE);
+                TULANCINGO.setVisibility(View.GONE);
+                opc1.setVisibility(View.GONE);
+                opc2.setVisibility(View.GONE);
+                fecha.setVisibility(View.GONE);
+                txtfcha.setVisibility(View.GONE);
+                visibilidad(true);
+                atras.setVisibility(View.VISIBLE);
+                siguiente.setVisibility(View.VISIBLE);
+
+                for (int i=1;i<=x;i++){
+                    Encabezado3();
+                    llenadoTabla2(da[i][1],da[i][2],da[i][3],da[i][6],da[i][4],da[i][5]);
+                }
+
+                Cambio_color(4);
+                altTableRow(1,10);
+                suma.setMin(1);
+                suma.setMax(10);
+
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(),"Tarea Cancelada!",Toast.LENGTH_LONG).show();
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Noti_penales extends AsyncTask<Void,Integer, Void>{
+
+        String[][] da =new String[500][7];
+        int veces=0;
+        Con_sql conStr=new Con_sql();
+        String Que_es="";
+        String Resultado="";
+        String Ex="";
+        int x=0;
+        String query="";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            Que_es=datos.getMES();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Noti_penales.this.cancel(true);
+                }
+            });
+
+            while (numero_causa.getText().toString().length()<9){
+                String ejemplo=numero_causa.getText().toString();
+                ejemplo="0"+ejemplo;
+                numero_causa.setText(ejemplo);
+
+            Ex=numero_causa.getText().toString();
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                connect =conStr.connection_notifica();
+
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+                    if(Que_es=="FECHA"){
+                        query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
+                    }else if (Que_es=="EXPEDIENTE"){
+
+                        query ="SELECT  *  FROM VtaVta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
+                    }
+
+                    //Toast.makeText(getActivity(),query, Toast.LENGTH_SHORT).show();
+
+
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+
+                    else {
+
+                        while (rs.next()){
+                            x=x+1;
+
+                            da[x][1]=rs.getString(1);
+                            da[x][2]=rs.getString(2);
+                            da[x][3]=rs.getString(3);
+                            da[x][4]=rs.getString(4);
+                            da[x][5]=rs.getString(5);
+                            da[x][6]=rs.getString(8);
+
+                        }
+                    }
+
+                }
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            pDialog.dismiss();
+            if (Resultado=="no"){
+
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else{
+
+                Encabezado2("No. de Notificación.","No.expediente","Fecha de Publicación.","Juicio.","Fecha de Resolución.","Síntesis.");
+
+                txtdistrito.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                juzgado.setVisibility(View.GONE);
+                opcion1.setVisibility(View.GONE);
+                opcion2.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                no_causa.setVisibility(View.GONE);
+                numero_expediente.setVisibility(View.GONE);
+                numero_causa.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                ACTOPAN.setVisibility(View.GONE);
+                APAN.setVisibility(View.GONE);
+                HUEJUTLA.setVisibility(View.GONE);
+                HUICHAPAN.setVisibility(View.GONE);
+                IXMIQUILPAN.setVisibility(View.GONE);
+                MIXQUIAHUALA.setVisibility(View.GONE);
+                PACHUCA.setVisibility(View.GONE);
+                TIZAYUCA.setVisibility(View.GONE);
+                TULA.setVisibility(View.GONE);
+                TULANCINGO.setVisibility(View.GONE);
+                opc1.setVisibility(View.GONE);
+                opc2.setVisibility(View.GONE);
+                fecha.setVisibility(View.GONE);
+                txtfcha.setVisibility(View.GONE);
+                visibilidad(true);
+                atras.setVisibility(View.VISIBLE);
+                siguiente.setVisibility(View.VISIBLE);
+
+                for (int i=1;i<=x;i++){
+                    Encabezado3();
+                    llenadoTabla2(da[i][1],da[i][2],da[i][3],da[i][6],da[i][4],da[i][5]);
+                }
+
+                Cambio_color(4);
+                altTableRow(1,10);
+                suma.setMin(1);
+                suma.setMax(10);
+
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(),"Tarea Cancelada!",Toast.LENGTH_LONG).show();
+        }
+
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class Noti_Adolecentes extends AsyncTask<Void, Integer, Void>{
+        String[][] da =new String[500][6];
+        int veces=0;
+        Con_sql conStr=new Con_sql();
+        String Que_es="";
+        String Resultado="";
+        String Ex="";
+        int x=0;
+        String query="";
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog.setProgress(0);
+            pDialog.show();
+            Que_es=datos.getMES();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Noti_Adolecentes.this.cancel(true);
+                }
+            });
+
+            while (numero_expediente.getText().toString().length()<11){
+                String ejemplo=numero_expediente.getText().toString();
+                ejemplo="0"+ejemplo;
+                numero_expediente.setText(ejemplo);
+
+                Ex=numero_expediente.getText().toString();
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                connect =conStr.connection_notifica();
+
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+                }
+                else
+                {
+                    if(Que_es=="FECHA"){
+                        query ="SELECT *  FROM Vta_ResiNotificaJuzAdoles where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
+                    }else if (Que_es=="EXPEDIENTE"){
+
+                        query ="SELECT  *  FROM Vta_ResiNotificaJuzAdoles where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
+                    }
+
+                    //Toast.makeText(getActivity(),query, Toast.LENGTH_SHORT).show();
+
+
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+
+                    else {
+
+                        while (rs.next()){
+                            x=x+1;
+
+                            da[x][1]=rs.getString(1);
+                            da[x][2]=rs.getString(2);
+                            da[x][3]=rs.getString(3);
+                            da[x][4]=rs.getString(4);
+                            da[x][5]=rs.getString(5);
+
+
+                        }
+                    }
+
+                }
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            pDialog.dismiss();
+            if (Resultado=="no"){
+
+                Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+
+            }else{
+
+                Encabezado("No. de Notificación.","No.expediente","Fecha de Publicación.","Fecha de Resolución.","Síntesis.");
+
+                txtdistrito.setVisibility(View.GONE);
+                distrito.setVisibility(View.GONE);
+                juzgado.setVisibility(View.GONE);
+                opcion1.setVisibility(View.GONE);
+                opcion2.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                no_causa.setVisibility(View.GONE);
+                numero_expediente.setVisibility(View.GONE);
+                numero_causa.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
+                ACTOPAN.setVisibility(View.GONE);
+                APAN.setVisibility(View.GONE);
+                HUEJUTLA.setVisibility(View.GONE);
+                HUICHAPAN.setVisibility(View.GONE);
+                IXMIQUILPAN.setVisibility(View.GONE);
+                MIXQUIAHUALA.setVisibility(View.GONE);
+                PACHUCA.setVisibility(View.GONE);
+                TIZAYUCA.setVisibility(View.GONE);
+                TULA.setVisibility(View.GONE);
+                TULANCINGO.setVisibility(View.GONE);
+                opc1.setVisibility(View.GONE);
+                opc2.setVisibility(View.GONE);
+                fecha.setVisibility(View.GONE);
+                txtfcha.setVisibility(View.GONE);
+                visibilidad(true);
+                atras.setVisibility(View.VISIBLE);
+                siguiente.setVisibility(View.VISIBLE);
+
+                for (int i=1;i<=x;i++){
+                   // Encabezado4("","","","","");
+                    llenadoTabla(da[i][1],da[i][2],da[i][3],da[i][4],da[i][5]);
+                }
+
+                Cambio_color(4);
+                altTableRow(1,10);
+                suma.setMin(1);
+                suma.setMax(10);
+
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(getActivity(),"Tarea Cancelada!",Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
