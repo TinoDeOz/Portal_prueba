@@ -53,12 +53,13 @@
             <TextView
                 android:id="@+id/lbl_noti_distrito"
                 android:layout_width="fill_parent"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/hint_distrito"
                 android:textColor="?android:attr/colorBackground"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:layout_marginBottom="10dp"/>
 
             <Spinner
                 android:id="@+id/spinner_noti_distrito"
@@ -71,12 +72,14 @@
             <TextView
                 android:id="@+id/lbl_noti_juzgado"
                 android:layout_width="fill_parent"
-                android:layout_height="33dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/hint_juzgado"
                 android:textColor="?android:attr/colorBackground"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:layout_marginBottom="10dp"
+                />
 
             <Spinner
                 android:id="@+id/spinner_actopan"

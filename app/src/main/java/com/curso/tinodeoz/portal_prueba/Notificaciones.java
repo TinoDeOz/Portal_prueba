@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -708,7 +709,6 @@ public class Notificaciones extends Fragment {
 
     }
 
-
     public void altTableRow(int min, int max) {
         int childViewCount = tabla.getChildCount();
         suma.setTotal(childViewCount-1);
@@ -734,8 +734,6 @@ public class Notificaciones extends Fragment {
 
     }
     }
-
-
 
     private void PENALES() {
 
@@ -764,7 +762,7 @@ public class Notificaciones extends Fragment {
                         ejemplo="0"+ejemplo;
                         numero_causa.setText(ejemplo);
                     }
-                    query ="SELECT  *  FROM VtaVta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+numero_causa.getText().toString()+"'";
+                    query ="SELECT  *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+numero_causa.getText().toString()+"'";
                 }
 
                 //Toast.makeText(getActivity(),query, Toast.LENGTH_SHORT).show();
@@ -941,7 +939,6 @@ public class Notificaciones extends Fragment {
 
     }
 
-
     public void selector_fecha(){
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -976,7 +973,7 @@ public void Cambio_color(int alt_row) {
     for (int i = 1; i < childViewCount; i++) {
         TableRow row = (TableRow) tabla.getChildAt(i);
 
-        for (int j = 0; j < row.getChildCount(); j++) {
+        for (int j = 0; j < row.getChildCount()-1; j++) {
 
             TextView tv = (TextView) row.getChildAt(j);
             if (i % 4 != 0) {
@@ -990,7 +987,7 @@ public void Cambio_color(int alt_row) {
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String txt5){
+    public void llenadoTabla(final String txt1, final String txt2, final String txt3, final String txt4, final String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -998,10 +995,7 @@ public void Cambio_color(int alt_row) {
         row.setLayoutParams(layoutFila);
         row.setGravity(Gravity.CENTER_VERTICAL);
 
-
         TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5;
-
-
 
         txtTabla=new TextView(getActivity());
         txtTabla.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -1014,7 +1008,7 @@ public void Cambio_color(int alt_row) {
 
 
         txtTabla2=new TextView(getActivity());
-        txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla2.setGravity(Gravity.CENTER);
         txtTabla2.setBackgroundColor(Color.TRANSPARENT);
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.parseColor("#B1613e"));
@@ -1023,7 +1017,7 @@ public void Cambio_color(int alt_row) {
 
 
         txtTabla3=new TextView(getActivity());
-        txtTabla3.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla3.setGravity(Gravity.CENTER);
         txtTabla3.setBackgroundColor(Color.TRANSPARENT);
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.parseColor("#B1613e"));
@@ -1032,7 +1026,7 @@ public void Cambio_color(int alt_row) {
 
 
         txtTabla4=new TextView(getActivity());
-        txtTabla4.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla4.setGravity(Gravity.CENTER);
         txtTabla4.setBackgroundColor(Color.TRANSPARENT);
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.parseColor("#B1613e"));
@@ -1041,11 +1035,31 @@ public void Cambio_color(int alt_row) {
 
 
         txtTabla5=new TextView(getActivity());
-        txtTabla5.setGravity(Gravity.CENTER_VERTICAL);
+        txtTabla5.setGravity(Gravity.CENTER);
         txtTabla5.setBackgroundColor(Color.TRANSPARENT);
-        txtTabla5.setText(txt5);
-        txtTabla5.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla5.setWidth(1100);
+        txtTabla5.setText(Html.fromHtml("<u>Ver Sintesis</u>"));
+        //txtTabla5.setText(txt5);
+        txtTabla5.setTextColor(Color.BLACK);
+        txtTabla5.setWidth(500);
+
+        txtTabla5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtdistrito.setVisibility(View.VISIBLE);
+                juzgado.setVisibility(View.VISIBLE);
+                txtdistrito.setTextSize(16);
+                txtdistrito.setText("No. de Notificacion:\n"+txt1+"\n\n" +
+                        "Expediente:\n"+txt2+"\n\n" +
+                        "Fecha de Publicación:\n"+txt3+"\n\n" +
+                        "Fecha de Resolucion:\n"+txt4+"\n\n");
+                juzgado.setTextSize(16);
+                juzgado.setText("SINTESIS:\n"+"\n"+txt5);
+                tabla.removeAllViews();
+                atras.setVisibility(View.GONE);
+                siguiente.setVisibility(View.GONE);
+
+            }
+        });
 
         row.addView(txtTabla5);
 
@@ -1053,7 +1067,6 @@ public void Cambio_color(int alt_row) {
 
         TableRow borde= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
-
 
         TextView borde1, borde2,borde3,borde4,borde5,border1;
 
@@ -1084,7 +1097,7 @@ public void Cambio_color(int alt_row) {
 
         borde5=new TextView(getActivity());
         borde5.setBackgroundColor(Color.parseColor("#000000"));
-        borde5.setWidth(1100);
+        borde5.setWidth(500);
         borde5.setHeight(10);
         borde.addView(borde5);
 
@@ -1150,7 +1163,7 @@ public void Cambio_color(int alt_row) {
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(1100);
+        txtTabla5.setWidth(500);
         txtTabla5.setHeight(x);
         row.addView(txtTabla5);
 
@@ -1239,7 +1252,7 @@ public void Cambio_color(int alt_row) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String txt4,String txt5){
+public void llenadoTabla2(final String txt1, final String txt2, final String txt3, final String txt7, final String txt4, final String txt5){
     TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
             TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -1270,7 +1283,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     row.addView(txtTabla2);
 
     txtTabla3=new TextView(getActivity());
-    txtTabla3.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla3.setGravity(Gravity.CENTER);
     txtTabla3.setBackgroundColor(Color.TRANSPARENT);
     txtTabla3.setText(txt3);
     txtTabla3.setTextColor(Color.parseColor("#B1613e"));
@@ -1278,7 +1291,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     row.addView(txtTabla3);
 
     txtTabla9=new TextView(getActivity());
-    txtTabla9.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla9.setGravity(Gravity.CENTER);
     txtTabla9.setBackgroundColor(Color.TRANSPARENT);
     txtTabla9.setText(txt7);
     txtTabla9.setTextColor(Color.parseColor("#B1613e"));
@@ -1286,7 +1299,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     row.addView(txtTabla9);
 
     txtTabla4=new TextView(getActivity());
-    txtTabla4.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla4.setGravity(Gravity.CENTER);
     txtTabla4.setBackgroundColor(Color.TRANSPARENT);
     txtTabla4.setText(txt4);
     txtTabla4.setTextColor(Color.parseColor("#B1613e"));
@@ -1294,11 +1307,31 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
     row.addView(txtTabla4);
 
     txtTabla5=new TextView(getActivity());
-    txtTabla5.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla5.setGravity(Gravity.CENTER);
     txtTabla5.setBackgroundColor(Color.TRANSPARENT);
-    txtTabla5.setText(txt5);
-    txtTabla5.setTextColor(Color.parseColor("#B1613e"));
-    txtTabla5.setWidth(1100);
+    txtTabla5.setText(Html.fromHtml("<u>Ver Sintesis</u>"));
+    //txtTabla5.setText(txt5);
+    txtTabla5.setTextColor(Color.BLACK);
+    txtTabla5.setWidth(500);
+
+    txtTabla5.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            txtdistrito.setVisibility(View.VISIBLE);
+            juzgado.setVisibility(View.VISIBLE);
+            txtdistrito.setTextSize(16);
+            txtdistrito.setText("No. de Notificacion:\n"+txt1+"\n\n" +
+                    "Expediente:\n"+txt2+"\n\n"+
+                    "Juicio:\n"+txt7+"\n\n"+
+                    "Fecha de Publicación:\n"+txt3+"\n\n" +
+                    "Fecha de Resolucion:\n"+txt4+"\n\n");
+            juzgado.setTextSize(16);
+            juzgado.setText("SINTESIS:\n"+"\n"+txt5);
+            tabla.removeAllViews();
+            atras.setVisibility(View.GONE);
+            siguiente.setVisibility(View.GONE);
+        }
+    });
 
     row.addView(txtTabla5);
 
@@ -1372,7 +1405,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
         txtTabla5.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(1100);
+        txtTabla5.setWidth(500);
         txtTabla5.setHeight(x);
         //txtTabla5.setMaxLines(3);
         //txtTabla5.setMovementMethod(new ScrollingMovementMethod());
@@ -1463,7 +1496,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(1100);
+        txtTabla5.setWidth(500);
         txtTabla5.setHeight(x);
         row.addView(txtTabla5);
 
@@ -1819,7 +1852,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
 
             pDialog.dismiss();
             if (Resultado=="no"){
-
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
 
             }else{
@@ -1936,7 +1968,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
                         query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
                     }else if (Que_es=="EXPEDIENTE"){
 
-                        query ="SELECT  *  FROM VtaVta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
+                        query ="SELECT  *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
                     }
 
                     //Toast.makeText(getActivity(),query, Toast.LENGTH_SHORT).show();
@@ -2104,13 +2136,10 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
                         query ="SELECT  *  FROM Vta_ResiNotificaJuzAdoles where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
                     }
 
-                    //Toast.makeText(getActivity(),query, Toast.LENGTH_SHORT).show();
-
-
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(!rs.isBeforeFirst()){
-                        ConnectionResult="No se encontraron Datos";
+                        ConnectionResult="No se encontraron datos";
                         Resultado="no";
                     }
 
@@ -2124,8 +2153,6 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
                             da[x][3]=rs.getString(3);
                             da[x][4]=rs.getString(4);
                             da[x][5]=rs.getString(5);
-
-
                         }
                     }
 
@@ -2148,6 +2175,7 @@ public void llenadoTabla2(String txt1,String txt2,String txt3,String txt7,String
             if (Resultado=="no"){
 
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
+                nueva();
 
             }else{
 

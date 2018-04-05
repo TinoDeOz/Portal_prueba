@@ -347,7 +347,7 @@ public class Portafolio extends Fragment {
                                         datos[1]=rs.getString("Fecha");
                                         datos[2]=rs.getString("Perfil");
                                     }
-                                /*    nuevo_registro.setExpediente(contenido[3]);
+                                /*   nuevo_registro.setExpediente(contenido[3]);
                                     nuevo_registro.setUbicacion(datos[2]);
                                     nuevo_registro.setFecha(datos[1]+"tt");
                                     nuevo_registro.setIDJuzgado(contenido[6]);
@@ -437,14 +437,12 @@ public void Consulta(String query){
 
         base.closeDB();
         Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
-    }catch (Exception e){
+    } catch (Exception e){
         base.closeDB();
         Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
 
     }
 }
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Actualizar_Datos(){
         Actualizar.setOnClickListener(new View.OnClickListener() {
@@ -455,11 +453,9 @@ public void Consulta(String query){
             }
         });
 
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void nueva() {
 
        nuevaa.setOnClickListener(new View.OnClickListener() {
@@ -475,9 +471,8 @@ public void Consulta(String query){
        });
 
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77777
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77777
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void salir(){
         salir.setOnClickListener(new View.OnClickListener() {
             @Override

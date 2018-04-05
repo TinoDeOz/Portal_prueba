@@ -219,11 +219,6 @@ Button nueva,salir;
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 public void accion(final View v){
     distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
@@ -280,8 +275,6 @@ public void accion(final View v){
     });
 
 
-
-
     consulta.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -296,10 +289,6 @@ public void accion(final View v){
             Promo.execute();
         }
     });
-
-
-
-
 
 }
 
