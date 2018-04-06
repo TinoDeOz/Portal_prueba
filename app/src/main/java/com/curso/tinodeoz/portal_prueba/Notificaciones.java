@@ -1857,7 +1857,7 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
             }else{
 
                 Encabezado2("No. de Notificación.","No.expediente","Fecha de Publicación.","Juicio.","Fecha de Resolución.","Síntesis.");
-
+                Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
                 txtdistrito.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);
                 juzgado.setVisibility(View.GONE);
@@ -2017,7 +2017,7 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
 
             }else{
-
+                Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
                 Encabezado2("No. de Notificación.","No.expediente","Fecha de Publicación.","Juicio.","Fecha de Resolución.","Síntesis.");
 
                 txtdistrito.setVisibility(View.GONE);
@@ -2095,9 +2095,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
             pDialog.setProgress(0);
             pDialog.show();
             Que_es=datos.getMES();
-            pDialog.setProgress(0);
-            pDialog.show();
-
 
             pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -2179,6 +2176,7 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
             }else{
 
+                Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
                 Encabezado("No. de Notificación.","No.expediente","Fecha de Publicación.","Fecha de Resolución.","Síntesis.");
 
                 txtdistrito.setVisibility(View.GONE);

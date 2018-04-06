@@ -1,5 +1,6 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -7,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -47,6 +49,7 @@ public class Portafolio extends Fragment {
     Spinner opc,distrito, juzgado1,juzgado2;
     TextView opcion,txt_juzgado,txt_exp, txt_distrito, txt_eliminar;
     EditText Expediente;
+    ProgressDialog pDialog;
 
 
     String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
@@ -230,9 +233,7 @@ public class Portafolio extends Fragment {
 
             }
         });
-
     }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void agregar() {
@@ -332,7 +333,6 @@ public class Portafolio extends Fragment {
                             }
                             else
                             {
-
                                 String consulta = "Select * from Vta_ResiUbicacion Where IdJuzgado="+contenido[6]+ " and Expediente='"+contenido[3]+"' Order by Fecha DESC;";
                                 Statement stmt = connect.createStatement();
                                 ResultSet rs = stmt.executeQuery(consulta);
@@ -347,12 +347,6 @@ public class Portafolio extends Fragment {
                                         datos[1]=rs.getString("Fecha");
                                         datos[2]=rs.getString("Perfil");
                                     }
-                                /*   nuevo_registro.setExpediente(contenido[3]);
-                                    nuevo_registro.setUbicacion(datos[2]);
-                                    nuevo_registro.setFecha(datos[1]+"tt");
-                                    nuevo_registro.setIDJuzgado(contenido[6]);
-                                    nuevo_registro.setJuzgado(contenido[2]);
-                                    nuevo_registro.setDistrito(contenido[1]);*/
 
                                     base.borrar(contenido[3],contenido[2]);
                                     base.Agregar(contenido[1],contenido[2],contenido[6],contenido[3],datos[2],datos[1]);
@@ -448,8 +442,15 @@ public void Consulta(String query){
         Actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActualizarTabla("");
-                Actualizar.setVisibility(View.GONE);
+
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                pDialog.setMessage("Actualizando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+                Consulta_portafolio Actu= new Consulta_portafolio();
+                Actu.execute();
+
             }
         });
 
@@ -457,7 +458,6 @@ public void Consulta(String query){
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void nueva() {
-
        nuevaa.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -488,9 +488,7 @@ public void Consulta(String query){
 
     }
 
-
 /////////////////////////////////////////////////////////////////////////
-
     public void altTableRow(int alt_row) {
         int childViewCount = tabla.getChildCount();
 
@@ -512,9 +510,8 @@ public void Consulta(String query){
         }
     }
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void Eliminar(){
+    public void Eliminar(){
     Btn_opc_eliminar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -774,8 +771,6 @@ public void Eliminar(){
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
 
-
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -789,7 +784,6 @@ public void Eliminar(){
     public Portafolio() {
         // Required empty public constructor
     }
-
 
     public static Portafolio newInstance(String param1, String param2) {
         Portafolio fragment = new Portafolio();
@@ -852,18 +846,177 @@ public void Eliminar(){
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public class Consulta_portafolio extends AsyncTask<Void, Integer, Void> {
+
+    Con_sql conStr = new Con_sql();
+    String[] contenido = new String[8];
+    String[] datos = new String[3];
+    String frase = "";
+    String columnas[] = {"distrito", "juzgado", "expediente", "ubicacion", "fecha", "idjuzgado"};
+    String query = "";
+    String Resultado = "";
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pDialog.setProgress(0);
+        pDialog.show();
+        pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                Consulta_portafolio.this.cancel(true);
+            }
+        });
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+
+        pDialog.dismiss();
+
+        if (Resultado.equals("no")) {
+            Toast.makeText(getActivity(), ConnectionResult, Toast.LENGTH_LONG).show();
+        } else {
+            //Encabezado("Distrito", "Juzgado", "No.de Expediente", "Ubicación", "Fecha");
+            nuevaa.setVisibility(View.VISIBLE);
+            salir.setVisibility(View.VISIBLE);
+            Btn_opc_eliminar.setVisibility(View.GONE);
+            agregar.setVisibility(View.GONE);
+            mostrar.setVisibility(View.GONE);
+            txt_juzgado.setVisibility(View.GONE);
+            juzgado1.setVisibility(View.GONE);
+            juzgado2.setVisibility(View.GONE);
+            distrito.setVisibility(View.GONE);
+            txt_distrito.setVisibility(View.GONE);
+            opc.setVisibility(View.GONE);
+            opcion.setVisibility(View.GONE);
+            Actualizar.setVisibility(View.GONE);
+
+            Consulta("");
+            altTableRow(4);
+
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        int progreso = values[0].intValue();
+        pDialog.setProgress(progreso);
+
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+
+        Toast.makeText(getActivity(), "Tarea Cancelada!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected Void doInBackground(Void... params) {
+
+
+
+            SQLiteDatabase db = base.getReadableDatabase();
+
+            try {
+                Cursor c = db.query("portafolio", columnas, query, null, null, null, null);
+
+                int dis, juz, exp, ubi, fech, idjuz;
+
+                dis = c.getColumnIndex("distrito");
+                juz = c.getColumnIndex("juzgado");
+                idjuz = c.getColumnIndex("idjuzgado");
+                exp = c.getColumnIndex("expediente");
+                ubi = c.getColumnIndex("ubicacion");
+                fech = c.getColumnIndex("fecha");
+
+                for(int a=1;a<=50;a++){
+                    Thread.sleep(100);
+                    publishProgress(a+1);
+                }
+
+                if (c.moveToFirst()) {
+                    do {
+
+                        contenido[1] = c.getString(dis);
+                        contenido[2] = c.getString(juz);
+                        contenido[3] = c.getString(exp);
+                        contenido[4] = c.getString(ubi);
+                        contenido[5] = c.getString(fech);
+                        contenido[6] = c.getString(idjuz);
+
+                        try {
+                            if (contenido[1].equals("Pachuca de Soto.")) {
+                                connect = conStr.connections();
+
+                            } else if (contenido[1].equals("Tulancingo de Bravo.")) {
+                                connect = conStr.connectionstulancingo();
+                            }
+
+                            if (connect == null) {
+                                Resultado = "no";
+                                ConnectionResult = "Check Your Internet Access!";
+
+                            } else {
+
+                                String consulta = "Select * from Vta_ResiUbicacion Where IdJuzgado=" + contenido[6] + " and Expediente='" + contenido[3] + "' Order by Fecha DESC;";
+                                Statement stmt = connect.createStatement();
+                                ResultSet rs = stmt.executeQuery(consulta);
+                                if (!rs.isBeforeFirst()) {
+                                    //Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    while (rs.next()) {
+
+                                        datos[1] = rs.getString("Fecha");
+                                        datos[2] = rs.getString("Perfil");
+                                    }
+                                /*   nuevo_registro.setExpediente(contenido[3]);
+                                    nuevo_registro.setUbicacion(datos[2]);
+                                    nuevo_registro.setFecha(datos[1]+"tt");
+                                    nuevo_registro.setIDJuzgado(contenido[6]);
+                                    nuevo_registro.setJuzgado(contenido[2]);
+                                    nuevo_registro.setDistrito(contenido[1]);*/
+
+                                    base.borrar(contenido[3], contenido[2]);
+                                    base.Agregar(contenido[1], contenido[2], contenido[6], contenido[3], datos[2], datos[1]);
+                                    //llenadoTabla(contenido[1],contenido[2],contenido[3],datos[2],datos[1] );
+                                }
+
+                                //altTableRow(4);
+                            }
+
+                        } catch (Exception ex) {
+                            esSatisfactorio = false;
+                            ConnectionResult = ex.getMessage();
+                            //Toast.makeText(getActivity(),"Error"+ ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+
+                    } while (c.moveToNext());
+                }
+                for(int a=50;a<=100;a++){
+                    Thread.sleep(100);
+                    publishProgress(a+1);
+                }
+                base.closeDB();
+                //Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                base.closeDB();
+                //Toast.makeText(getActivity(),"Error al actualizar portafolio", Toast.LENGTH_LONG).show();
+            }
+
+            return null;
+
+        }
+
+}
 }

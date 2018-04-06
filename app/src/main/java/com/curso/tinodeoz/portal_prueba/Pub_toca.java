@@ -1,14 +1,17 @@
 package com.curso.tinodeoz.portal_prueba;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +48,7 @@ public class Pub_toca extends Fragment {
     EditText numero_toca;
     Spinner sala;
     Button consulta;
+    ProgressDialog pDialog;
 
     String[] string_sala={"Selecciona Aqui:","Primera sala civil y familiar.","Segunda sala civil y familiar."};
 
@@ -247,7 +251,18 @@ public class Pub_toca extends Fragment {
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                pDialog = new ProgressDialog(getActivity(),R.style.MyAlertDialogStyle);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                Consulta_publicacion Con_Pub = new Consulta_publicacion();
+                Con_Pub.execute();
+                /*
                 String[] datos =new String[5];
+
                 int x=0;
                 try {
 
@@ -305,13 +320,14 @@ public class Pub_toca extends Fragment {
                     esSatisfactorio = false;
                     ConnectionResult = ex.getMessage();
                 }
+               */
             }
         });
     }
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String txt5){
+    public void llenadoTabla(final String txt1, final String txt2, final String txt3, final String txt4, final String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -321,8 +337,6 @@ public class Pub_toca extends Fragment {
 
 
         TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5;
-
-
 
         txtTabla=new TextView(getActivity());
         txtTabla.setGravity(Gravity.CENTER_VERTICAL);
@@ -343,7 +357,7 @@ public class Pub_toca extends Fragment {
 
 
         txtTabla3=new TextView(getActivity());
-        txtTabla3.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla3.setGravity(Gravity.CENTER);
         txtTabla3.setBackgroundColor(Color.TRANSPARENT);
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.parseColor("#B1613e"));
@@ -352,7 +366,7 @@ public class Pub_toca extends Fragment {
 
 
         txtTabla4=new TextView(getActivity());
-        txtTabla4.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla4.setGravity(Gravity.CENTER);
         txtTabla4.setBackgroundColor(Color.TRANSPARENT);
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.parseColor("#B1613e"));
@@ -361,13 +375,36 @@ public class Pub_toca extends Fragment {
 
 
         txtTabla5=new TextView(getActivity());
-        txtTabla5.setGravity(Gravity.FILL_HORIZONTAL);
+        txtTabla5.setGravity(Gravity.CENTER);
         txtTabla5.setBackgroundColor(Color.TRANSPARENT);
-        txtTabla5.setText(txt5);
-        txtTabla5.setTextColor(Color.parseColor("#B1613e"));
+        txtTabla5.setText(Html.fromHtml("<u>Ver Sintesis</u>"));
+        txtTabla5.setTextColor(Color.BLACK);
         txtTabla5.setWidth(700);
         txtTabla5.setPadding(0,20,0,20);
         row.addView(txtTabla5);
+
+
+        txtTabla5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txt_no_toca.setText("Numero de Toca:\n" +
+                        numero_toca.getText().toString()+"\n \n" +
+                        "Fecha de publicación:\n" +txt2+"\n \n" +
+                        "Juicio:\n"+txt3+"\n \n" +
+                        "Fecha de resolución:\n"+ txt4+"\n \n" +
+                        "Sintesis:\n"+txt5);
+
+                tabla.removeAllViews();
+                txt_no_toca.setTextSize(16);
+                txt_no_toca.setVisibility(View.VISIBLE);
+                txt_no_toca.setPadding(15,10,10,15);
+
+            }
+        });
+
+
+
+
 
         tabla.addView(row);
 
@@ -488,18 +525,7 @@ public class Pub_toca extends Fragment {
 
         tabla.addView(row);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
-
-
-
-
-
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -525,18 +551,127 @@ public class Pub_toca extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public class Consulta_publicacion extends AsyncTask<Void, Integer, Void>{
+        String[][] datos =new String[500][5];
+        Con_sql conStr=new Con_sql();
+        int x=0;
+        String toca="";
+        String Resultado="";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            toca=numero_toca.getText().toString();
+            pDialog.setProgress(0);
+            pDialog.show();
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Consulta_publicacion.this.cancel(true);
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                connect =conStr.connections();
+
+                if (connect == null)
+                {
+                    ConnectionResult = "Check Your Internet Access!";
+                    Resultado="no";
+
+                }
+                else
+                {
+                    while (toca.length()<9){
+                        String ejemplo=toca;
+                        ejemplo="0"+ejemplo;
+                        toca=ejemplo;
+                    }
+
+                    String query = " SELECT publicacion, juicio,acuerdo, Sintesis FROM Vta_ResiNotificaSalas where id_sala="+datos_consulta.getID()+" and num_toca='"+toca+"'";
+                    Statement stmt = connect.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(!rs.isBeforeFirst()){
+                        ConnectionResult="No se encontraron Datos";
+                        Resultado="no";
+                    }
+
+                    else {
+
+                        while (rs.next()){
+                            x=x+1;
+                            datos[x][1]=rs.getString("publicacion");
+                            datos[x][2]=rs.getString("juicio");
+                            datos[x][3]=rs.getString("acuerdo");
+                            datos[x][4]=rs.getString("Sintesis");
+                        }
+                    }
+
+                }
+
+            }catch (Exception ex)
+            {
+                esSatisfactorio = false;
+                ConnectionResult = ex.getMessage();
+            }
+
+            return null;
+        }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+
+
+        pDialog.dismiss();
+        if (Resultado.equals("no")){
+            Toast.makeText(getActivity(),ConnectionResult,Toast.LENGTH_LONG).show();
+
+        }else{
+            Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
+            Encabezado("#","FECHA DE PUBLICACIÓN","JUICIO", "FECHA DE RESOLUCIÓN", "SÍNTESIS");
+            txt_no_toca.setVisibility(View.GONE);
+            numero_toca.setVisibility(View.GONE);
+            consulta.setVisibility(View.GONE);
+            sala.setVisibility(View.GONE);
+            txt_pub_sala.setPadding(20,50,20,50);
+            txt_pub_sala.setText("Este servicio es de carácter informativo, de ningún modo debe considerarse como una notificación con validez legal.");
+            visibilidad(true);
+
+            for (int i=1;i<=x;i++){
+                llenadoTabla(String.valueOf(i),datos[i][1],datos[i][2],datos[i][3],datos[i][4]);
+            }
+        }
+
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        int progreso = values[0].intValue();
+        pDialog.setProgress(progreso);
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        Toast.makeText(getActivity(),"Tarea Cancelada!",Toast.LENGTH_LONG).show();
+    }
+}
+
+
+
+
+
+
 }

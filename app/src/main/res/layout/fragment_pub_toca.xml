@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/txt_no_toca"
                 android:layout_width="fill_parent"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/num_toca"
                 android:textColor="?android:attr/colorBackground"
