@@ -11,7 +11,6 @@
     <string name="hint_causa">Ingrese su número de Causa:</string>
     <string name="regresar">Regresar</string>
 
-
     <string name="app_name">APP-PJHIDALGO</string>
     <string name="title_activity_menu2">APP-PJHIDALGO.</string>
 
@@ -22,11 +21,10 @@
 
     <string name="action_settings">Informacion</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_des"><u>Notificaciones por lista</u></string>
 
-    <string name="descripcion1">Primera Instancia.&lt;br&gt;Materias Civil y Familiar para los Distritos Judiciales de Pachuca y Tulancingo.</string>
+    <string name="descripcion1">Primera Instancia.&lt;br&gt;Materias Civil y Familiar para los Distritos Judiciales de Pachuca, Tula y Tulancingo.</string>
     <string name="descripcion2">Primera Instancia.&lt;br&gt; Todas las materias para todos los Distritos Judiciales.</string>
     <string name="descripcion3">Segunda Instancia.&lt;br&gt; Materias Civil y Familiar.</string>
     <string name="descripcion">A partir del día 5 de mayo de 2015 los juzgados Quinto y Sexto de lo Civil del Distrito Judicial de Pachuca de Soto se especializarán en asuntos del ramo mercantil, por lo que cambiarán su denominación por la de juzgados Primero y Segundo de lo Mercantil del Distrito Judicial de Pachuca de Soto; sin embargo, continuarán conociendo de todos los juicios y procedimientos de la materia civil que radiquen hasta el día 30 de abril de 2015.</string>
@@ -84,16 +82,13 @@
     <string name="titulo_acuerdo">Acuerdo de Promoción.</string>
     <string name="tipo_promo">Seleccione el tipo de promoción:</string>
 
-
     /////////////////////////////////// Publicacion de tocas //////////////////////////////////////////////////////
     <string name="titulo_pub">Publicaciónes De Tocas</string>
     <string name="sala_proce">Sala De Procedencia:</string>
     <string name="num_toca">Número de toca:</string>
 
-
     //////////////////////////////// Ubicacion de Tocas. ///////////////////////////////////////////////////////
     <string name="titulo_ubi">Ubicación de Tocas</string>
-
 
     /////////////////////////////////// Ubicacion de expedientes ////////////////////////////////////////////////
     <string name="titulo_UBI_EXP">Ubicación de expedientes.</string>
@@ -101,7 +96,7 @@
 
     //////////////////////////////////// Menu Drawer /////////////////////////////////////////////////////////
     <string name="opc1">Primera instancia materia civil y familiar"</string>
-    <string name="opc2">Distritos Pachuca y Tulancingo</string>
+    <string name="opc2">Pachuca, Tula y Tulancingo</string>
     <string name="opc3">Primera instancia todas las materias</string>
     <string name="opc4">Todos los distritos</string>
     <string name="opc5">Segunda instancia</string>

@@ -61,11 +61,13 @@ public class ubi_exp extends Fragment {
 
     Datos datos_consulta,Seleccion;
 
-    Spinner distrito, juzgado1,juzgado2;
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
+    Spinner distrito, juzgado1,juzgado2,juzgado3;
+    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
             "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
     String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
+    String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -276,6 +278,7 @@ public class ubi_exp extends Fragment {
         distrito=(Spinner)v.findViewById(R.id.spinner_distrito);
         juzgado1=(Spinner)v.findViewById(R.id.spinner_juzgado);
         juzgado2=(Spinner)v.findViewById(R.id.spinner_juzgado2);
+        juzgado3=(Spinner)v.findViewById(R.id.spinner_juzgado3);
 
         txt_exp=(TextView)v.findViewById(R.id.txt_expediente);
         consulta=(Button)v.findViewById(R.id.consultar);
@@ -286,6 +289,7 @@ public class ubi_exp extends Fragment {
         txt_juzgado.setVisibility(View.GONE);
         juzgado1.setVisibility(View.GONE);
         juzgado2.setVisibility(View.GONE);
+        juzgado3.setVisibility(View.GONE);
         txt_exp.setVisibility(View.GONE);
         web2.setVisibility(View.GONE);
         no_expediente.setVisibility(View.GONE);
@@ -314,9 +318,6 @@ public class ubi_exp extends Fragment {
         else
             return string;
     }
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void llenado_spiners(View v){
         ArrayAdapter<String> adaptador=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_distrito);
@@ -327,6 +328,9 @@ public class ubi_exp extends Fragment {
 
         ArrayAdapter<String> adaptador3=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado2);
         juzgado2.setAdapter(adaptador3);
+
+        ArrayAdapter<String> adaptador4=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado3);
+        juzgado3.setAdapter(adaptador4);
     }
 
     public void acciones(final View v){
@@ -339,6 +343,7 @@ public class ubi_exp extends Fragment {
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.GONE);
+                    juzgado3.setVisibility(View.GONE);
                     nuevo_registro= new Data_Portafolio();
                     nuevo_registro.setDistrito("Pachuca de Soto.");
                     Seleccion =new Datos();
@@ -349,10 +354,21 @@ public class ubi_exp extends Fragment {
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.GONE);
+                    juzgado3.setVisibility(View.GONE);
                     nuevo_registro= new Data_Portafolio();
                     nuevo_registro.setDistrito("Tulancingo de Bravo.");
                     Seleccion =new Datos();
                     Seleccion.setID("2");
+
+                }else if (position==3) {
+                    txt_juzgado.setVisibility(View.VISIBLE);
+                    juzgado3.setVisibility(View.VISIBLE);
+                    juzgado1.setVisibility(View.GONE);
+                    juzgado2.setVisibility(View.GONE);
+                    nuevo_registro= new Data_Portafolio();
+                    nuevo_registro.setDistrito("Tula de Allende.");
+                    Seleccion =new Datos();
+                    Seleccion.setID("3");
                 }
             }
 
@@ -395,6 +411,44 @@ public class ubi_exp extends Fragment {
 
             }
         });
+
+
+        juzgado3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==1){
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("26");
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULA");
+                    nuevo_registro.setIDJuzgado("26");
+
+                } else if (position==2) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("33");
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULA");
+                    nuevo_registro.setIDJuzgado("33");
+
+                }
+                else if (position==3) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("49");
+                    nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULA");
+                    nuevo_registro.setIDJuzgado("49");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
 
         juzgado1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
     @Override
@@ -734,6 +788,10 @@ public void Encabezado(String txt1,String txt2){
                     //Con_sql conStr = new Con_sql();
                     connect = conStr.connectionstulancingo();
                     //Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
+                }else if (Selec_ID=="3") {
+                    //Con_sql conStr = new Con_sql();
+                    connect = conStr.connection_tula();
+                    //Toast.makeText(getActivity(),"Esperé unos segundos...", Toast.LENGTH_SHORT).show();
                 }
                 if (connect == null){
                     ConnectionResult = "Check Your Internet Access!";
@@ -752,8 +810,6 @@ public void Encabezado(String txt1,String txt2){
                         Resultado= "no";
                         ConnectionResult = "No se encontraron datos.";
                     }else {
-
-
 
                         while (rs.next()){
 
@@ -800,6 +856,7 @@ public void Encabezado(String txt1,String txt2){
                 distrito.setVisibility(View.GONE);
                 juzgado1.setVisibility(View.GONE);
                 juzgado2.setVisibility(View.GONE);
+                juzgado3.setVisibility(View.GONE);
                 txt_exp.setVisibility(View.GONE);
                 web2.setVisibility(View.GONE);
                 no_expediente.setVisibility(View.GONE);

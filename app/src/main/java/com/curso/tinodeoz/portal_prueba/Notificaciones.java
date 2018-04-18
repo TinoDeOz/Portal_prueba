@@ -24,7 +24,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -36,7 +35,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
 
-
 public class Notificaciones extends Fragment {
 
     private  int dia,mes,ano;
@@ -44,14 +42,13 @@ public class Notificaciones extends Fragment {
     Obj_enteros suma= new Obj_enteros();
     Datos datos,datos2;
 
-
     Connection connect;
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
 
-
     TableLayout tabla;
     WebView web;
+    Button nueva,salir;
     Button consulta, atras, siguiente;
     TextView txtdistrito,juzgado,materia,opcion1,opcion2,no_expediente,no_causa,txtfcha;
     EditText numero_expediente, numero_causa,fecha;
@@ -61,8 +58,6 @@ public class Notificaciones extends Fragment {
             TIZAYUCA,TULA,TULANCINGO;
 
     ProgressDialog pDialog;
-
-
 
     String[] string_distrito={"Selecciona Aqui:","ACTOPAN","APAN","HUEJUTLA DE REYES","HUICHAPAN DE VILLAGRAN","IXMIQUILPAN","MIXQUIAHUALA DE JUAREZ","PACHUCA DE SOTO ","TIZAYUCA","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
     String[] string_actopan={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR ACTOPAN","SEGUNDO CIVIL Y FAMILIAR ACTOPAN","PENAL ACTOPAN."};
@@ -82,7 +77,6 @@ public class Notificaciones extends Fragment {
 
         txtfcha=(TextView)v.findViewById(R.id.lbl_noti_fecha);
         fecha=(EditText)v.findViewById(R.id.txt_fecha);
-
         juzgado=(TextView)v.findViewById(R.id.lbl_noti_juzgado);
         opcion1=(TextView)v.findViewById(R.id.lbl_noti_opciones);
         opcion2=(TextView)v.findViewById(R.id.lbl_noti_opciones2);
@@ -122,7 +116,6 @@ public class Notificaciones extends Fragment {
 
         numero_expediente.setVisibility(View.GONE);
         numero_causa.setVisibility(View.GONE);
-
         consulta.setVisibility(View.GONE);
 
         ACTOPAN.setVisibility(View.GONE);
@@ -222,7 +215,6 @@ public class Notificaciones extends Fragment {
         opcion2.setVisibility(View.GONE);
         opc2.setVisibility(View.GONE);
     }
-
 
     public void spiner_dist(){
 
@@ -447,7 +439,6 @@ public class Notificaciones extends Fragment {
                 } else if(position==2){
                     seleccion_juzgado2("42");
                 }
-
             }
 
             @Override
@@ -496,14 +487,11 @@ public class Notificaciones extends Fragment {
                     seleccion_juzgado2("34");
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
-
 
 
         opc1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -573,7 +561,6 @@ public class Notificaciones extends Fragment {
         });
     }
 
-
     public void consulta_final(){
 
         consulta.setOnClickListener(new View.OnClickListener() {
@@ -597,7 +584,6 @@ public class Notificaciones extends Fragment {
                     Noti_penales Penales=new Noti_penales();
                     Penales.execute();
 
-
                 }else if (datos.getQUE_ES()=="ADOLECENTES"){
                     //ADOLECENTES();
                     Noti_Adolecentes Noti_ad = new Noti_Adolecentes();
@@ -608,6 +594,31 @@ public class Notificaciones extends Fragment {
         });
     }
 
+    public void altTableRow(int min, int max) {
+        int childViewCount = tabla.getChildCount();
+        suma.setTotal(childViewCount-1);
+        //
+        for (int i = 1; i < childViewCount; i++) {
+            TableRow row = (TableRow) tabla.getChildAt(i);
+            row.setVisibility(View.GONE);
+        }
+
+        if(childViewCount-1<max){
+            for (int i = 1; i < childViewCount; i++) {
+                TableRow row = (TableRow) tabla.getChildAt(i);
+                row.setVisibility(View.VISIBLE);
+                atras.setVisibility(View.GONE);
+                siguiente.setVisibility(View.GONE);
+            }
+
+        }else{
+            for (int i = min; i <= max; i++) {
+                TableRow row = (TableRow) tabla.getChildAt(i);
+                row.setVisibility(View.VISIBLE);
+            }
+
+        }
+    }
 
     private void NORMAL(int w) {
         String[] da =new String[7];
@@ -707,32 +718,6 @@ public class Notificaciones extends Fragment {
         }
 
 
-    }
-
-    public void altTableRow(int min, int max) {
-        int childViewCount = tabla.getChildCount();
-        suma.setTotal(childViewCount-1);
-        //
-        for (int i = 1; i < childViewCount; i++) {
-            TableRow row = (TableRow) tabla.getChildAt(i);
-            row.setVisibility(View.GONE);
-    }
-
-    if(childViewCount-1<max){
-        for (int i = 1; i < childViewCount; i++) {
-            TableRow row = (TableRow) tabla.getChildAt(i);
-            row.setVisibility(View.VISIBLE);
-            atras.setVisibility(View.GONE);
-            siguiente.setVisibility(View.GONE);
-        }
-
-    }else{
-        for (int i = min; i <= max; i++) {
-            TableRow row = (TableRow) tabla.getChildAt(i);
-            row.setVisibility(View.VISIBLE);
-        }
-
-    }
     }
 
     private void PENALES() {
@@ -967,7 +952,7 @@ public class Notificaciones extends Fragment {
         });
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void Cambio_color(int alt_row) {
+    public void Cambio_color(int alt_row) {
     int childViewCount = tabla.getChildCount();
 
     for (int i = 1; i < childViewCount; i++) {
@@ -1062,7 +1047,6 @@ public void Cambio_color(int alt_row) {
         });
 
         row.addView(txtTabla5);
-
         tabla.addView(row);
 
         TableRow borde= new TableRow(getActivity());
@@ -1104,7 +1088,7 @@ public void Cambio_color(int alt_row) {
         //tabla.addView(row ,new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         tabla.addView(borde);
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Encabezado(String txt1,String txt2,String txt3,String txt4,String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
@@ -1176,9 +1160,8 @@ public void Cambio_color(int alt_row) {
 
         tabla.addView(row);
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Encabezado4(String txt1,String txt2,String txt3,String txt4,String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
@@ -1249,10 +1232,9 @@ public void Cambio_color(int alt_row) {
 
         tabla.addView(row);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void llenadoTabla2(final String txt1, final String txt2, final String txt3, final String txt7, final String txt4, final String txt5){
+    public void llenadoTabla2(final String txt1, final String txt2, final String txt3, final String txt7, final String txt4, final String txt5){
     TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
             TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -1338,8 +1320,7 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
     tabla.addView(row);
 
 }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
     public void Encabezado3(){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
@@ -1424,21 +1405,17 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
         tabla.addView(row);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void Encabezado2(String txt1,String txt2,String txt3,String txt7,String txt4,String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
         Resources res = getResources();
 
-
-
         int x=150;
 
         TableRow row= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
-
 
         TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5,txtTabla6,txtTabla7;
 
@@ -1451,9 +1428,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
         txtTabla.setHeight(x);
         row.addView(txtTabla);
 
-
-
-
         txtTabla2=new TextView(getActivity());
         txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
@@ -1462,7 +1436,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
         txtTabla2.setWidth(300);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
-
 
         txtTabla3=new TextView(getActivity());
         txtTabla3.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -1509,8 +1482,8 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
         tabla.addView(row);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void paginacion(){
 
         atras.setOnClickListener(new View.OnClickListener() {
@@ -1563,8 +1536,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Button nueva,salir;
     public void finales(View v){
 
         nueva=(Button)v.findViewById(R.id.nueva_consulta);
@@ -1580,7 +1551,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
             salir.setVisibility(View.GONE);
         }
     }
-
 
     public void salir(){
 
@@ -1638,63 +1608,7 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
 
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public Notificaciones() {
-        // Required empty public constructor
-    }
-
-
-    // TODO: Rename and change types and number of parameters
-    public static Notificaciones newInstance(String param1, String param2) {
-        Notificaciones fragment = new Notificaciones();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_notificaciones, container, false);
-        mensaje();
-        inicio(v);
-        llenado_spiners(v);
-        spiner_dist();
-        acciones();
-        selector_fecha();
-        consulta_final();
-        finales(v);
-        visibilidad(false);
-        nueva();
-        salir();
-        paginacion();
-
-        return v;
-    }
-
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void mensaje(){
 
@@ -1734,6 +1648,58 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
         getActivity().finish();
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private OnFragmentInteractionListener mListener;
+
+    public Notificaciones() {
+        // Required empty public constructor
+    }
+
+    public static Notificaciones newInstance(String param1, String param2) {
+        Notificaciones fragment = new Notificaciones();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.fragment_notificaciones, container, false);
+        mensaje();
+        inicio(v);
+        llenado_spiners(v);
+        spiner_dist();
+        acciones();
+        selector_fecha();
+        consulta_final();
+        finales(v);
+        visibilidad(false);
+        nueva();
+        salir();
+        paginacion();
+
+        return v;
+    }
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -1763,7 +1729,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
         void onFragmentInteraction(Uri uri);
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private class Noti_Normal extends AsyncTask<Void, Integer,Void>{
         String[][] da =new String[500][7];
         int veces=0;
@@ -2076,17 +2041,14 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private class Noti_Adolecentes extends AsyncTask<Void, Integer, Void>{
         String[][] da =new String[500][6];
-        int veces=0;
         Con_sql conStr=new Con_sql();
         String Que_es="";
         String Resultado="";
         String Ex="";
         int x=0;
         String query="";
-
 
         @Override
         protected void onPreExecute() {
@@ -2117,7 +2079,6 @@ public void llenadoTabla2(final String txt1, final String txt2, final String txt
 
             try {
                 connect =conStr.connection_notifica();
-
 
                 if (connect == null)
                 {

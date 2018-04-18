@@ -254,7 +254,7 @@ public class AudienciasOrales extends Fragment {
                     datos_consulta.setID("IN(26,27,33,39,49,75)");
                     datos_consulta.setQUE_ES("TULA DE ALLENDE.");
                     Seleccion =new Datos();
-                    Seleccion.setID("1");
+                    Seleccion.setID("3");
 
 
                 }else if (position==3) {
@@ -506,8 +506,6 @@ public void Cambio_color(int alt_row) {
 }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String txt5){
     TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
@@ -532,7 +530,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
 
     txtTabla2=new TextView(getActivity());
-    txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+    txtTabla2.setGravity(Gravity.CENTER);
     txtTabla2.setBackgroundColor(Color.TRANSPARENT);
     txtTabla2.setText(txt2);
     txtTabla2.setTextColor(Color.parseColor("#B1613e"));
@@ -541,7 +539,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
 
     txtTabla3=new TextView(getActivity());
-    txtTabla3.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla3.setGravity(Gravity.CENTER);
     txtTabla3.setBackgroundColor(Color.TRANSPARENT);
     txtTabla3.setText(txt3);
     txtTabla3.setTextColor(Color.parseColor("#B1613e"));
@@ -550,7 +548,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
 
     txtTabla4=new TextView(getActivity());
-    txtTabla4.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla4.setGravity(Gravity.CENTER);
     txtTabla4.setBackgroundColor(Color.TRANSPARENT);
     txtTabla4.setText(txt4);
     txtTabla4.setTextColor(Color.parseColor("#B1613e"));
@@ -559,7 +557,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
 
     txtTabla5=new TextView(getActivity());
-    txtTabla5.setGravity(Gravity.CENTER_VERTICAL);
+    txtTabla5.setGravity(Gravity.CENTER);
     txtTabla5.setBackgroundColor(Color.TRANSPARENT);
     txtTabla5.setText(txt5);
     txtTabla5.setTextColor(Color.parseColor("#B1613e"));
@@ -607,8 +605,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
     //tabla.addView(row ,new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
     tabla.addView(borde);
 }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
     public void Encabezado(String txt1,String txt2,String txt3,String txt4,String txt5){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
@@ -682,6 +679,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
 
         tabla.addView(row);
     }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
 
     public void onButtonPressed(Uri uri) {
@@ -741,7 +739,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
             });
         }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         @Override
         protected Void doInBackground(Void... params) {
 
@@ -753,6 +750,9 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
                 }else if (Selec_ID=="2") {
 
                     connect = conStr.connectionstulancingo();
+                }else if (Selec_ID=="3") {
+
+                    connect = conStr.connection_tula();
                 }
 
                 if (connect == null)
@@ -762,7 +762,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
                 }
                 else
                 {
-
                     //String query = "SELECT * FROM Vta_ResiAudiOralMercantil where DATEPART(MONTH, FechaAudi)="+Obj_mes+ " and DATEPART(YEAR,FechaAudi)="+Obj_año+" and IdJuzgado "+Obj_id;
                     String query = "SELECT * FROM Vta_ResiAudiOralMercantil where DATEPART(MONTH, FechaAudi)="+datos_consulta3.getMES()+ " and DATEPART(YEAR,FechaAudi)="+datos_consulta2.getAÑO()+" and IdJuzgado "+datos_consulta.getID();
                     Statement stmt = connect.createStatement();
@@ -775,7 +774,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
                     else {
 
                         Resultado="si";
-
 
                         while (rs.next()){
                             x=x+1;
@@ -804,12 +802,10 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
         }
 
 
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             pDialog.dismiss();
-
 
             if (Resultado=="no"){
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
@@ -830,7 +826,6 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
                 consulta.setVisibility(View.GONE);
                 visibilidad(true);
 
-
                 for (int i = 1; i <= x; i++) {
                     llenadoTabla(String.valueOf(i), datos[i][1], datos[i][2], datos[i][3], datos[i][4]);
                 }
@@ -845,17 +840,5 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
             Toast.makeText(getActivity(), "Tarea cancelada!", Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
 }

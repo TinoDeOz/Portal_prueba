@@ -39,19 +39,17 @@ public class consejo_familiar extends Fragment {
     TextView txt_juzgado,txt_exp,txt_distrito;
     EditText no_expediente;
     Button consulta;
-    Spinner distrito, juzgado1,juzgado2;
+    Spinner distrito, juzgado1,juzgado2,juzgado3;
     TableLayout tabla;
     ProgressDialog pDialog;
 
     Datos datos_consulta, Seleccion;
 
 
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
+    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
-    String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
-
-
-
+    String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
+    String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -161,6 +159,7 @@ public void inicio(View v){
     distrito=(Spinner)v.findViewById(R.id.spinner_familiar_distrito);
     juzgado1=(Spinner)v.findViewById(R.id.spinner_familiar_juzgado);
     juzgado2=(Spinner)v.findViewById(R.id.spinner_familiar_juzgado2);
+    juzgado3=(Spinner)v.findViewById(R.id.spinner_familiar_juzgado3);
 
     txt_distrito=(TextView)v.findViewById(R.id.txt_familiar_distrito);
     tabla=(TableLayout)v.findViewById(R.id.Tabla_btn_familiar);
@@ -168,6 +167,7 @@ public void inicio(View v){
     txt_juzgado.setVisibility(View.GONE);
     juzgado1.setVisibility(View.GONE);
     juzgado2.setVisibility(View.GONE);
+    juzgado3.setVisibility(View.GONE);
     txt_exp.setVisibility(View.GONE);
     no_expediente.setVisibility(View.GONE);
     consulta.setVisibility(View.GONE);
@@ -240,6 +240,9 @@ Button nueva,salir;
 
         ArrayAdapter<String> adaptador3=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado2);
         juzgado2.setAdapter(adaptador3);
+
+        ArrayAdapter<String> adaptador4=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado3);
+        juzgado3.setAdapter(adaptador4);
     }
 
 
@@ -254,6 +257,7 @@ Button nueva,salir;
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.GONE);
+                    juzgado3.setVisibility(View.GONE);
                     Seleccion =new Datos();
                     Seleccion.setID("1");
 
@@ -262,8 +266,17 @@ Button nueva,salir;
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado2.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.GONE);
+                    juzgado3.setVisibility(View.GONE);
                     Seleccion =new Datos();
                     Seleccion.setID("2");
+
+                }else if (position==3) {
+                    txt_juzgado.setVisibility(View.VISIBLE);
+                    juzgado3.setVisibility(View.VISIBLE);
+                    juzgado1.setVisibility(View.GONE);
+                    juzgado2.setVisibility(View.GONE);
+                    Seleccion =new Datos();
+                    Seleccion.setID("3");
 
                 }
             }
@@ -335,6 +348,33 @@ Button nueva,salir;
             }
         });
 
+        juzgado3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==1){
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("26");
+
+                } else if (position==2) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("33");
+
+                }
+                else if (position==3) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("49");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         consulta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -481,7 +521,8 @@ Button nueva,salir;
 
         tabla.addView(row);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
     public void seleccion_juzgado(View v){
 
         txt_exp.setVisibility(View.VISIBLE);
@@ -492,7 +533,6 @@ Button nueva,salir;
         // no_expediente.setVisibility(View.GONE);
         // consulta.setVisibility(View.GONE);
     }
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void onButtonPressed(Uri uri) {
@@ -554,7 +594,6 @@ Button nueva,salir;
                     Consulta_CF.this.cancel(true);
                 }
             });
-
         }
 
         @Override
@@ -566,6 +605,9 @@ Button nueva,salir;
 
                 }else if (Selec_ID=="2") {
                     connect = conStr.connectionstulancingo();
+
+                }else if (Selec_ID=="3") {
+                    connect = conStr.connection_tula();
                 }
                 if (connect == null)
                 {
@@ -574,16 +616,16 @@ Button nueva,salir;
                 }
                 else
                 {
-
                     while (ex.length()<11){
                         String ejemplo=ex;
                         ejemplo="0"+ejemplo;
                         ex=ejemplo;
                     }
 
-                    String query = "SELECT CONVERT(VARCHAR, FechaIntervencion, 105)FechaIntervencion FROM Vta_ResiIntevencionesCF Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'";
+                    String query = "SELECT CONVERT(VARCHAR, FechaIntervencion, 111)FechaIntervencion FROM Vta_ResiIntevencionesCF Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by FechaIntervencion DESC;";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
+
                     if(!rs.isBeforeFirst()){
                         ConnectionResult = "No se encontraron datos.";
                         Resultado="no";
@@ -593,7 +635,7 @@ Button nueva,salir;
 
                         while (rs.next()){
                             x=x+1;
-                            datos[x][1]=rs.getString("FechaIntervencion").toString();
+                            datos[x][1]=rs.getString("FechaIntervencion");
 
                         }
                     }
@@ -604,7 +646,6 @@ Button nueva,salir;
                 esSatisfactorio = false;
                 ConnectionResult = ex.getMessage();
             }
-
             return null;
         }
 
@@ -622,19 +663,20 @@ Button nueva,salir;
             if (Resultado=="no"){
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
             }else{
-                Encabezado("Fecha De Intervencion.");
+                Encabezado("Fecha De Intervencion.\n Año/Día/Mes");
                 txt_juzgado.setVisibility(View.GONE);
                 txt_distrito.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);
                 juzgado1.setVisibility(View.GONE);
                 juzgado2.setVisibility(View.GONE);
+                juzgado3.setVisibility(View.GONE);
                 txt_exp.setVisibility(View.GONE);
                 no_expediente.setVisibility(View.GONE);
                 consulta.setVisibility(View.GONE);
                 visibilidad(true);
 
                 for (int i = 1; i <= x; i++) {
-                    llenadoTabla(datos[x][1]);
+                    llenadoTabla(datos[i][1]);
                 }
             }
         }

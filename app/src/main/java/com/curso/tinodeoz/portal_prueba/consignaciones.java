@@ -665,22 +665,24 @@ public class consignaciones extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-
             try {
 
                 if (Selec_ID=="1") {
                     connect = conStr.connections();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
 
                 }else if (Selec_ID=="2") {
 
-                    connect = conStr.connections();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositosTula Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    // connect = conStr.connections();
+                    // query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositosTula Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+
+                    connect= conStr.connection_tula();
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
 
 
                 }else if (Selec_ID=="3") {
                     connect = conStr.connectionstulancingo();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
                 }
 
                 if (connect == null)
@@ -735,7 +737,7 @@ public class consignaciones extends Fragment {
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
 
             }else{
-                Encabezado("Fecha");
+                Encabezado("Fecha\n Año/Día/Mes");
                 txt_juzgado.setVisibility(View.GONE);
                 txt_distrito.setText("Ultimos 5 Depositos.");
                 distrito.setVisibility(View.GONE);

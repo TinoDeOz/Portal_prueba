@@ -51,13 +51,11 @@ public class Portafolio extends Fragment {
     EditText Expediente;
     ProgressDialog pDialog;
 
-
     String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
+    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
-            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
+            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
     //String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
-
 
 
     public void inicio(View v){
@@ -67,8 +65,6 @@ public class Portafolio extends Fragment {
         txt_eliminar=(TextView)v.findViewById(R.id.txt_expediente);
         Expediente=(EditText)v.findViewById(R.id.txt_no_expediente);
         btn_eliminar=(Button)v.findViewById(R.id.eliminar);
-
-
 
         opcion=(TextView)v.findViewById(R.id.txt_busqueda);
         opc=(Spinner)v.findViewById(R.id.spinner_busqueda);
@@ -114,6 +110,7 @@ public class Portafolio extends Fragment {
         ArrayAdapter<String> adaptador4=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_opcion);
         opc.setAdapter(adaptador4);
     }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void acciones(final View v){
 
@@ -126,14 +123,11 @@ public class Portafolio extends Fragment {
                     txt_juzgado.setVisibility(View.GONE);
                     juzgado1.setVisibility(View.GONE);
 
-
-
                 } else if (position==2) {
                     txt_distrito.setVisibility(View.GONE);
                     distrito.setVisibility(View.GONE);
                     txt_juzgado.setVisibility(View.VISIBLE);
                     juzgado1.setVisibility(View.VISIBLE);
-
 
                 } else if (position==3) {
                     Consulta("");
@@ -163,6 +157,11 @@ public class Portafolio extends Fragment {
                     nuevo_registro.setDistrito("Tulancingo de Bravo.");
                     Consulta("distrito='"+nuevo_registro.getDistrito()+"'");
 
+                } else if (position==3) {
+                    nuevo_registro= new Data_Portafolio();
+                    nuevo_registro.setDistrito("Tula de Allende.");
+                    Consulta("distrito='"+nuevo_registro.getDistrito()+"'");
+
                 }
             }
 
@@ -171,7 +170,6 @@ public class Portafolio extends Fragment {
 
             }
         });
-
 
         juzgado1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -207,7 +205,6 @@ public class Portafolio extends Fragment {
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==8) {
-
                     nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
@@ -224,6 +221,18 @@ public class Portafolio extends Fragment {
 
                 }else if (position==12) {
                     nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==13) {
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==14) {
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==15) {
+                    nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
                 }
             }
@@ -418,12 +427,9 @@ public void Consulta(String query){
                 contenido[4] = c.getString(ubi);
                 contenido[5] = c.getString(fech);
 
-                if ( contenido[1].equals("Pachuca de Soto.")){
-                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
-                }
-                if ( contenido[1].equals("Tulancingo de Bravo.")){
-                    llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
-                }
+
+                llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
+
             } while (c.moveToNext());
 
             altTableRow(4);
@@ -861,7 +867,6 @@ public void Consulta(String query){
     String query = "";
     String Resultado = "";
 
-
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -923,8 +928,6 @@ public void Consulta(String query){
     @Override
     protected Void doInBackground(Void... params) {
 
-
-
             SQLiteDatabase db = base.getReadableDatabase();
 
             try {
@@ -972,7 +975,7 @@ public void Consulta(String query){
                                 Statement stmt = connect.createStatement();
                                 ResultSet rs = stmt.executeQuery(consulta);
                                 if (!rs.isBeforeFirst()) {
-                                    //Toast.makeText(getActivity(),"No se encontraron Datos", Toast.LENGTH_SHORT).show();
+                                    Resultado="no hay";
                                 } else {
 
                                     while (rs.next()) {
@@ -980,13 +983,6 @@ public void Consulta(String query){
                                         datos[1] = rs.getString("Fecha");
                                         datos[2] = rs.getString("Perfil");
                                     }
-                                /*   nuevo_registro.setExpediente(contenido[3]);
-                                    nuevo_registro.setUbicacion(datos[2]);
-                                    nuevo_registro.setFecha(datos[1]+"tt");
-                                    nuevo_registro.setIDJuzgado(contenido[6]);
-                                    nuevo_registro.setJuzgado(contenido[2]);
-                                    nuevo_registro.setDistrito(contenido[1]);*/
-
                                     base.borrar(contenido[3], contenido[2]);
                                     base.Agregar(contenido[1], contenido[2], contenido[6], contenido[3], datos[2], datos[1]);
                                     //llenadoTabla(contenido[1],contenido[2],contenido[3],datos[2],datos[1] );
@@ -1017,6 +1013,5 @@ public void Consulta(String query){
             return null;
 
         }
-
 }
 }

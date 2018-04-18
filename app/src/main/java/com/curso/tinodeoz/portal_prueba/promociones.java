@@ -45,7 +45,7 @@ public class promociones extends Fragment {
 
 
     Spinner distrito, inicial,posterior;
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO"};
+    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_tipo={"Selecciona Aqui:","Inicial","Posterior"};
 
 
@@ -242,7 +242,16 @@ public void accion(final View v){
                 Seleccion =new Datos();
                 Seleccion.setID("2");
 
+            }else if (position==3) {
+                txt_tipo.setVisibility(View.VISIBLE);
+                inicial.setVisibility(View.VISIBLE);
+                datos_consulta =new Datos();
+                datos_consulta.setID("IN(26,27,33,39,49,75,92)");
+                Seleccion =new Datos();
+                Seleccion.setID("3");
+
             }
+
         }
 
         @Override
@@ -376,14 +385,16 @@ public void accion(final View v){
 
                     if (Selec_ID=="1") {
                         connect = conStr.connections();
-
                     }else if (Selec_ID=="2") {
                         connect = conStr.connectionstulancingo();
+                    }else if (Selec_ID=="3") {
+                        connect = conStr.connection_tula();
                     }
 
                     query = "SELECT Vta_ResiAcuerdosInicial.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosInicial, Juzgados where id_expediente ="+ex+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosInicial.IdJuzgado=Juzgados.id_juzgado";
                     CAMPO1="Expediente";
                     CAMPO2="nombre";
+
                 }else if (Que_es=="POSTERIOR"){
 
                     if (Selec_ID=="1") {
@@ -391,7 +402,11 @@ public void accion(final View v){
 
                     }else if (Seleccion.getID()=="2") {
                         connect = conStr.connectionstulancingo();
+
+                    }else if (Selec_ID=="3") {
+                        connect = conStr.connection_tula();
                     }
+
 
                     query = "SELECT Vta_ResiAcuerdosPromos.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosPromos,Juzgados where IdPosterior="+ex+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosPromos.IdJuzgado=Juzgados.id_juzgado";
                     CAMPO1="Expediente";
