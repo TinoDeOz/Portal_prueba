@@ -35,7 +35,6 @@ public class promociones extends Fragment {
 
     Datos datos_consulta,Seleccion;
 
-
     WebView web;
     TextView txt_tipo,txt_exp, txtdistrito;
     EditText no_expediente;
@@ -151,7 +150,6 @@ public class promociones extends Fragment {
         no_expediente.setVisibility(View.GONE);
         consulta.setVisibility(View.GONE);
 
-
     }
 
     public void llenado_spiners(View v){
@@ -162,12 +160,10 @@ public class promociones extends Fragment {
         inicial.setAdapter(adaptador2);
         posterior.setAdapter(adaptador2);
 
-
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////777
 Button nueva,salir;
     public void finales(View v){
-
         nueva=(Button)v.findViewById(R.id.nueva_consulta);
         salir=(Button)v.findViewById(R.id.Salir);
     }
@@ -216,8 +212,6 @@ Button nueva,salir;
 
     }
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void accion(final View v){
     distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -227,12 +221,9 @@ public void accion(final View v){
                 txt_tipo.setVisibility(View.VISIBLE);
                 inicial.setVisibility(View.VISIBLE);
                 datos_consulta =new Datos();
-                datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90)");
+                datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90,97,98)");
                 Seleccion =new Datos();
                 Seleccion.setID("1");
-
-
-
 
             } else if (position==2) {
                 txt_tipo.setVisibility(View.VISIBLE);
@@ -249,9 +240,7 @@ public void accion(final View v){
                 datos_consulta.setID("IN(26,27,33,39,49,75,92)");
                 Seleccion =new Datos();
                 Seleccion.setID("3");
-
             }
-
         }
 
         @Override
@@ -318,7 +307,6 @@ public void accion(final View v){
         getActivity().finish();
     }
 
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -361,9 +349,11 @@ public void accion(final View v){
         Con_sql conStr = new Con_sql();
         int x=0;
         String ex="";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             Que_es=datos_consulta.getQUE_ES();
             Selec_ID=Seleccion.getID();
             ex=no_expediente.getText().toString();
@@ -375,6 +365,10 @@ public void accion(final View v){
                     Consulta_promo.this.cancel(true);
                 }
             });
+
+            if(ex.length()<1)
+                ex="000000";
+
         }
 
         @Override
@@ -407,7 +401,6 @@ public void accion(final View v){
                         connect = conStr.connection_tula();
                     }
 
-
                     query = "SELECT Vta_ResiAcuerdosPromos.Expediente,Juzgados.nombre FROM Vta_ResiAcuerdosPromos,Juzgados where IdPosterior="+ex+" and IdJuzgado "+ datos_consulta.getID()+" and Vta_ResiAcuerdosPromos.IdJuzgado=Juzgados.id_juzgado";
                     CAMPO1="Expediente";
                     CAMPO2="nombre";
@@ -421,7 +414,6 @@ public void accion(final View v){
                 }
                 else
                 {
-
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(!rs.isBeforeFirst()){
@@ -487,7 +479,5 @@ public void accion(final View v){
             super.onCancelled();
             Toast.makeText(getActivity(),"Tarea Cancelada!", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 }

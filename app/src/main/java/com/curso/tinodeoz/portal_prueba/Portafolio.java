@@ -39,7 +39,6 @@ public class Portafolio extends Fragment {
     String ConnectionResult="";
     Boolean esSatisfactorio=false;
 
-
     RelativeLayout RL;
     DB base;
     Data_Portafolio nuevo_registro;
@@ -132,7 +131,6 @@ public class Portafolio extends Fragment {
                 } else if (position==3) {
                     Consulta("");
                 }
-
             }
 
             @Override
@@ -140,7 +138,6 @@ public class Portafolio extends Fragment {
 
             }
         });
-
 
 
         distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -244,7 +241,6 @@ public class Portafolio extends Fragment {
         });
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void agregar() {
 
         agregar.setOnClickListener(new View.OnClickListener() {
@@ -585,7 +581,8 @@ public void Consulta(String query){
         txtTabla.setBackgroundResource(R.drawable.border);
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla.setWidth(400);
+        txtTabla.setMinWidth(400);
+        txtTabla.setMaxWidth(500);
         row.addView(txtTabla);
 
 
@@ -596,7 +593,8 @@ public void Consulta(String query){
         txtTabla2.setBackgroundResource(R.drawable.border);
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla2.setWidth(400);
+        txtTabla2.setMinWidth(400);
+        txtTabla2.setMaxWidth(500);
         row.addView(txtTabla2);
 
 
@@ -607,7 +605,8 @@ public void Consulta(String query){
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.parseColor("#B1613e"));
         //txtTabla3.setTextColor(Color.BLUE);
-        txtTabla3.setWidth(400);
+        txtTabla3.setMinWidth(400);
+        txtTabla3.setMaxWidth(500);
         row.addView(txtTabla3);
 
         txtTabla4=new TextView(getActivity());
@@ -616,7 +615,8 @@ public void Consulta(String query){
         txtTabla4.setBackgroundResource(R.drawable.border);
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla4.setWidth(400);
+        txtTabla4.setMinWidth(400);
+        txtTabla4.setMaxWidth(500);
         row.addView(txtTabla4);
 
 
@@ -626,7 +626,8 @@ public void Consulta(String query){
         txtTabla5.setBackgroundResource(R.drawable.border);
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla5.setWidth(400);
+        txtTabla5.setMinWidth(400);
+        txtTabla5.setMaxWidth(500);
         row.addView(txtTabla5);
 
         final Button txtTabla7=new Button(getActivity());
@@ -707,7 +708,6 @@ public void Consulta(String query){
         TableRow row= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
 
-
         TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5,txtTabla6;
 
         txtTabla=new TextView(getActivity());
@@ -715,10 +715,9 @@ public void Consulta(String query){
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(400);
+        txtTabla.setWidth(500);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
-
 
         txtTabla2=new TextView(getActivity());
         txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);

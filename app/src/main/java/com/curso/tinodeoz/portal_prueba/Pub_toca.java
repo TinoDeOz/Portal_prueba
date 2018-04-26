@@ -454,10 +454,7 @@ public class Pub_toca extends Fragment {
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
-
-
-
-        int x=170;
+        int x=200;
 
         TableRow row= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
@@ -483,7 +480,8 @@ public class Pub_toca extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setWidth(400);
+        txtTabla2.setMinWidth(400);
+        txtTabla2.setMaxWidth(500);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -493,7 +491,8 @@ public class Pub_toca extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setWidth(400);
+        txtTabla3.setMinWidth(400);
+        txtTabla3.setMaxWidth(500);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -502,7 +501,8 @@ public class Pub_toca extends Fragment {
         txtTabla4.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.WHITE);
-        txtTabla4.setWidth(400);
+        txtTabla4.setMinWidth(400);
+        txtTabla4.setMaxWidth(500);
         txtTabla4.setHeight(x);
         row.addView(txtTabla4);
 
@@ -511,7 +511,8 @@ public class Pub_toca extends Fragment {
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(800);
+        txtTabla5.setMinWidth(800);
+        txtTabla5.setMaxWidth(900);
         txtTabla5.setHeight(x);
 
         row.addView(txtTabla5);

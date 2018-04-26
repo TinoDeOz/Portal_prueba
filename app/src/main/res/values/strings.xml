@@ -3,6 +3,7 @@
     <string name="hint_distrito">Seleccione su distrito:</string>
     <string name="hint_juzgado">Seleccione su juzgado:</string>
     <string name="hint_expediente">Ingrese su numero de expediente:</string>
+    <string name="hint_folio">Ingrese su numero de folio:</string>
     <string name="ingrese">Ingrese aqui:</string>
     <string name="consulta">Consultar</string>
     <string name="nueva">Nueva consulta</string>

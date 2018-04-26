@@ -51,7 +51,7 @@ public class consignaciones extends Fragment {
 
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
-            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
+            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","TERCERO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA"};
     String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE DE TULA"};
 
     String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
@@ -75,14 +75,7 @@ public class consignaciones extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment consignaciones.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static consignaciones newInstance(String param1, String param2) {
         consignaciones fragment = new consignaciones();
@@ -195,7 +188,6 @@ public class consignaciones extends Fragment {
         }
     }
 
-
     public void salir(){
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +202,6 @@ public class consignaciones extends Fragment {
         });
 
     }
-
 
     public void nueva(){
 
@@ -229,13 +220,7 @@ public class consignaciones extends Fragment {
 
     }
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
     public void llenado_spiners(View v){
         ArrayAdapter<String> adaptador=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_distrito);
         distrito.setAdapter(adaptador);
@@ -250,7 +235,6 @@ public class consignaciones extends Fragment {
         juzgado3.setAdapter(adaptador4);
 
     }
-
 
     public void acciones(final View v){
 
@@ -290,10 +274,6 @@ public class consignaciones extends Fragment {
             }
         });
 
-
-
-
-
         juzgado1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -332,22 +312,29 @@ public class consignaciones extends Fragment {
                     datos_consulta =new Datos();
                     datos_consulta.setID("46");
 
-                }else if (position==7) {
+                }else if (position==8) {
                     seleccion_juzgado(v);
                     datos_consulta =new Datos();
-                    datos_consulta.setID("5");
+                    datos_consulta.setID("97");
 
                 }else if (position==8) {
                     seleccion_juzgado(v);
                     datos_consulta =new Datos();
-                    datos_consulta.setID("40");
+                    datos_consulta.setID("5");
 
                 }else if (position==9) {
                     seleccion_juzgado(v);
                     datos_consulta =new Datos();
+                    datos_consulta.setID("40");
+
+                }else if (position==10) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
                     datos_consulta.setID("52");
-
-
+                }else if (position==11) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("98");
                 }
             }
 

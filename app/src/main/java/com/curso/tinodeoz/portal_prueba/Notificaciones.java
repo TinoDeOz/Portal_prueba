@@ -988,7 +988,8 @@ public class Notificaciones extends Fragment {
         //txtTabla.setBackgroundResource(R.drawable.border);
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla.setWidth(250);
+        txtTabla.setMinWidth(300);
+        txtTabla.setMaxWidth(500);
         row.addView(txtTabla);
 
 
@@ -1096,7 +1097,7 @@ public class Notificaciones extends Fragment {
 
 
 
-        int x=100;
+        int x=150;
 
         TableRow row= new TableRow(getActivity());
         row.setLayoutParams(layoutFila);
@@ -1109,8 +1110,11 @@ public class Notificaciones extends Fragment {
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(250);
+        txtTabla.setMinWidth(300);
+        txtTabla.setMaxWidth(400);
         txtTabla.setHeight(x);
+
+
         row.addView(txtTabla);
 
 
@@ -1119,7 +1123,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setWidth(300);
+        txtTabla2.setMinWidth(300);
+        txtTabla2.setMaxWidth(400);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1129,7 +1134,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setWidth(300);
+        txtTabla3.setMinWidth(300);
+        txtTabla3.setMaxWidth(400);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1138,7 +1144,8 @@ public class Notificaciones extends Fragment {
         txtTabla4.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.WHITE);
-        txtTabla4.setWidth(300);
+        txtTabla4.setMinWidth(300);
+        txtTabla4.setMaxWidth(400);
         txtTabla4.setHeight(x);
         row.addView(txtTabla4);
 
@@ -1147,7 +1154,8 @@ public class Notificaciones extends Fragment {
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(500);
+        txtTabla5.setMinWidth(300);
+        txtTabla5.setMaxWidth(400);
         txtTabla5.setHeight(x);
         row.addView(txtTabla5);
 
@@ -1341,7 +1349,8 @@ public class Notificaciones extends Fragment {
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(250);
+        txtTabla.setMinWidth(300);
+        txtTabla.setMaxWidth(400);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
 
@@ -1350,7 +1359,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setWidth(300);
+        txtTabla2.setMinWidth(300);
+        txtTabla2.setMaxWidth(400);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1360,7 +1370,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setWidth(300);
+        txtTabla3.setMinWidth(300);
+        txtTabla3.setMaxWidth(400);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1369,7 +1380,8 @@ public class Notificaciones extends Fragment {
         txtTabla7.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla7.setTextColor(Color.WHITE);
-        txtTabla7.setWidth(400);
+        txtTabla7.setMinWidth(600);
+        txtTabla7.setMaxWidth(700);
         txtTabla7.setHeight(x);
         row.addView(txtTabla7);
 
@@ -1378,7 +1390,8 @@ public class Notificaciones extends Fragment {
         txtTabla4.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla4.setTextColor(Color.WHITE);
-        txtTabla4.setWidth(300);
+        txtTabla4.setMinWidth(300);
+        txtTabla4.setMaxWidth(400);
         txtTabla4.setHeight(x);
         row.addView(txtTabla4);
 
@@ -1386,7 +1399,8 @@ public class Notificaciones extends Fragment {
         txtTabla5.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(500);
+        txtTabla5.setMinWidth(500);
+        txtTabla5.setMaxWidth(600);
         txtTabla5.setHeight(x);
         //txtTabla5.setMaxLines(3);
         //txtTabla5.setMovementMethod(new ScrollingMovementMethod());
@@ -1424,7 +1438,8 @@ public class Notificaciones extends Fragment {
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(250);
+        txtTabla.setMinWidth(300);
+        txtTabla.setMaxWidth(400);
         txtTabla.setHeight(x);
         row.addView(txtTabla);
 
@@ -1433,7 +1448,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setWidth(300);
+        txtTabla2.setMinWidth(300);
+        txtTabla2.setMaxWidth(400);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1442,7 +1458,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setWidth(300);
+        txtTabla3.setMinWidth(300);
+        txtTabla3.setMaxWidth(400);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1451,7 +1468,8 @@ public class Notificaciones extends Fragment {
         txtTabla7.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla7.setText(txt7);
         txtTabla7.setTextColor(Color.WHITE);
-        txtTabla7.setWidth(400);
+        txtTabla7.setMinWidth(400);
+        txtTabla7.setMaxWidth(500);
         txtTabla7.setHeight(x);
         row.addView(txtTabla7);
 
@@ -1460,7 +1478,8 @@ public class Notificaciones extends Fragment {
         txtTabla4.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.WHITE);
-        txtTabla4.setWidth(300);
+        txtTabla4.setMinWidth(300);
+        txtTabla4.setMaxWidth(400);
         txtTabla4.setHeight(x);
         row.addView(txtTabla4);
 
@@ -1469,7 +1488,8 @@ public class Notificaciones extends Fragment {
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
-        txtTabla5.setWidth(500);
+        txtTabla5.setMinWidth(500);
+        txtTabla5.setMaxWidth(600);
         txtTabla5.setHeight(x);
         row.addView(txtTabla5);
 

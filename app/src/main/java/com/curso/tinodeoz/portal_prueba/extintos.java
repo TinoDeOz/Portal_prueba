@@ -651,6 +651,11 @@ Button nueva,salir;
             pDialog.dismiss();
             if (Resultado=="no"){
                 Toast.makeText(getActivity(), ConnectionResult, Toast.LENGTH_SHORT).show();
+                txt_exp.setVisibility(View.GONE);
+                materia.setVisibility(View.GONE);
+                txt_materia.setVisibility(View.GONE);
+                no_expediente.setVisibility(View.GONE);
+                consulta.setVisibility(View.GONE);
             }else {
 
                 Encabezado("NÚMERO DE EXPEDIENTE ACTUAL", "JUZGADO EN EL QUE SE RADICO");

@@ -97,7 +97,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/hint_expediente"
+                android:text="@string/hint_folio"
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 

@@ -47,7 +47,7 @@ public class consejo_familiar extends Fragment {
 
 
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
-    String[] string_juzgado={"Selecciona Aqui:","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
+    String[] string_juzgado={"Selecciona Aqui:","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA"};
     String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
     String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
@@ -65,15 +65,7 @@ public class consejo_familiar extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment consejo_familiar.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static consejo_familiar newInstance(String param1, String param2) {
         consejo_familiar fragment = new consejo_familiar();
         Bundle args = new Bundle();
@@ -140,10 +132,12 @@ public class consejo_familiar extends Fragment {
         });
         dialogo1.show();
     }
+
     private void aceptar() {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
     }
+
     private void cancelar() {
 
         getActivity().finish();
@@ -175,7 +169,6 @@ public void inicio(View v){
 
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Button nueva,salir;
     public void finales(View v){
@@ -194,7 +187,6 @@ Button nueva,salir;
         }
     }
 
-
     public void salir(){
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,7 +201,6 @@ Button nueva,salir;
         });
 
     }
-
 
     public void nueva(){
 
@@ -228,8 +219,6 @@ Button nueva,salir;
 
     }
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void llenado_spiners(View v){
         ArrayAdapter<String> adaptador=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_distrito);
@@ -244,8 +233,6 @@ Button nueva,salir;
         ArrayAdapter<String> adaptador4=  new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,string_juzgado3);
         juzgado3.setAdapter(adaptador4);
     }
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
     public void acciones(final View v){
@@ -287,10 +274,6 @@ Button nueva,salir;
             }
         });
 
-
-
-
-
         juzgado1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -309,6 +292,11 @@ Button nueva,salir;
                     seleccion_juzgado(v);
                     datos_consulta =new Datos();
                     datos_consulta.setID("52");
+
+                }else if (position==4) {
+                    seleccion_juzgado(v);
+                    datos_consulta =new Datos();
+                    datos_consulta.setID("98");
 
                 }
             }

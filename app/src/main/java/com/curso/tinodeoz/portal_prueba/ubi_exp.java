@@ -64,7 +64,7 @@ public class ubi_exp extends Fragment {
     Spinner distrito, juzgado1,juzgado2,juzgado3;
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
-            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA"};
+            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","TERCERO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA"};
     String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
     String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
@@ -197,6 +197,7 @@ public class ubi_exp extends Fragment {
         trans.addToBackStack(null);
         trans.commit();
     }
+
     private void cancelar2() {
         getActivity().finish();
 
@@ -226,7 +227,6 @@ public class ubi_exp extends Fragment {
         }
     }
 
-
     public void salir(){
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +241,6 @@ public class ubi_exp extends Fragment {
         });
 
     }
-
 
     public void nueva(){
 
@@ -260,7 +259,6 @@ public class ubi_exp extends Fragment {
 
     }
 
-
     public void guardar(final View vv){
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,7 +268,6 @@ public class ubi_exp extends Fragment {
         });
 
     }
-
 
     public void inicio(View v){
         txt_distrito=(TextView)v.findViewById(R.id.txt_distrito);
@@ -297,7 +294,6 @@ public class ubi_exp extends Fragment {
 
 
     }
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static String agregarCeros(String string, int largo)
@@ -460,8 +456,6 @@ public class ubi_exp extends Fragment {
             nuevo_registro.setJuzgado("PRIMERO CIVIL PACHUCA");
             nuevo_registro.setIDJuzgado("1");
 
-
-
         } else if (position==2) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
@@ -497,27 +491,40 @@ public class ubi_exp extends Fragment {
             datos_consulta.setID("46");
             nuevo_registro.setJuzgado("SEGUNDO MERCANTIL PACHUCA");
             nuevo_registro.setIDJuzgado("46");
+        }else if (position==7) {
+            seleccion_juzgado(v);
+            datos_consulta =new Datos();
+            datos_consulta.setID("97");
+            nuevo_registro.setJuzgado("TERCERO MERCANTIL PACHUCA");
+            nuevo_registro.setIDJuzgado("97");
         }
-        else if (position==7) {
+        else if (position==8) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("5");
             nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("5");
         }
-        else if (position==8) {
+        else if (position==9) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("40");
             nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("40");
         }
-        else if (position==9) {
+        else if (position==10) {
             seleccion_juzgado(v);
             datos_consulta =new Datos();
             datos_consulta.setID("52");
             nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
             nuevo_registro.setIDJuzgado("52");
+        }
+        else if (position==11) {
+            seleccion_juzgado(v);
+            datos_consulta =new Datos();
+            datos_consulta.setID("98");
+            nuevo_registro.setJuzgado("CUARTO FAMILIAR PACHUCA");
+            nuevo_registro.setIDJuzgado("98");
         }
     }
 

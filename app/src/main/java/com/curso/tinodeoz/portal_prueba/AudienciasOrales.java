@@ -243,7 +243,7 @@ public class AudienciasOrales extends Fragment {
                 if (position==1) {
 
                     datos_consulta =new Datos();
-                    datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90)");
+                    datos_consulta.setID("IN(1,2,3,4,5,7,8,9,36,37,38,40,46,50,52,53,54,55,56,57,58,59,60,61,62,64,67,68,69,86,88,89,90,97,98)");
                     datos_consulta.setQUE_ES("PACHUCA DE SOTO.");
                     Seleccion =new Datos();
                     Seleccion.setID("1");
