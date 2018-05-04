@@ -53,9 +53,7 @@ public class Portafolio extends Fragment {
     String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
     String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
     String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
-            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
-    //String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO Y FAMILIAR DE TULANCINGO"};
-
+            "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","TERCERO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
     public void inicio(View v){
         RL= (RelativeLayout)v.findViewById(R.id.Relative) ;
@@ -139,7 +137,6 @@ public class Portafolio extends Fragment {
             }
         });
 
-
         distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -198,37 +195,46 @@ public class Portafolio extends Fragment {
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==7) {
-                    nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
+                    nuevo_registro.setJuzgado("TERCERO MERCANTIL PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==8) {
-                    nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
+                    nuevo_registro.setJuzgado("PRIMERO FAMILIAR PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==9) {
-                    nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
-                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
-                }else if (position==10) {
-                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    nuevo_registro.setJuzgado("SEGUNDO FAMILIAR PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
-                }else if (position==11) {
-                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO");
+                }else if (position==10) {
+                    nuevo_registro.setJuzgado("TERCERO FAMILIAR PACHUCA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                } else if (position==11) {
+                    nuevo_registro.setJuzgado("CUARTO FAMILIAR PACHUCA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==12) {
-                    nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULANCINGO");
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULANCINGO");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==13) {
-                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULA");
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==14) {
-                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULA");
+                    nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULANCINGO");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
 
                 }else if (position==15) {
+                    nuevo_registro.setJuzgado("PRIMERO CIVIL Y FAMILIAR DE TULA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==16) {
+                    nuevo_registro.setJuzgado("SEGUNDO CIVIL Y FAMILIAR DE TULA");
+                    Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
+
+                }else if (position==17) {
                     nuevo_registro.setJuzgado("TERCERO CIVIL Y FAMILIAR DE TULA");
                     Consulta("juzgado='"+nuevo_registro.getJuzgado()+"'");
                 }
@@ -399,10 +405,11 @@ public void Consulta(String query){
         exp=c.getColumnIndex("expediente");
         ubi=c.getColumnIndex("ubicacion");
         fech=c.getColumnIndex("fecha");
+
         Encabezado("Distrito","Juzgado","No.de Expediente","Ubicación","Fecha");
+
         nuevaa.setVisibility(View.VISIBLE);
         salir.setVisibility(View.VISIBLE);
-        //Btn_opc_eliminar.setVisibility(View.VISIBLE);
         agregar.setVisibility(View.GONE);
         mostrar.setVisibility(View.GONE);
         txt_juzgado.setVisibility(View.GONE);
@@ -414,15 +421,12 @@ public void Consulta(String query){
         opcion.setVisibility(View.GONE);
 
         if(c.moveToFirst()){
-
             do{
-
                 contenido[1] = c.getString(dis);
                 contenido[2] = c.getString(juz);
                 contenido[3] = c.getString(exp);
                 contenido[4] = c.getString(ubi);
                 contenido[5] = c.getString(fech);
-
 
                 llenadoTabla(contenido[1],contenido[2],contenido[3],contenido[4],contenido[5]);
 
@@ -435,8 +439,7 @@ public void Consulta(String query){
         Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_SHORT).show();
     } catch (Exception e){
         base.closeDB();
-        Toast.makeText(getActivity(),"No se encontraron datos", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getActivity(),"No se encontraron datos.", Toast.LENGTH_SHORT).show();
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -914,19 +917,18 @@ public void Consulta(String query){
         super.onProgressUpdate(values);
         int progreso = values[0].intValue();
         pDialog.setProgress(progreso);
-
     }
 
     @Override
     protected void onCancelled() {
         super.onCancelled();
-
         Toast.makeText(getActivity(), "Tarea Cancelada!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected Void doInBackground(Void... params) {
 
+        int a;
             SQLiteDatabase db = base.getReadableDatabase();
 
             try {
@@ -941,20 +943,21 @@ public void Consulta(String query){
                 ubi = c.getColumnIndex("ubicacion");
                 fech = c.getColumnIndex("fecha");
 
-                for(int a=1;a<=50;a++){
+                for(a=1;a<=50;a++){
                     Thread.sleep(100);
                     publishProgress(a+1);
                 }
 
                 if (c.moveToFirst()) {
                     do {
-
                         contenido[1] = c.getString(dis);
                         contenido[2] = c.getString(juz);
                         contenido[3] = c.getString(exp);
                         contenido[4] = c.getString(ubi);
                         contenido[5] = c.getString(fech);
                         contenido[6] = c.getString(idjuz);
+                        publishProgress(a+1);
+                        a=a+1;
 
                         try {
                             if (contenido[1].equals("Pachuca de Soto.")) {
@@ -962,6 +965,9 @@ public void Consulta(String query){
 
                             } else if (contenido[1].equals("Tulancingo de Bravo.")) {
                                 connect = conStr.connectionstulancingo();
+
+                            }else if (contenido[1].equals("Tula de Allende.")) {
+                                connect = conStr.connection_tula();
                             }
 
                             if (connect == null) {
@@ -969,48 +975,40 @@ public void Consulta(String query){
                                 ConnectionResult = "Check Your Internet Access!";
 
                             } else {
-
-                                String consulta = "Select * from Vta_ResiUbicacion Where IdJuzgado=" + contenido[6] + " and Expediente='" + contenido[3] + "' Order by Fecha DESC;";
+                                String consulta = "Select Perfil,CONVERT(VARCHAR, Fecha, 105)Fecha,Motivo,Expediente,IdJuzgado from Vta_ResiUbicacion Where IdJuzgado=" + contenido[6] + " and Expediente='" + contenido[3] + "' Order by Fecha DESC;";
                                 Statement stmt = connect.createStatement();
                                 ResultSet rs = stmt.executeQuery(consulta);
                                 if (!rs.isBeforeFirst()) {
                                     Resultado="no hay";
                                 } else {
-
-                                    while (rs.next()) {
-
+                                    while (rs.next()){
                                         datos[1] = rs.getString("Fecha");
                                         datos[2] = rs.getString("Perfil");
                                     }
                                     base.borrar(contenido[3], contenido[2]);
                                     base.Agregar(contenido[1], contenido[2], contenido[6], contenido[3], datos[2], datos[1]);
-                                    //llenadoTabla(contenido[1],contenido[2],contenido[3],datos[2],datos[1] );
                                 }
-
-                                //altTableRow(4);
                             }
 
                         } catch (Exception ex) {
                             esSatisfactorio = false;
                             ConnectionResult = ex.getMessage();
-                            //Toast.makeText(getActivity(),"Error"+ ex.getMessage().toString(), Toast.LENGTH_LONG).show();
                         }
 
                     } while (c.moveToNext());
                 }
-                for(int a=50;a<=100;a++){
+
+
+                for(int z=a;z<=100;z++){
                     Thread.sleep(100);
-                    publishProgress(a+1);
+                    publishProgress(z+1);
                 }
                 base.closeDB();
-                //Toast.makeText(getActivity(),"¡CONSULTA COMPLETADA!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 base.closeDB();
-                //Toast.makeText(getActivity(),"Error al actualizar portafolio", Toast.LENGTH_LONG).show();
             }
-
             return null;
 
         }
-}
+    }
 }

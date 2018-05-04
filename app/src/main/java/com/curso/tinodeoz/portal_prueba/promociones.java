@@ -302,6 +302,7 @@ public void accion(final View v){
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
     }
+
     private void cancelar() {
 
         getActivity().finish();

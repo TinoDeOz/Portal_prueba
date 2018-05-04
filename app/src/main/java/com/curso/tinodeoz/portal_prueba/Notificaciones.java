@@ -66,7 +66,7 @@ public class Notificaciones extends Fragment {
     String[] string_huichapan={"Selecciona Aqui:","CIVIL Y FAMILIAR HUICHAPAN","PENAL HUICHAPAN"};
     String[] string_ixmi={"Selecciona Aqui:","CIVIL Y FAMILIAR IXMIQUILPAN","PENAL IXMIQUILPAN"};
     String[] string_mixqui={"Selecciona Aqui:","CIVIL Y FAMILIAR MIXQUIAHUALA","PENAL MIXQUIAHUALA"};
-    String[] string_pachuca={"Selecciona Aqui:","PRIMERO DE LO PENAL PACHUCA","SEGUNDO DE LO PENAL PACHUCA","TERCERO DE LO PENAL PACHUCA","CUARTO DE LO PENAL PACHUCA","PRIMERO FAMILIAR DE PACHUCA","SEGUNDO FAMILIAR DE PACHUCA","TERCERO FAMILIAR DE PACHUCA","PRIMERO DE LO CIVIL PACHUCA","SEGUNDO DE LO CIVIL PACHUCA","TERCERO DE LO CIVIL PACHUCA","CUARTO DE LO CIVIL PACHUCA","PRIMERO DE LO MERCANTIL PACHUCA","SEGUNDO DE LO MERCANTIL PACHUCA","PRIMERO ESPECIALIZADO PARA ADOLECENTES","SEGUNDO ESPECIALIZADO PARA ADOLECENTES"};
+    String[] string_pachuca={"Selecciona Aqui:","PRIMERO DE LO PENAL PACHUCA","SEGUNDO DE LO PENAL PACHUCA","TERCERO DE LO PENAL PACHUCA","CUARTO DE LO PENAL PACHUCA","PRIMERO FAMILIAR DE PACHUCA","SEGUNDO FAMILIAR DE PACHUCA","TERCERO FAMILIAR DE PACHUCA","CUARTO FAMILAR DE PACHUCA","PRIMERO DE LO CIVIL PACHUCA","SEGUNDO DE LO CIVIL PACHUCA","TERCERO DE LO CIVIL PACHUCA","CUARTO DE LO CIVIL PACHUCA","PRIMERO DE LO MERCANTIL PACHUCA","SEGUNDO DE LO MERCANTIL PACHUCA","TERCERO DE LO MERCANTIL PACHUCA","PRIMERO ESPECIALIZADO PARA ADOLECENTES","SEGUNDO ESPECIALIZADO PARA ADOLECENTES"};
     String[] string_tiza={"Selecciona Aqui:","CIVIL Y FAMILIAR TIZAYUCA","PENAL TIZAYUCA"};
     String[] string_tula={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR TULA","SEGUNDO CIVIL Y FAMILIAR TULA","TERCERO CIVIL Y FAMILIAR TULA","PRIMERO PENAL TULA","SEGUNDO PENAL TULA"};
     String[] string_tulancingo={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR TULANCINGO","SEGUNDO CIVIL Y FAMILIAR TULANCINGO","TERCERO CIVIL Y FAMILIAR TULANCINGO","PRIMERO PENAL TULANCINGO","SEGUNDO PENAL TULANCINGO"};
@@ -178,7 +178,6 @@ public class Notificaciones extends Fragment {
         opc2.setAdapter(adaptador13);
     }
 
-
     public void visibilidad_sp(){
         ACTOPAN.setVisibility(View.GONE);
         APAN.setVisibility(View.GONE);
@@ -190,10 +189,16 @@ public class Notificaciones extends Fragment {
         TIZAYUCA.setVisibility(View.GONE);
         TULA.setVisibility(View.GONE);
         TULANCINGO.setVisibility(View.GONE);
+        txtfcha.setVisibility(View.GONE);
         opc1.setVisibility(View.GONE);
         opc2.setVisibility(View.GONE);
+        opcion2.setVisibility(View.GONE);
+        opcion1.setVisibility(View.GONE);
+        no_expediente.setVisibility(View.GONE);
+        numero_expediente.setVisibility(View.GONE);
+        fecha.setVisibility(View.GONE);
+        consulta.setVisibility(View.GONE);
     }
-
 
     public void seleccion_juzgado2(String juz){
         datos=new Datos();
@@ -203,8 +208,8 @@ public class Notificaciones extends Fragment {
         opc2.setVisibility(View.VISIBLE);
         opcion1.setVisibility(View.GONE);
         opc1.setVisibility(View.GONE);
-    }
 
+    }
 
     public void seleccion_juzgado(String juz){
         datos=new Datos();
@@ -272,7 +277,6 @@ public class Notificaciones extends Fragment {
         });
     }
 
-
     public void acciones(){
 
         ACTOPAN.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -293,7 +297,6 @@ public class Notificaciones extends Fragment {
             }
         });
 
-
         APAN.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -312,7 +315,6 @@ public class Notificaciones extends Fragment {
 
             }
         });
-
 
         HUEJUTLA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -383,7 +385,6 @@ public class Notificaciones extends Fragment {
             }
         });
 
-
         PACHUCA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -403,25 +404,28 @@ public class Notificaciones extends Fragment {
                 }else if(position==7){
                     seleccion_juzgado("52");
                 }else if(position==8){
-                    seleccion_juzgado("1");
+                    seleccion_juzgado("98");
                 }else if(position==9){
-                    seleccion_juzgado("2");
+                    seleccion_juzgado("1");
                 }else if(position==10){
-                    seleccion_juzgado("3");
+                    seleccion_juzgado("2");
                 }else if(position==11){
-                    seleccion_juzgado("36");
+                    seleccion_juzgado("3");
                 }else if(position==12){
-                    seleccion_juzgado("38");
+                    seleccion_juzgado("36");
                 }else if(position==13){
-                    seleccion_juzgado("46");
+                    seleccion_juzgado("38");
                 }else if(position==14){
+                    seleccion_juzgado("46");
+                }else if(position==15){
+                    seleccion_juzgado("97");
+                }else if(position==16){
                     seleccion_juzgado("53");
                     datos.setQUE_ES("ADOLECENTES");
-                }else if(position==15){
+                }else if(position==17){
                     seleccion_juzgado("73");
                     datos.setQUE_ES("ADOLECENTES");
                 }
-
             }
 
             @Override
@@ -447,7 +451,6 @@ public class Notificaciones extends Fragment {
             }
         });
 
-
         TULA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -471,7 +474,6 @@ public class Notificaciones extends Fragment {
             }
         });
 
-
         TULANCINGO.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -492,7 +494,6 @@ public class Notificaciones extends Fragment {
 
             }
         });
-
 
         opc1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

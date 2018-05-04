@@ -471,7 +471,8 @@ Button nueva,salir;
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(600);
+        txtTabla.setMinWidth(600);
+        txtTabla.setMaxWidth(700);
         row.addView(txtTabla);
 
 
@@ -480,7 +481,8 @@ Button nueva,salir;
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setWidth(600);
+        txtTabla2.setMinWidth(600);
+        txtTabla2.setMaxWidth(700);
         row.addView(txtTabla2);
 
        TextView txtTabla6=new TextView(getActivity());

@@ -69,8 +69,6 @@ public class primera_all extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,11 +102,6 @@ public class primera_all extends Fragment {
         });
 
     }
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

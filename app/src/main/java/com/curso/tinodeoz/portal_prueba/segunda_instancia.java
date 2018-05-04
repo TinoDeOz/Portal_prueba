@@ -57,7 +57,7 @@ public class segunda_instancia extends Fragment {
         View v=inflater.inflate(R.layout.fragment_segunda_instancia, container, false);
         cambiar_publicacion(v);
         cambiar_ubicacion(v);
-       // ubicacion.setVisibility(View.GONE);
+        ubicacion.setVisibility(View.GONE);
         String text = "<html><body style=\"text-align:center; font-size:18px; line-height:20px; background-color:#72ffffff;\"> %s </body></html>";
         String info=getString(R.string.descripcion3);
         webView = (WebView) v.findViewById(R.id.WebView3);
@@ -67,7 +67,6 @@ public class segunda_instancia extends Fragment {
         return v;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void cambiar_ubicacion(View v){
         ubicacion=(Button) v.findViewById(R.id.btn_ubi_tocas);
         ubicacion.setOnClickListener(new View.OnClickListener() {
@@ -94,12 +93,9 @@ public class segunda_instancia extends Fragment {
                 trans.replace(R.id.content_frame, fra);
                 trans.addToBackStack(null);
                 trans.commit();
-
             }
         });
     }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
