@@ -651,7 +651,7 @@ Button nueva,salir;
             if (Resultado=="no"){
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
             }else{
-                Encabezado("Fecha De Intervencion.\n Año/Día/Mes");
+                Encabezado("Fecha De Intervencion.\n Año/Mes/Día");
                 txt_juzgado.setVisibility(View.GONE);
                 txt_distrito.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);

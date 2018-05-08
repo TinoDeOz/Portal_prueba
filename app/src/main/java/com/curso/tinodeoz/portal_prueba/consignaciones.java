@@ -29,6 +29,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import static java.lang.String.format;
+
 
 public class consignaciones extends Fragment {
 
@@ -111,7 +113,7 @@ public class consignaciones extends Fragment {
         String text_web = "<html><body style=\"text-align:justify; font-size:12px; line-height:20px; color:white;\"> %s </body></html>";
         String texto="Este servicio es de carácter informativo y está orientado hacia los justiciables y comunidad jurídica a fin de consultar el registro de las consignaciones que han sido recibidas en la Dirección del Fondo Judicial. <br>Este servicio busca orientarle para calcular el tiempo de entrega de las consignaciones derivadas de las controversias que representa el pago de pensiones alimenticias o rentas.<br> El usuario deberá de conocer el número de expediente y juzgado de radicación.";
         web= new WebView(getContext());
-        web.loadData(String.format(text_web, texto), "text/html; charset=utf-8","UTF-8");
+        web.loadData(format(text_web, texto), "text/html; charset=utf-8","UTF-8");
         web.setBackgroundColor(Color.parseColor("#00FFFFFF"));
 
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
@@ -503,7 +505,7 @@ public class consignaciones extends Fragment {
 
     }
 
-    public void llenadoTabla(String txt1){
+    public void llenadoTabla(String txt1, String txt2){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -512,16 +514,25 @@ public class consignaciones extends Fragment {
         row.setGravity(Gravity.CENTER_VERTICAL);
 
 
-        TextView txtTabla;
+        TextView txtTabla, txtTabla2;
 
         txtTabla=new TextView(getActivity());
         txtTabla.setGravity(Gravity.CENTER_HORIZONTAL);
         txtTabla.setBackgroundColor(Color.TRANSPARENT);
         txtTabla.setText(txt1);
-        txtTabla.setTextSize(18);
+        txtTabla.setTextSize(16);
         txtTabla.setTextColor(Color.parseColor("#B1613e"));
-        txtTabla.setWidth(700);
+        txtTabla.setWidth(500);
         row.addView(txtTabla);
+
+        txtTabla2=new TextView(getActivity());
+        txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla2.setBackgroundColor(Color.TRANSPARENT);
+        txtTabla2.setText(txt2);
+        txtTabla2.setTextSize(16);
+        txtTabla2.setTextColor(Color.parseColor("#B1613e"));
+        txtTabla2.setWidth(500);
+        row.addView(txtTabla2);
 
 
         tabla.addView(row);
@@ -530,14 +541,19 @@ public class consignaciones extends Fragment {
         row.setLayoutParams(layoutFila);
 
 
-        TextView borde1;
+        TextView borde1, borde2;
 
         borde1=new TextView(getActivity());
         borde1.setBackgroundColor(Color.parseColor("#000000"));
-        borde1.setWidth(700);
+        borde1.setWidth(500);
         borde1.setHeight(10);
         borde.addView(borde1);
 
+        borde2=new TextView(getActivity());
+        borde2.setBackgroundColor(Color.parseColor("#000000"));
+        borde2.setWidth(500);
+        borde2.setHeight(10);
+        borde.addView(borde2);
 
 
         //tabla.addView(row ,new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
@@ -545,7 +561,7 @@ public class consignaciones extends Fragment {
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
-    public void Encabezado(String txt1){
+    public void Encabezado(String txt1, String txt2){
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -557,12 +573,21 @@ public class consignaciones extends Fragment {
 
         txtTabla=new TextView(getActivity());
         txtTabla.setGravity(Gravity.CENTER_HORIZONTAL);
-        txtTabla.setTextSize(18);
+        txtTabla.setTextSize(16);
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
-        txtTabla.setWidth(700);
+        txtTabla.setWidth(500);
         row.addView(txtTabla);
+
+        txtTabla2=new TextView(getActivity());
+        txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla2.setTextSize(16);
+        txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
+        txtTabla2.setText(txt2);
+        txtTabla2.setTextColor(Color.WHITE);
+        txtTabla2.setWidth(500);
+        row.addView(txtTabla2);
 
         tabla.addView(row);
     }
@@ -579,9 +604,31 @@ public class consignaciones extends Fragment {
         Toast.makeText(getActivity(),"Bienvenido Al Sistema ",Toast.LENGTH_LONG).show();
 
     }
+
     private void cancelar() {
 
         getActivity().finish();
+    }
+
+    public void Cambiar_Fecha(String txt){
+
+        String txt1 =txt;
+
+        txt1=txt1.replace("1/","Enero/");
+        txt1=txt1.replace("2/","febrero/");
+        txt1=txt1.replace("3/","Marzo/");
+        txt1=txt1.replace("4/","Abril/");
+        txt1=txt1.replace("5/","Mayo/");
+        txt1=txt1.replace("6/","Junio/");
+        txt1=txt1.replace("7/","Julio/");
+        txt1=txt1.replace("8/","Agosto/");
+        txt1=txt1.replace("9/","Septiembre/");
+        txt1=txt1.replace("10/","Octubre/");
+        txt1=txt1.replace("11/","Noviembre/");
+        txt1=txt1.replace("12/","Diciembre/");
+
+
+
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -624,7 +671,6 @@ public class consignaciones extends Fragment {
         int x=0;
 
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -656,7 +702,7 @@ public class consignaciones extends Fragment {
 
                 if (Selec_ID=="1") {
                     connect = conStr.connections();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha, Correspondiente FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
 
                 }else if (Selec_ID=="2") {
 
@@ -664,12 +710,12 @@ public class consignaciones extends Fragment {
                     // query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 105)de_fecha FROM Vta_ResiDepositosTula Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
 
                     connect= conStr.connection_tula();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha, Correspondiente FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
 
 
                 }else if (Selec_ID=="3") {
                     connect = conStr.connectionstulancingo();
-                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
+                    query = "SELECT  Top 5 CONVERT(VARCHAR, de_fecha, 111)de_fecha, Correspondiente FROM Vta_ResiDepositos Where IdJuzgado="+datos_consulta.getID()+ "and Expediente='"+ex+"'Order by de_fecha DESC;";
                 }
 
                 if (connect == null)
@@ -692,7 +738,8 @@ public class consignaciones extends Fragment {
 
                         while (rs.next()){
                             x=x+1;
-                            datos[x][1]=rs.getString("de_fecha").toString();
+                            datos[x][1]=format(rs.getString("de_fecha").toString(),"dd/MM/yyyy");
+                            datos[x][2]=rs.getString("Correspondiente").toString();
 
                         }
                     }
@@ -724,7 +771,7 @@ public class consignaciones extends Fragment {
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
 
             }else{
-                Encabezado("Fecha\n Año/Día/Mes");
+                Encabezado("Fecha\n Año/Mes/Día","Correspondiete\n a:");
                 txt_juzgado.setVisibility(View.GONE);
                 txt_distrito.setText("Ultimos 5 Depositos.");
                 distrito.setVisibility(View.GONE);
@@ -735,8 +782,25 @@ public class consignaciones extends Fragment {
                 consulta.setVisibility(View.GONE);
                 visibilidad(true);
 
+
+
                 for (int i=1;i<=x;i++) {
-                    llenadoTabla(datos[i][1]);
+                    String txt1=datos[i][2];
+                    txt1=txt1.replace("11/","Noviembre/");
+                    txt1=txt1.replace("12/","Diciembre/");
+                    txt1=txt1.replace("1/","Enero/");
+                    txt1=txt1.replace("2/","febrero/");
+                    txt1=txt1.replace("3/","Marzo/");
+                    txt1=txt1.replace("4/","Abril/");
+                    txt1=txt1.replace("5/","Mayo/");
+                    txt1=txt1.replace("6/","Junio/");
+                    txt1=txt1.replace("7/","Julio/");
+                    txt1=txt1.replace("8/","Agosto/");
+                    txt1=txt1.replace("9/","Septiembre/");
+                    txt1=txt1.replace("10/","Octubre/");
+
+                    llenadoTabla(datos[i][1], txt1);
+
                 }
             }
         }
