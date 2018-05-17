@@ -29,9 +29,7 @@ public class Ubi_tocas extends Fragment {
     Spinner sala;
     Button consulta;
 
-    String[] string_sala={"Selecciona Aqui:","Primera sala civil y familiar.","Segunda sala civil y familiar."};
-
-
+    String[] string_sala={"Selecciona aquí:","Primera sala civil y familiar","Segunda sala civil y familiar"};
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

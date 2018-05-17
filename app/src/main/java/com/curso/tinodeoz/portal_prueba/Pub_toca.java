@@ -50,7 +50,7 @@ public class Pub_toca extends Fragment {
     Button consulta;
     ProgressDialog pDialog;
 
-    String[] string_sala={"Selecciona Aqui:","Primera sala civil y familiar.","Segunda sala civil y familiar."};
+    String[] string_sala={"Selecciona aquí:","Primera sala civil y familiar","Segunda sala civil y familiar"};
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -464,7 +464,7 @@ public class Pub_toca extends Fragment {
         TextView txtTabla, txtTabla2,txtTabla3,txtTabla4,txtTabla5,txtTabla6;
 
         txtTabla=new TextView(getActivity());
-        txtTabla.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla.setGravity(Gravity.CENTER);
         txtTabla.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla.setText(txt1);
         txtTabla.setTextColor(Color.WHITE);
@@ -476,7 +476,7 @@ public class Pub_toca extends Fragment {
 
 
         txtTabla2=new TextView(getActivity());
-        txtTabla2.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla2.setGravity(Gravity.CENTER);
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
@@ -487,7 +487,7 @@ public class Pub_toca extends Fragment {
 
 
         txtTabla3=new TextView(getActivity());
-        txtTabla3.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla3.setGravity(Gravity.CENTER);
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
@@ -497,7 +497,7 @@ public class Pub_toca extends Fragment {
         row.addView(txtTabla3);
 
         txtTabla4=new TextView(getActivity());
-        txtTabla4.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla4.setGravity(Gravity.CENTER);
         txtTabla4.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla4.setText(txt4);
         txtTabla4.setTextColor(Color.WHITE);
@@ -507,7 +507,7 @@ public class Pub_toca extends Fragment {
         row.addView(txtTabla4);
 
         txtTabla5=new TextView(getActivity());
-        txtTabla5.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla5.setGravity(Gravity.CENTER);
         txtTabla5.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.WHITE);
@@ -518,7 +518,7 @@ public class Pub_toca extends Fragment {
         row.addView(txtTabla5);
 
         txtTabla6=new TextView(getActivity());
-        txtTabla6.setGravity(Gravity.CENTER_HORIZONTAL);
+        txtTabla6.setGravity(Gravity.CENTER);
         txtTabla6.setBackgroundColor(Color.TRANSPARENT);
         txtTabla6.setWidth(200);
         txtTabla6.setHeight(x);
@@ -526,6 +526,27 @@ public class Pub_toca extends Fragment {
 
         tabla.addView(row);
     }
+    public void Cambio_color(int alt_row) {
+        int childViewCount = tabla.getChildCount();
+
+        for (int i = 1; i < childViewCount; i++) {
+            TableRow row = (TableRow) tabla.getChildAt(i);
+
+            for (int j = 0; j < row.getChildCount()-1; j++) {
+
+                TextView tv = (TextView) row.getChildAt(j);
+                if (i % 3 != 0) {
+                    // tv.setBackground(getResources().getDrawable(R.drawable.alt_row_color));
+                    tv.setTextColor(Color.parseColor("#B1613e"));
+                } else {
+                    //tv.setBackground(getResources().getDrawable(R.drawable.row_color));
+                    tv.setTextColor(Color.BLACK);
+                }
+            }
+        }
+    }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: Rename method, update argument and hook method into UI event
@@ -599,7 +620,7 @@ public class Pub_toca extends Fragment {
                         toca=ejemplo;
                     }
 
-                    String query = " SELECT publicacion, juicio,acuerdo, Sintesis FROM Vta_ResiNotificaSalas where id_sala="+datos_consulta.getID()+" and num_toca='"+toca+"'";
+                    String query = " SELECT CONVERT(VARCHAR, publicacion, 105)publicacion, juicio,acuerdo, Sintesis FROM Vta_ResiNotificaSalas where id_sala="+datos_consulta.getID()+" and num_toca='"+toca+"'";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     if(!rs.isBeforeFirst()){
@@ -652,6 +673,7 @@ public class Pub_toca extends Fragment {
             for (int i=1;i<=x;i++){
                 llenadoTabla(String.valueOf(i),datos[i][1],datos[i][2],datos[i][3],datos[i][4]);
             }
+            Cambio_color(3);
         }
 
     }

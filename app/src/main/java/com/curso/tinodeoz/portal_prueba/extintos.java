@@ -47,8 +47,8 @@ public class extintos extends Fragment {
     Spinner juzgado,materia;
     ProgressDialog pDialog;
 
-    String[] string_juzgado={"Selecciona Aqui:","TERCERO PENAL PACHUCA","PRIMERO MIXTO MENOR PACHUCA","SEGUNDO MIXTO MENOR PACHUCA"};
-    String[] string_materia={"Selecciona Aqui:","MATERIA CIVIL Y MERCANTIL","MATERIA PENAL"};
+    String[] string_juzgado={"Selecciona aquí:","TERCERO PENAL PACHUCA","PRIMERO MIXTO MENOR PACHUCA","SEGUNDO MIXTO MENOR PACHUCA"};
+    String[] string_materia={"Selecciona aquí:","MATERIA CIVIL Y MERCANTIL","MATERIA PENAL"};
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static final String ARG_PARAM1 = "param1";

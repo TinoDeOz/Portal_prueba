@@ -111,18 +111,31 @@
                 android:textColor="?android:attr/colorBackground"
                 android:textSize="17sp"/>
 
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp">
+
+
             <EditText
                 android:id="@+id/txt_consig_no_expediente"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/darker_gray"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:maxLength="11"
                 android:gravity="center"
                 android:hint="@string/ingrese"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:theme="@style/CampoTextoPurpura"
+                android:textColorHint="#e1e1e1"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/consig_consultar"
                 android:layout_width="105dp"

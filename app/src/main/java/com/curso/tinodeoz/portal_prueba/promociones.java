@@ -44,8 +44,8 @@ public class promociones extends Fragment {
 
 
     Spinner distrito, inicial,posterior;
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
-    String[] string_tipo={"Selecciona Aqui:","Inicial","Posterior"};
+    String[] string_distrito={"Selecciona aquí:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
+    String[] string_tipo={"Selecciona aquí:","Inicial","Posterior"};
 
 
     // TODO: Rename parameter arguments, choose names that match

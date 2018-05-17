@@ -59,19 +59,19 @@ public class Notificaciones extends Fragment {
 
     ProgressDialog pDialog;
 
-    String[] string_distrito={"Selecciona Aqui:","ACTOPAN","APAN","HUEJUTLA DE REYES","HUICHAPAN DE VILLAGRAN","IXMIQUILPAN","MIXQUIAHUALA DE JUAREZ","PACHUCA DE SOTO ","TIZAYUCA","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
-    String[] string_actopan={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR ACTOPAN","SEGUNDO CIVIL Y FAMILIAR ACTOPAN","PENAL ACTOPAN."};
-    String[] string_apan={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR APAN.","SEGUNDO CIVIL Y FAMILIAR APAN.","PENAL APAN."};
-    String[] string_huejutla={"Selecciona Aqui:","CIVIL Y FAMILIAR HUEJUTLA","PENAL DE JALTOCAN EN HUEJUTLA"};
-    String[] string_huichapan={"Selecciona Aqui:","CIVIL Y FAMILIAR HUICHAPAN","PENAL HUICHAPAN"};
-    String[] string_ixmi={"Selecciona Aqui:","CIVIL Y FAMILIAR IXMIQUILPAN","PENAL IXMIQUILPAN"};
-    String[] string_mixqui={"Selecciona Aqui:","CIVIL Y FAMILIAR MIXQUIAHUALA","PENAL MIXQUIAHUALA"};
-    String[] string_pachuca={"Selecciona Aqui:","PRIMERO DE LO PENAL PACHUCA","SEGUNDO DE LO PENAL PACHUCA","TERCERO DE LO PENAL PACHUCA","CUARTO DE LO PENAL PACHUCA","PRIMERO FAMILIAR DE PACHUCA","SEGUNDO FAMILIAR DE PACHUCA","TERCERO FAMILIAR DE PACHUCA","CUARTO FAMILAR DE PACHUCA","PRIMERO DE LO CIVIL PACHUCA","SEGUNDO DE LO CIVIL PACHUCA","TERCERO DE LO CIVIL PACHUCA","CUARTO DE LO CIVIL PACHUCA","PRIMERO DE LO MERCANTIL PACHUCA","SEGUNDO DE LO MERCANTIL PACHUCA","TERCERO DE LO MERCANTIL PACHUCA","PRIMERO ESPECIALIZADO PARA ADOLECENTES","SEGUNDO ESPECIALIZADO PARA ADOLECENTES"};
-    String[] string_tiza={"Selecciona Aqui:","CIVIL Y FAMILIAR TIZAYUCA","PENAL TIZAYUCA"};
-    String[] string_tula={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR TULA","SEGUNDO CIVIL Y FAMILIAR TULA","TERCERO CIVIL Y FAMILIAR TULA","PRIMERO PENAL TULA","SEGUNDO PENAL TULA"};
-    String[] string_tulancingo={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR TULANCINGO","SEGUNDO CIVIL Y FAMILIAR TULANCINGO","TERCERO CIVIL Y FAMILIAR TULANCINGO","PRIMERO PENAL TULANCINGO","SEGUNDO PENAL TULANCINGO"};
-    String[] string_civiles={"Selecciona Aqui:","No.Expediente","Fecha de Notificación."};
-    String[] string_penales={"Selecciona Aqui:","No.Causa","Fecha de Notificación."};
+    String[] string_distrito={"Selecciona aquí:","ACTOPAN","APAN","HUEJUTLA DE REYES","HUICHAPAN DE VILLAGRAN","IXMIQUILPAN","MIXQUIAHUALA DE JUAREZ","PACHUCA DE SOTO ","TIZAYUCA","TULA DE ALLENDE","TULANCINGO DE BRAVO"};
+    String[] string_actopan={"Selecciona aquí:","PRIMERO CIVIL Y FAMILIAR ACTOPAN","SEGUNDO CIVIL Y FAMILIAR ACTOPAN","PENAL ACTOPAN"};
+    String[] string_apan={"Selecciona aquí:","PRIMERO CIVIL Y FAMILIAR APAN.","SEGUNDO CIVIL Y FAMILIAR APAN.","PENAL APAN."};
+    String[] string_huejutla={"Selecciona aquí:","CIVIL Y FAMILIAR HUEJUTLA","PENAL DE JALTOCAN EN HUEJUTLA"};
+    String[] string_huichapan={"Selecciona aquí:","CIVIL Y FAMILIAR HUICHAPAN","PENAL HUICHAPAN"};
+    String[] string_ixmi={"Selecciona aquí:","CIVIL Y FAMILIAR IXMIQUILPAN","PENAL IXMIQUILPAN"};
+    String[] string_mixqui={"Selecciona aquí:","CIVIL Y FAMILIAR MIXQUIAHUALA","PENAL MIXQUIAHUALA"};
+    String[] string_pachuca={"Selecciona aquí:","PRIMERO DE LO PENAL PACHUCA","SEGUNDO DE LO PENAL PACHUCA","TERCERO DE LO PENAL PACHUCA","CUARTO DE LO PENAL PACHUCA","PRIMERO FAMILIAR DE PACHUCA","SEGUNDO FAMILIAR DE PACHUCA","TERCERO FAMILIAR DE PACHUCA","CUARTO FAMILAR DE PACHUCA","PRIMERO DE LO CIVIL PACHUCA","SEGUNDO DE LO CIVIL PACHUCA","TERCERO DE LO CIVIL PACHUCA","CUARTO DE LO CIVIL PACHUCA","PRIMERO DE LO MERCANTIL PACHUCA","SEGUNDO DE LO MERCANTIL PACHUCA","TERCERO DE LO MERCANTIL PACHUCA","PRIMERO ESPECIALIZADO PARA ADOLECENTES","SEGUNDO ESPECIALIZADO PARA ADOLECENTES"};
+    String[] string_tiza={"Selecciona aquí:","CIVIL Y FAMILIAR TIZAYUCA","PENAL TIZAYUCA"};
+    String[] string_tula={"Selecciona aquí:","PRIMERO CIVIL Y FAMILIAR TULA","SEGUNDO CIVIL Y FAMILIAR TULA","TERCERO CIVIL Y FAMILIAR TULA","PRIMERO PENAL TULA","SEGUNDO PENAL TULA"};
+    String[] string_tulancingo={"Selecciona aquí:","PRIMERO CIVIL Y FAMILIAR TULANCINGO","SEGUNDO CIVIL Y FAMILIAR TULANCINGO","TERCERO CIVIL Y FAMILIAR TULANCINGO","PRIMERO PENAL TULANCINGO","SEGUNDO PENAL TULANCINGO"};
+    String[] string_civiles={"Selecciona aquí:","No.Expediente","Fecha de Notificación"};
+    String[] string_penales={"Selecciona aquí:","No.Causa","Fecha de Notificación"};
 
     public void inicio(View v){
 
@@ -1024,7 +1024,7 @@ public class Notificaciones extends Fragment {
         txtTabla5=new TextView(getActivity());
         txtTabla5.setGravity(Gravity.CENTER);
         txtTabla5.setBackgroundColor(Color.TRANSPARENT);
-        txtTabla5.setText(Html.fromHtml("<u>Ver Sintesis</u>"));
+        txtTabla5.setText(Html.fromHtml("<u>Ver síntesis</u>"));
         //txtTabla5.setText(txt5);
         txtTabla5.setTextColor(Color.BLACK);
         txtTabla5.setWidth(500);
@@ -1035,12 +1035,15 @@ public class Notificaciones extends Fragment {
                 txtdistrito.setVisibility(View.VISIBLE);
                 juzgado.setVisibility(View.VISIBLE);
                 txtdistrito.setTextSize(16);
-                txtdistrito.setText("No. de Notificacion:\n"+txt1+"\n\n" +
+                /*txtdistrito.setText("No. de notificacion:\n"+txt1+"\n\n" +
                         "Expediente:\n"+txt2+"\n\n" +
-                        "Fecha de Publicación:\n"+txt3+"\n\n" +
-                        "Fecha de Resolucion:\n"+txt4+"\n\n");
+                        "Fecha de publicación:\n"+txt3+"\n\n" +
+                        "Fecha de resolucion:\n"+txt4+"\n\n");*/
+                txtdistrito.setText("Expediente:\n"+txt2+"\n\n" +
+                        "Fecha de publicación:\n"+txt3+"\n\n" +
+                        "Fecha de resolución:\n"+txt4+"\n\n");
                 juzgado.setTextSize(16);
-                juzgado.setText("SINTESIS:\n"+"\n"+txt5);
+                juzgado.setText("Síntesis:\n"+"\n"+txt5);
                 tabla.removeAllViews();
                 atras.setVisibility(View.GONE);
                 siguiente.setVisibility(View.GONE);
@@ -1124,8 +1127,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setMinWidth(300);
-        txtTabla2.setMaxWidth(400);
+        txtTabla2.setMinWidth(400);
+        txtTabla2.setMaxWidth(500);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1135,8 +1138,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setMinWidth(300);
-        txtTabla3.setMaxWidth(400);
+        txtTabla3.setMinWidth(400);
+        txtTabla3.setMaxWidth(500);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1300,7 +1303,7 @@ public class Notificaciones extends Fragment {
     txtTabla5=new TextView(getActivity());
     txtTabla5.setGravity(Gravity.CENTER);
     txtTabla5.setBackgroundColor(Color.TRANSPARENT);
-    txtTabla5.setText(Html.fromHtml("<u>Ver Sintesis</u>"));
+    txtTabla5.setText(Html.fromHtml("<u>Ver síntesis</u>"));
     //txtTabla5.setText(txt5);
     txtTabla5.setTextColor(Color.BLACK);
     txtTabla5.setWidth(500);
@@ -1311,13 +1314,18 @@ public class Notificaciones extends Fragment {
             txtdistrito.setVisibility(View.VISIBLE);
             juzgado.setVisibility(View.VISIBLE);
             txtdistrito.setTextSize(16);
-            txtdistrito.setText("No. de Notificacion:\n"+txt1+"\n\n" +
+            /*txtdistrito.setText("No. de Notificacion:\n"+txt1+"\n\n" +
                     "Expediente:\n"+txt2+"\n\n"+
                     "Juicio:\n"+txt7+"\n\n"+
                     "Fecha de Publicación:\n"+txt3+"\n\n" +
-                    "Fecha de Resolucion:\n"+txt4+"\n\n");
+                    "Fecha de Resolucion:\n"+txt4+"\n\n");*/
+
+            txtdistrito.setText("Expediente:\n"+txt2+"\n\n" +
+                    "Fecha de publicación:\n"+txt3+"\n\n" +
+                    "Fecha de resolución:\n"+txt4+"\n\n");
+
             juzgado.setTextSize(16);
-            juzgado.setText("SINTESIS:\n"+"\n"+txt5);
+            juzgado.setText("Síntesis:\n"+"\n"+txt5);
             tabla.removeAllViews();
             atras.setVisibility(View.GONE);
             siguiente.setVisibility(View.GONE);
@@ -1360,8 +1368,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setMinWidth(300);
-        txtTabla2.setMaxWidth(400);
+        txtTabla2.setMinWidth(400);
+        txtTabla2.setMaxWidth(500);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1371,8 +1379,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
 
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setMinWidth(300);
-        txtTabla3.setMaxWidth(400);
+        txtTabla3.setMinWidth(400);
+        txtTabla3.setMaxWidth(500);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1449,8 +1457,8 @@ public class Notificaciones extends Fragment {
         txtTabla2.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla2.setText(txt2);
         txtTabla2.setTextColor(Color.WHITE);
-        txtTabla2.setMinWidth(300);
-        txtTabla2.setMaxWidth(400);
+        txtTabla2.setMinWidth(400);
+        txtTabla2.setMaxWidth(500);
         txtTabla2.setHeight(x);
         row.addView(txtTabla2);
 
@@ -1459,8 +1467,8 @@ public class Notificaciones extends Fragment {
         txtTabla3.setBackgroundColor(Color.parseColor("#B1613e"));
         txtTabla3.setText(txt3);
         txtTabla3.setTextColor(Color.WHITE);
-        txtTabla3.setMinWidth(300);
-        txtTabla3.setMaxWidth(400);
+        txtTabla3.setMinWidth(400);
+        txtTabla3.setMaxWidth(500);
         txtTabla3.setHeight(x);
         row.addView(txtTabla3);
 
@@ -1796,7 +1804,15 @@ public class Notificaciones extends Fragment {
                 else
                 {
                     if(Que_es=="FECHA"){
-                        query ="SELECT *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
+                        query ="SELECT [No.de Notificación]" +
+                                "      ,[Número]" +
+                                "      ,[Fecha de Publicación]" +
+                                "      ,CONVERT(VARCHAR, [Fecha de Resolución], 105)[Fecha de Resolución]" +
+                                "      ,[Síntesis]" +
+                                "      ,[id_distrito]" +
+                                "      ,[id_juzgado]" +
+                                "      ,[Juicio]  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and  DATEPART(MONTH,[Fecha de Publicación])="+datos2.getMES()+" and DATEPART(YEAR,[Fecha de Publicación])="+datos2.getAÑO()+" and DATEPART(DAY,[Fecha de Publicación])="+datos2.getDIA()+" ORDER BY \"Fecha de Publicación\" DESC;";
+
                     }else if (Que_es=="EXPEDIENTE"){
                         query ="SELECT  *  FROM Vta_ResiNotificaJuzgado where id_juzgado="+datos.getID()+" and Número='"+Ex+"'";
                     }
@@ -1842,7 +1858,7 @@ public class Notificaciones extends Fragment {
 
             }else{
 
-                Encabezado2("No. de Notificación.","No.expediente","Fecha de Publicación.","Juicio.","Fecha de Resolución.","Síntesis.");
+                Encabezado2("No. de Notificación","No.expediente","Fecha de Publicación","Juicio","Fecha de Resolución","Síntesis");
                 Toast.makeText(getActivity(), "Tarea finalizada!", Toast.LENGTH_SHORT).show();
                 txtdistrito.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);

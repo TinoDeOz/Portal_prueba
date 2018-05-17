@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -40,6 +43,7 @@ public class Portafolio extends Fragment {
     Boolean esSatisfactorio=false;
 
     RelativeLayout RL;
+    LinearLayout LL;
     DB base;
     Data_Portafolio nuevo_registro;
 
@@ -50,13 +54,16 @@ public class Portafolio extends Fragment {
     EditText Expediente;
     ProgressDialog pDialog;
 
-    String[] string_opcion={"Selecciona Aqui:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
-    String[] string_juzgado={"Selecciona Aqui:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
+    ImageView image_loading;
+
+    String[] string_opcion={"Selecciona aquí:","POR DISTRITO","POR JUZGADO","TODOS LOS EXPEDIENTES"};
+    String[] string_distrito={"Selecciona aquí:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
+    String[] string_juzgado={"Selecciona aquí:","PRIMERO CIVIL PACHUCA","SEGUNDO CIVIL PACHUCA","TERCERO CIVIL PACHUCA","CUARTO CIVIL PACHUCA",
             "PRIMERO MERCANTIL PACHUCA","SEGUNDO MERCANTIL PACHUCA","TERCERO MERCANTIL PACHUCA","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
     public void inicio(View v){
         RL= (RelativeLayout)v.findViewById(R.id.Relative) ;
+        LL= (LinearLayout)v.findViewById(R.id.linear);
         Btn_opc_eliminar=(Button)v.findViewById(R.id.borrar);
         Actualizar=(Button)v.findViewById(R.id.Actualizar);
         txt_eliminar=(TextView)v.findViewById(R.id.txt_expediente);
@@ -76,6 +83,12 @@ public class Portafolio extends Fragment {
         tabla=(TableLayout)v.findViewById(R.id.Tabla_portafolio);
         nuevaa=(Button)v.findViewById(R.id.nueva_consulta);
         salir=(Button)v.findViewById(R.id.Salir);
+
+        image_loading= (ImageView) v.findViewById(R.id.loading);
+        image_loading.setBackgroundResource(R.drawable.loading);
+        LL.setVisibility(View.GONE);
+
+
 
         nuevaa.setVisibility(View.GONE);
         salir.setVisibility(View.GONE);
@@ -869,17 +882,22 @@ public void Consulta(String query){
     String query = "";
     String Resultado = "";
 
+    AnimationDrawable animacion_loading = (AnimationDrawable)image_loading.getBackground();
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        //LL.setVisibility(View.VISIBLE);
         pDialog.setProgress(0);
         pDialog.show();
+
         pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 Consulta_portafolio.this.cancel(true);
             }
         });
+
     }
 
     @Override
@@ -889,6 +907,8 @@ public void Consulta(String query){
         pDialog.dismiss();
 
         if (Resultado.equals("no")) {
+            //LL.setVisibility(View.GONE);
+            //animacion_loading.stop();
             Toast.makeText(getActivity(), ConnectionResult, Toast.LENGTH_LONG).show();
         } else {
             //Encabezado("Distrito", "Juzgado", "No.de Expediente", "Ubicación", "Fecha");
@@ -908,7 +928,8 @@ public void Consulta(String query){
 
             Consulta("");
             altTableRow(4);
-
+            //LL.setVisibility(View.GONE);
+            //animacion_loading.stop();
         }
     }
 
@@ -922,7 +943,10 @@ public void Consulta(String query){
     @Override
     protected void onCancelled() {
         super.onCancelled();
+        //LL.setVisibility(View.GONE);
+        //animacion_loading.stop();
         Toast.makeText(getActivity(), "Tarea Cancelada!", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

@@ -78,20 +78,30 @@
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
 
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp">
+
             <EditText
                 android:id="@+id/txt_numero_publi_toca"
                 android:layout_width="fill_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/darker_gray"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="text"
                 android:maxLength="9"
                 android:gravity="center"
                 android:hint="@string/ingrese"
-                />
+                android:theme="@style/CampoTextoPurpura"
+                android:textColorHint="#e1e1e1"
+                android:textColor="@color/white"/>
 
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_publi_toca_consultar"
@@ -114,7 +124,7 @@
                     android:id="@+id/Tabla_btn_publicacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"

@@ -46,10 +46,10 @@ public class consejo_familiar extends Fragment {
     Datos datos_consulta, Seleccion;
 
 
-    String[] string_distrito={"Selecciona Aqui:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
-    String[] string_juzgado={"Selecciona Aqui:","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA"};
-    String[] string_juzgado2={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
-    String[] string_juzgado3={"Selecciona Aqui:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
+    String[] string_distrito={"Selecciona aquí:","PACHUCA DE SOTO","TULANCINGO DE BRAVO","TULA DE ALLENDE"};
+    String[] string_juzgado={"Selecciona aquí:","PRIMERO FAMILIAR PACHUCA","SEGUNDO FAMILIAR PACHUCA","TERCERO FAMILIAR PACHUCA","CUARTO FAMILIAR PACHUCA"};
+    String[] string_juzgado2={"Selecciona aquí","PRIMERO CIVIL Y FAMILIAR DE TULANCINGO","SEGUNDO CIVIL Y FAMILIAR DE TULANCINGO","TERCERO CIVIL Y FAMILIAR DE TULANCINGO"};
+    String[] string_juzgado3={"Selecciona aquí:","PRIMERO CIVIL Y FAMILIAR DE TULA","SEGUNDO CIVIL Y FAMILIAR DE TULA","TERCERO CIVIL Y FAMILIAR DE TULA"};
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -651,7 +651,7 @@ Button nueva,salir;
             if (Resultado=="no"){
                 Toast.makeText(getActivity(),ConnectionResult, Toast.LENGTH_LONG).show();
             }else{
-                Encabezado("Fecha De Intervencion.\n Año/Mes/Día");
+                Encabezado("Fecha De Intervencion\n Año/Mes/Día");
                 txt_juzgado.setVisibility(View.GONE);
                 txt_distrito.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);

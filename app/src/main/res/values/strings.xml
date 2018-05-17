@@ -1,15 +1,15 @@
 <resources>
 
-    <string name="hint_distrito">Seleccione su distrito:</string>
-    <string name="hint_juzgado">Seleccione su juzgado:</string>
-    <string name="hint_expediente">Ingrese su numero de expediente:</string>
+    <string name="hint_distrito">Seleccione el distrito:</string>
+    <string name="hint_juzgado">Seleccione el juzgado:</string>
+    <string name="hint_expediente">Ingrese el numero de expediente:</string>
     <string name="hint_folio">Ingrese su numero de folio:</string>
-    <string name="ingrese">Ingrese aqui:</string>
+    <string name="ingrese">Ingrese aquí:</string>
     <string name="consulta">Consultar</string>
     <string name="nueva">Nueva consulta</string>
     <string name="salir">Salir</string>
-    <string name="opc_busqueda">Seleccione La Opción De Busqueda:</string>
-    <string name="hint_causa">Ingrese su número de Causa:</string>
+    <string name="opc_busqueda">Seleccione la opción de busqueda:</string>
+    <string name="hint_causa">Ingrese el número de causa:</string>
     <string name="regresar">Regresar</string>
 
     <string name="app_name">APP-PJHIDALGO</string>
@@ -62,13 +62,13 @@
 
 //////////////////////////////////// Notificaciones /////////////////////////////////////////////////////////////
     <string name="titulo_noti">Consulta De Notificaciones Por Lista.</string>
-    <string name="fecha_noti">Fecha De Notificación:</string>
+    <string name="fecha_noti">Fecha De notificación:</string>
 
     ///////////////////////////// Portafolio ////////////////////////////////////////////////////////////////////777
     <string name="titulo_portafolio">Mi portafolio móvil.</string>
     <string name="agregar_exp">Agregar expediente</string>
     <string name="portafolio">Portafolio de asuntos</string>
-    <string name="actualizar">Actualizar expedientes</string>
+    <string name="actualizar">Actualizar portafolio</string>
     <string name="eliminar">Eliminar del portafolio y salir</string>
 
     ///////////////////////////////Primera Instancia ///////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@
 
     /////////////////////////////////// Publicacion de tocas //////////////////////////////////////////////////////
     <string name="titulo_pub">Publicaciónes De Tocas</string>
-    <string name="sala_proce">Sala De Procedencia:</string>
+    <string name="sala_proce">Sala de Procedencia:</string>
     <string name="num_toca">Número de toca:</string>
 
     //////////////////////////////// Ubicacion de Tocas. ///////////////////////////////////////////////////////

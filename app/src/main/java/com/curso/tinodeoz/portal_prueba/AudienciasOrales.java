@@ -816,7 +816,7 @@ public void llenadoTabla(String txt1,String txt2,String txt3,String txt4,String 
                 txt_distrito.setText("AUDIENCIAS ORALES EN MATERIA MERCANTIL PARA EL MES DE " + datos_consulta3.getQUE_ES() + " DEL AÑO " + datos_consulta2.getAÑO() + "  DEL DISTRITO JUDICIAL DE " + datos_consulta.getQUE_ES());
                 txt_distrito.setPadding(50, 50, 50, 0);
 
-                Encabezado("#", "No.expediente", "Juzgado", "Fecha y hora de la audiencia", "Tipo de audiencia.");
+                Encabezado("#", "No.expediente", "Juzgado", "Fecha y hora de la audiencia", "Tipo de audiencia");
 
                 txt_mes.setVisibility(View.GONE);
                 distrito.setVisibility(View.GONE);

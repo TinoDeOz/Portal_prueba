@@ -28,4 +28,9 @@
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="CampoTextoPurpura" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#d4d4d4</item>
+        <item name="colorControlActivated">#e4e4e4</item>
+    </style>
+
 </resources>
